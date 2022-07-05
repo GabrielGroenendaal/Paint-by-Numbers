@@ -69,6 +69,10 @@ body {
       border-style: outset;
 }
 
+.tile-selected {
+      background-color: green;
+      border-style: inset;
+}
 .number-hint-left-row, .number-hint-top-row {
       display: flex;
       justify-content: end;

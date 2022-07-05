@@ -608,11 +608,42 @@ var Board = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Board);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      selection: [],
+      selecting: false
+    }; // this.addToSelection = this.addToSelection.bind(this);
+    // this.toggleSelecting = this.toggleSelecting.bind(this);
+    // this.onMouseDown = this.onMouseDown.bind(this)
+    // this.onMouseUp = this.onMouseUp.bind(this)
+
     return _this;
-  } // updateCrossouts() {
-  //       let hintsY = this.props.generateHintsY();
-  //       let hintsX = this.props.generateHintsX();
+  } // addToSelection(tile) {
+  //       let new_arr = this.state.selection;
+  //       new_arr.push(tile);
+  //       this.setState = {
+  //             selection: new_arr
+  //       }
+  // }
+  // toggleSelecting() {
+  //       this.setState({
+  //             selecting: false
+  //       })
+  // }
+  // onMouseDown(event) {
+  //       event.preventDefault()
+  //       this.setState({
+  //             selecting: true
+  //       })
+  // }
+  // onMouseUp(event) {
+  //       event.preventDefault()
+  //       this.state.selection.forEach(checkTile => {
+  //             this.props.update(checkTile.getTile(), false)
+  //             checkTile.toggleSelected()
+  //       })
+  //       this.setState({
+  //             selecting: false
+  //       })
   // }
 
 
@@ -626,6 +657,8 @@ var Board = /*#__PURE__*/function (_React$Component) {
       var hintsX = this.props.board.hintsX;
       var hintsY = this.props.board.hintsY;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        // onMouseDown={this.onMouseDown.bind(this)}
+        // onMouseUp={this.onMouseUp.bind(this)}
         className: "board-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hintX__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hints: hintsX
@@ -640,7 +673,10 @@ var Board = /*#__PURE__*/function (_React$Component) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tile__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: idx.toString() + innerIdx.toString(),
             update: _this2.props.update,
-            tile: innerEle
+            tile: innerEle // addToSelection={this.addToSelection}
+            // toggleSelecting={this.toggleSelecting}
+            ,
+            board: _this2
           });
         }));
       }));
@@ -944,16 +980,46 @@ var Tile = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Tile);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      selected: false
+    }; // this.getTile = this.getTile.bind(this)
+    // this.toggleSelected = this.toggleSelected.bind(this)
+
     return _this;
-  }
+  } // getTile() {
+  //       return this.props.tile
+  // }
+  // toggleSelected() {
+  //       this.setState({selected: false})
+  // }
+
 
   _createClass(Tile, [{
     key: "handleClick",
     value: function handleClick(event) {
       event.preventDefault();
       this.props.update(this.props.tile, event.altKey ? true : false);
-    }
+    } // onMouseDown(event) {
+    //       console.log("check")
+    //       event.preventDefault();
+    //       if (this.props.board.state.selecting) {
+    //             this.setState({ selected: true})
+    //             this.props.addToSelection(this)
+    //       }
+    // }
+    // onMouseOver(event) {
+    //       console.log("check")
+    //       event.preventDefault();
+    //       if (this.props.board.state.selecting) {
+    //             this.setState({ selected: true})
+    //             this.props.addToSelection(this)
+    //       }
+    // }
+    // onMouseUp(event) {
+    //       event.preventDefault()
+    //       this.props.toggleSelecting()
+    // }
+
   }, {
     key: "render",
     value: function render() {
@@ -975,9 +1041,16 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         text = '-';
       }
 
+      if (this.state.selected) {
+        classText += " tile-selected";
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: 'tile tile-' + classText + ' num-' + text,
-        onClick: this.handleClick.bind(this)
+        onClick: this.handleClick.bind(this) // onMouseDown={this.onMouseDown.bind(this)}
+        // onMouseOver={this.onMouseOver.bind(this)}
+        // onMouseUp={this.onMouseUp.bind(this)}
+
       }, text);
     }
   }]);
