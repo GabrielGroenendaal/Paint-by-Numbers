@@ -1,0 +1,65 @@
+.puzzle-options-container {
+
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 10px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    background-color: red;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+.puzzle-selector-options-container {
+    width: 150px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: yellow;
+    display: inline-block;
+    padding: 10px;
+    margin-left: auto;
+}
+
+.puzzle-library-options {
+    width: 150px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: yellow;
+    padding: 10px;
+    display: inline-block;
+    margin-right: auto;
+}
+
+.submit-generate-puzzle-container {
+    border: none;
+    width: 82px;
+    height: 40px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: grey;
+    padding: 12px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.submit-button {
+    color: white;
+    text-align: center;
+}
+
+.footer-links {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+}
+
+.app .fa-github {
+    align-items: right;
+    padding: 10px;
+    font-size: 30px;
+}

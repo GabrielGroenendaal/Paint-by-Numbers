@@ -1,0 +1,73 @@
+.navigation-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(207, 203, 203);
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-nav-bar {
+    display: flex;
+}
+
+
+.nav-bar-logo {
+
+    display: inline-block;
+    width: 65px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 4px;
+    cursor: pointer;
+    background-color: grey;
+}
+
+.app .material-icons {
+    font-size: 40px;
+    color: white;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.title {
+    display: flex;
+    text-align: center;
+}     
+
+.signup-button {
+        border: none;
+        width: 82px;
+        height: 40px;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 500;
+        color: white;
+        background-color: grey;
+        padding: 12px;
+        margin: 4px;
+        cursor: pointer;
+}
+
+.login-button {
+    border: none;
+    width: 82px;
+    height: 40px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: grey;
+    padding: 12px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
