@@ -1,5 +1,5 @@
 .puzzle-container {
-    width: 550px;
+    width: 750px;
     /* height: 550px; */
     border-radius: 10px;
     padding: 12px;
@@ -11,18 +11,6 @@
     /* background-color: rgb(214, 214, 214); */
 }
 
-.puzzle-section {
-    width: 550px;
-    /* height: 550px; */
-    border-radius: 10px;
-    padding: 12px;
-    /* margin: 30px; */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* background-color: rgb(214, 214, 214); */
-}
 
 .number-hints-left-item {
     /* color: white; */
@@ -40,6 +28,7 @@
 
 .puzzle-content-container {
     display: flex;
+    margin: 40px;
     /* width: 550px;
     height: 550px; */
     
@@ -81,12 +70,8 @@ tr:nth-child(5n + 1) td {
     height: 150px;
     width: 120px;
     border-radius: 5px;
-    top: 50%;
-    right: 13%;
-    position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(213, 213, 213);
+    background-color: rgb(233, 229, 229);
+    
 }
 
 .progress-bar h3 {
@@ -115,4 +100,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.puzzle-wrap {
+    display: flex;
+    align-items: center;
 }
