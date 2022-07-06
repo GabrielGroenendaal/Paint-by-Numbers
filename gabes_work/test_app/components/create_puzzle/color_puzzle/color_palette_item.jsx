@@ -3,13 +3,26 @@ import React from "react";
 class ColorPaletteItem extends React.Component {
       constructor(props) {
             super(props)
+            this.click = this.click.bind(this)
+      }
+
+      click(event) {
+            event.preventDefault()
+            this.props.selectColor(this.props.color)
       }
 
       render() {
-            let style = "--color: " + this.props.color;
+            const styles = {
+                  background: this.props.color
+            }
             return (
-                  <td>
-                        {this.props.color}
+                  <td
+                        className="color-tile"
+                        style={styles}
+                        onClick={this.click}
+
+                  >
+                       
                   </td>
             )
       }

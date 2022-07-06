@@ -23,7 +23,8 @@ class ColorBoard extends React.Component {
       }
 
       selectColor(color) {
-            this.setState(prevState => ({selectedColor: color}))
+            this.setState(prevState => ({ selectedColor: color }))
+            console.log(this.state.selectedColor)
       }
 
       onMouseDown(event) {
@@ -34,7 +35,9 @@ class ColorBoard extends React.Component {
       onMouseUp(event) {
             event.preventDefault()
             this.state.selection.forEach(checkTile => {
-                  this.props.update(checkTile, event.altKey ? true : false)
+                  checkTile.changeColor(this.state.selectedColor);
+                  console.log(checkTile)
+                  // this.props.update(checkTile, event.altKey ? true : false)
             })
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }

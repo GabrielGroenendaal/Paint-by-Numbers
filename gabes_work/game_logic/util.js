@@ -6,7 +6,9 @@ const Util = {
             dimension = dimension.map(dimension => parseInt(dimension))
             return dimension;
       },
-
+      convertDimensionsToString(dimensions) {
+            return dimensions.join("x")
+      },
       parseBoolean(value) {
             if (value === "true") {
                   return true

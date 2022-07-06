@@ -15,13 +15,19 @@ class ColorPaletteLeft extends React.Component {
                   'blue',
                   'red',
                   'green',
-                  'purple'
+                  'purple',
+                  'gray',
+                  'yellow',
+                  'pink',
+                  'orange',
+                  'lightblue',
+                  'black'
             ]
             return (
-                  <tr>
+                  <tr className="color-palette-left-row">
                         {colors.map((color, idx) => {
                               return (
-                                    <ColorPaletteItem color={color} key={idx.toString()} />
+                                    <ColorPaletteItem color={color} key={idx.toString()} selectColor={this.props.selectColor} />
                               )
                         })}
                   </tr>

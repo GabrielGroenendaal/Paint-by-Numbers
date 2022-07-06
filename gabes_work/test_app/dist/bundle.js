@@ -594,12 +594,14 @@ var TileCreate = /*#__PURE__*/function () {
     this.explored = options.explored || false;
     this.bombed = options.bombed || false;
     this.flagged = options.flagged || false;
+    this.colored = options.colored || false;
   }
 
   _createClass(TileCreate, [{
     key: "changeColor",
     value: function changeColor(color) {
       this.color = color;
+      this.colored = true;
     }
   }, {
     key: "toggleBombed",
@@ -799,6 +801,7 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
           selectedColor: color
         };
       });
+      console.log(this.state.selectedColor);
     }
   }, {
     key: "onMouseDown",
@@ -817,7 +820,8 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       this.state.selection.forEach(function (checkTile) {
-        _this2.props.update(checkTile, event.altKey ? true : false);
+        checkTile.changeColor(_this2.state.selectedColor);
+        console.log(checkTile); // this.props.update(checkTile, event.altKey ? true : false)
       });
       this.setState(function (prevState) {
         return {
@@ -930,16 +934,32 @@ var ColorPaletteItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ColorPaletteItem);
 
   function ColorPaletteItem(props) {
+    var _this;
+
     _classCallCheck(this, ColorPaletteItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.click = _this.click.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ColorPaletteItem, [{
+    key: "click",
+    value: function click(event) {
+      event.preventDefault();
+      this.props.selectColor(this.props.color);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var style = "--color: " + this.props.color;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, this.props.color);
+      var styles = {
+        background: this.props.color
+      };
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        className: "color-tile",
+        style: styles,
+        onClick: this.click
+      });
     }
   }]);
 
@@ -1003,11 +1023,16 @@ var ColorPaletteLeft = /*#__PURE__*/function (_React$Component) {
   _createClass(ColorPaletteLeft, [{
     key: "render",
     value: function render() {
-      var colors = ['blue', 'red', 'green', 'purple'];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, colors.map(function (color, idx) {
+      var _this = this;
+
+      var colors = ['blue', 'red', 'green', 'purple', 'gray', 'yellow', 'pink', 'orange', 'lightblue', 'black'];
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+        className: "color-palette-left-row"
+      }, colors.map(function (color, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_palette_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           color: color,
-          key: idx.toString()
+          key: idx.toString(),
+          selectColor: _this.props.selectColor
         });
       }));
     }
@@ -1069,12 +1094,6 @@ var ColorTile = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ColorTile, [{
-    key: "handleClick",
-    value: function handleClick(event) {
-      event.preventDefault();
-      this.props.update(this.props.tile, event.altKey ? true : false);
-    }
-  }, {
     key: "onMouseDown",
     value: function onMouseDown(event) {
       event.preventDefault();
@@ -1111,15 +1130,22 @@ var ColorTile = /*#__PURE__*/function (_React$Component) {
         classText += ' tile-empty';
       }
 
+      var renderTileStyle;
+
       if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
         classText = "tile tile-selected";
+      } else {
+        renderTileStyle = renderTile.colored ? {
+          background: this.props.tile.color
+        } : {};
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-        className: classText,
-        onClick: this.handleClick.bind(this),
+        className: classText // onClick={this.handleClick.bind(this)}
+        ,
         onMouseDown: this.onMouseDown.bind(this),
-        onMouseOver: this.onMouseOver.bind(this)
+        onMouseOver: this.onMouseOver.bind(this),
+        style: renderTileStyle
       }, text);
     }
   }]);

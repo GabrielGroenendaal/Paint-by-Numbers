@@ -29,11 +29,6 @@ class Tile {
 
       print() {
             let str = "";
-            // if (this.bombed == false) {
-            //       str = "_O_"
-            // } else {
-            //       str = "_X_"
-            // }
             if (this.explored === false) {
                   if (this.flagged === false) {
                         str = "_E_"

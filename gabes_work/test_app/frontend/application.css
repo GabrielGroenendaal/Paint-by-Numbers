@@ -74,10 +74,7 @@ body {
       border-style: outset;
 }
 
-.tile-selected {
-      background-color: green;
-      border-style: inset;
-}
+
 .number-hint-left-row, .number-hint-top-row {
       display: flex;
       justify-content: end;
@@ -123,4 +120,25 @@ table {
 
 .tile-highlighted {
       background-color: yellow;
+}
+
+.color-tile {
+      background-color: attr(data-palettecolor);
+      width: 24px;
+      height: 24px;
+      border-radius: 15px;
+      margin-right: 4px;
+      margin-left: 4px;
+ 
+}
+.color-palette-left-row {
+      padding: 5px 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.tile-selected {
+      background-color: rgb(98, 98, 98);
+      border-style: inset;
 }

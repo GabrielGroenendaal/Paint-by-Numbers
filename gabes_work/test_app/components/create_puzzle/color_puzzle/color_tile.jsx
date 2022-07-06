@@ -7,10 +7,6 @@ class ColorTile extends React.Component {
             super(props)
       }
 
-      handleClick(event) {
-            event.preventDefault();
-            this.props.update(this.props.tile, (event.altKey ? true : false))
-      }
 
       onMouseDown(event) {
             event.preventDefault();
@@ -33,7 +29,7 @@ class ColorTile extends React.Component {
             let mouseOverTile = this.props.board.state.currentMouseover;
             let text = ""
             let classText = "tile"
-            
+
             if (mouseOverTile) {
                   if (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1]) {
                         classText += ' tile-highlighted'
@@ -43,18 +39,19 @@ class ColorTile extends React.Component {
             } else {
                   classText += ' tile-empty'
             }
-            
-      
-            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected"}
-            
+            let renderTileStyle;  
+
+            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected" }
+            else { renderTileStyle = (renderTile.colored) ? { background: this.props.tile.color } : {}}
             
             
             return (
                   <td
                         className={classText}
-                        onClick={this.handleClick.bind(this)}
+                        // onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
+                        style={renderTileStyle}
                   >
                         {text}
                   </td>

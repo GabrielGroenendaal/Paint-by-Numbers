@@ -1,5 +1,5 @@
 
-const { default: Hint } = require('../test_app/components/hint');
+const { default: Hint } = require('../test_app/components/play_puzzle/hint');
 const Tile = require('./tile');
 const Util = require('./util')
 const HintItem = require('./hint')
@@ -83,7 +83,7 @@ class Board {
 
       plantBombs() {
             let numOfBombs = 0;
-            let totalBombs = Util.randomInt(4 * this.area() / 10, 7 * this.area() / 10);
+            let totalBombs = Util.randomInt(4 * this.area() / 10, 6 * this.area() / 10);
             let positions = Util.allPositions(this.dimensions);
             while (numOfBombs < totalBombs) {
                   let i = Util.randomIndex(positions);
