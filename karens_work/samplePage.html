@@ -7,7 +7,10 @@
       <link rel="stylesheet" href="navbar.css">
       <link rel="stylesheet" href="board.css">
       <link rel="stylesheet" href="puzzle-options.css">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="options.js"></script>
+      
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap" rel="stylesheet">
@@ -34,234 +37,248 @@
                         
                         </div>
                   </div>
-      
-                  <div class="puzzle-container">
-                        
-      
+                  
+               <div class="main-page-container">  
+                        <div class="puzzle-container">
+                              <div class="puzzle-wrap">
+                              <!-- Contains the puzzle content itself  -->
+                              <div class="puzzle-content-container">
+                                    <div class="board-container">
+                                          <table class="board-rows-table">
 
-                        <!-- Contains the puzzle content itself  -->
-                        <div class="puzzle-content-container">
-                              <div class="board-container">
-                                    <table class="board-rows-table">
-
-                                          <!-- Contains the number hints on the left hand side of the puzzle -->
-                                          <div class="number-hints-left-container"></div>
-                                          
-                                          
-                                          <!--  Contains the number hints at the top of the puzzle  -->
-                                          <div class="number-hints-top-container">
-                                                <tr class="number-hints-top-content">
-                                                      <td class="number-hints-right-item"></td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</td>
-                                                      <td class="number-hints-right-item">x</li>
-                                                </tr>
-                                          </div>
-                                          
-                                          <div class="board-row-1">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-2">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                                      
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-3">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                              
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-4">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                                     
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-5">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                                     
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-6">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                                     
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-7">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                                    
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-8">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-9">
-                                                <tr class="row-tiles-container">
-                                                <td class="number-hints-left-item">x</td>                                        
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                </tr>
-                                          </div>
-                                          <div class="board-row-10">
-                                                <tr class="row-tiles-container">
+                                                <!-- Contains the number hints on the left hand side of the puzzle -->
+                                                <div class="number-hints-left-container"></div>
+                                                
+                                                
+                                                <!--  Contains the number hints at the top of the puzzle  -->
+                                                <div class="number-hints-top-container">
+                                                      <tr class="number-hints-top-content">
+                                                            <td class="number-hints-right-item"></td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</td>
+                                                            <td class="number-hints-right-item">x</li>
+                                                      </tr>
+                                                </div>
+                                                
+                                                <div class="board-row-1">
+                                                      <tr class="row-tiles-container">
                                                       <td class="number-hints-left-item">x</td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></td>
-                                                      <td class="board-tile-item"></li>
-                                                </tr>
-                                          </div>
-                                    </table>
-      
-      
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-2">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                                      
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-3">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                              
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-4">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                                     
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-5">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                                     
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-6">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                                     
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-7">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                                    
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-8">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-9">
+                                                      <tr class="row-tiles-container">
+                                                      <td class="number-hints-left-item">x</td>                                        
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                      </tr>
+                                                </div>
+                                                <div class="board-row-10">
+                                                      <tr class="row-tiles-container">
+                                                            <td class="number-hints-left-item">x</td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></td>
+                                                            <td class="board-tile-item"></li>
+                                                      </tr>
+                                                </div>
+                                          </table>
+            
+            
+                                    </div>
                               </div>
-                        </div>
-                             </div>
-        
-                  
-                  <div class="puzzle-options-container">
-      
-                        <div class="puzzle-selector-options-container">
-                              <div class="puzzle-size-options">Size</div>
-                              <div class="puzzle-difficulty-options">Difficulty</div>
-                              <div class="puzzle-genre-options">Genre</div>
-                        </div>
-      
-                        <div class="submit-generate-puzzle-container">
-                              <div class="submit-button">
-                                    <button type="submit">Submit</button>
-                              </div>
-                        </div>
-      
-                        <div class="puzzle-library-options">
-                              <div class="save-to-library-button"></div>
-                              <div class="share-puzzle-button"></div>
-                              <div class="user-library-button"></div>
-                        </div>
-                  </div>
-                  
-           
+                              
+                              
 
-            <!-- Contains a handful of options to adjust gameplay for the puzzle  -->
-                        <div class="puzzle-gameplay-options-container">
-                              <!-- A little question mark that pops out a modal with instructions on the game -->
-                              <div class="game-info-button"></div>
-                              <!-- A element that contains tracking for the player's completion % and # of mistakes made -->
-                              <div class="progress-bar">
-                                    <!-- <h3>Progress</h3>
-                                    <h3>Mistakes</h3> -->
+                        <!-- closes puzzle container -->
+                        
+                              <div class="puzzle-gameplay-options-container">
+
+                                    <div class="game-info-button"></div>
+                                    <!-- A element that contains tracking for the player's completion % and # of mistakes made -->
+                                    <div class="progress-bar">
+                                          <!-- <h3>Progress</h3>
+                                          <h3>Mistakes</h3> -->
+                                    </div>
+            
+                                    <!-- A simple toggle to adjust the aesthetics of the board -->
+                                    <div class="cross-outs-button"></div>
+            
+                                    <div class="reset-puzzle-button"></div>
+                                    <div class="reveal-puzzle-button"></div>
+                              </div>        
                               </div>
-      
-                              <!-- A simple toggle to adjust the aesthetics of the board -->
-                              <div class="cross-outs-button"></div>
-      
-                              <div class="reset-puzzle-button"></div>
-                              <div class="reveal-puzzle-button"></div>
+
+                  <!-- closes puzzle container -->
                         </div>
+
+                        <div class="puzzle-options-collapse">
+                              <button class="Hide" onclick="myFunction()">
+                                    <i class="fa fa-chevron-down" id ="fa-chevron-down"></i>
+                                    <i class="fa fa-chevron-up" id ="fa-chevron-up"></i>
+                              </button>
+                              <div class="puzzle-options-container" id="puzzle-show">
+                                    <div class="puzzle-selector-options-container">
+                                          <div class="puzzle-size-options">SIZE</div>
+                                                <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
+                                          <div class="puzzle-difficulty-options">DIFFICULTY</div>
+                                                <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
+                                          <div class="puzzle-genre-options">GENRE</div>
+                                    </div>
+                  
+                                    <div class="submit-generate-puzzle-container">
+                                          <div class="submit-button">
+                                                <button type="submit">Submit</button>
+                                          </div>
+                                    </div>
+                  
+                                    <div class="puzzle-library-options">
+                                          <div class="save-to-library-button">SAVE</div>
+                                          <div class="share-puzzle-button">SHARE</div>
+                                          <div class="user-library-button">LIBRARY</div>
+                                    </div>
+                              </div>
+                        </div>
+                  
+           <!-- closes main page container -->
+            </div>
+
+                        
             <div class="footer">
                   <div class="footer-links">
                         <!-- Github,  -->
