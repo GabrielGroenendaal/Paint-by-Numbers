@@ -13,7 +13,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-var _require = __webpack_require__(/*! ../test_app/components/hint */ "./components/hint.jsx"),
+var _require = __webpack_require__(/*! ../test_app/components/play_puzzle/hint */ "./components/play_puzzle/hint.jsx"),
     Hint = _require["default"];
 
 var Tile = __webpack_require__(/*! ./tile */ "../game_logic/tile.js");
@@ -118,7 +118,7 @@ var Board = /*#__PURE__*/function () {
     key: "plantBombs",
     value: function plantBombs() {
       var numOfBombs = 0;
-      var totalBombs = Util.randomInt(4 * this.area() / 10, 7 * this.area() / 10);
+      var totalBombs = Util.randomInt(4 * this.area() / 10, 6 * this.area() / 10);
       var positions = Util.allPositions(this.dimensions);
 
       while (numOfBombs < totalBombs) {
@@ -361,6 +361,118 @@ module.exports = Board;
 
 /***/ }),
 
+/***/ "../game_logic/board_create.js":
+/*!*************************************!*\
+  !*** ../game_logic/board_create.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var Util = __webpack_require__(/*! ./util */ "../game_logic/util.js");
+
+var TileCreate = __webpack_require__(/*! ./tile_create */ "../game_logic/tile_create.js");
+
+var BoardCreate = /*#__PURE__*/function () {
+  function BoardCreate() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, BoardCreate);
+
+    this.dimensions = Util.parseDimension(options.dimensions || "10x10");
+    this.difficulty = options.difficulty || "easy";
+    this.originalImageUril = options.originalImageUrl || "default";
+    this.genre = options.genre || "NA";
+    this.tiles = options.tiles ? this.makeTileMap(options.tiles) : this.generateBoard();
+  }
+
+  _createClass(BoardCreate, [{
+    key: "makeTileMap",
+    value: function makeTileMap(tileData) {
+      var board = [];
+
+      for (var i = 0; i < this.width(); i++) {
+        var row = [];
+
+        for (var k = 0; k < this.height(); k++) {
+          var thisTileData = tileData.shift();
+          var bombedStatus = Util.parseBoolean(thisTileData[1]);
+
+          if (bombedStatus == false) {
+            this.total += 1;
+          }
+
+          var tileOptions = {
+            color: thisTileData[0],
+            bombed: bombedStatus,
+            board: this,
+            explored: false,
+            flagged: false,
+            pos: [i, k]
+          };
+          var tile = new Tile(tileOptions);
+          row.push(tile);
+        }
+
+        board.push(row);
+      }
+
+      return board;
+    }
+  }, {
+    key: "generateBoard",
+    value: function generateBoard() {
+      var board = [];
+
+      for (var i = 0; i < this.width(); i++) {
+        var row = [];
+
+        for (var k = 0; k < this.height(); k++) {
+          var createTileOptions = {
+            board: this,
+            color: "white",
+            pos: [i, k],
+            bombed: false,
+            flagged: false,
+            explored: false
+          };
+          var thing = new TileCreate(createTileOptions);
+          row.push(thing);
+        }
+
+        board.push(row);
+      }
+
+      return board;
+    }
+  }, {
+    key: "width",
+    value: function width() {
+      return this.dimensions[0];
+    }
+  }, {
+    key: "height",
+    value: function height() {
+      return this.dimensions[1];
+    }
+  }, {
+    key: "area",
+    value: function area() {
+      return this.width() * this.height();
+    }
+  }]);
+
+  return BoardCreate;
+}();
+
+module.exports = BoardCreate;
+
+/***/ }),
+
 /***/ "../game_logic/hint.js":
 /*!*****************************!*\
   !*** ../game_logic/hint.js ***!
@@ -433,11 +545,7 @@ var Tile = /*#__PURE__*/function () {
   }, {
     key: "print",
     value: function print() {
-      var str = ""; // if (this.bombed == false) {
-      //       str = "_O_"
-      // } else {
-      //       str = "_X_"
-      // }
+      var str = "";
 
       if (this.explored === false) {
         if (this.flagged === false) {
@@ -464,6 +572,49 @@ module.exports = Tile;
 
 /***/ }),
 
+/***/ "../game_logic/tile_create.js":
+/*!************************************!*\
+  !*** ../game_logic/tile_create.js ***!
+  \************************************/
+/***/ ((module) => {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var TileCreate = /*#__PURE__*/function () {
+  function TileCreate(options) {
+    _classCallCheck(this, TileCreate);
+
+    this.board = options.board;
+    this.color = options.color || "white";
+    this.pos = options.pos;
+    this.explored = options.explored || false;
+    this.bombed = options.bombed || false;
+    this.flagged = options.flagged || false;
+  }
+
+  _createClass(TileCreate, [{
+    key: "changeColor",
+    value: function changeColor(color) {
+      this.color = color;
+    }
+  }, {
+    key: "toggleBombed",
+    value: function toggleBombed() {
+      this.bombed = this.bombed ? false : true;
+    }
+  }]);
+
+  return TileCreate;
+}();
+
+module.exports = TileCreate;
+
+/***/ }),
+
 /***/ "../game_logic/util.js":
 /*!*****************************!*\
   !*** ../game_logic/util.js ***!
@@ -477,6 +628,9 @@ var Util = {
       return parseInt(dimension);
     });
     return dimension;
+  },
+  convertDimensionsToString: function convertDimensionsToString(dimensions) {
+    return dimensions.join("x");
   },
   parseBoolean: function parseBoolean(value) {
     if (value === "true") {
@@ -551,10 +705,10 @@ module.exports = Util;
 
 /***/ }),
 
-/***/ "./components/board.jsx":
-/*!******************************!*\
-  !*** ./components/board.jsx ***!
-  \******************************/
+/***/ "./components/create_puzzle/color_puzzle/color_board.jsx":
+/*!***************************************************************!*\
+  !*** ./components/create_puzzle/color_puzzle/color_board.jsx ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -564,11 +718,715 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../game_logic/tile */ "../game_logic/tile.js");
+/* harmony import */ var _color_tile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color_tile */ "./components/create_puzzle/color_puzzle/color_tile.jsx");
+/* harmony import */ var _color_palette_left__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./color_palette_left */ "./components/create_puzzle/color_puzzle/color_palette_left.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var ColorBoard = /*#__PURE__*/function (_React$Component) {
+  _inherits(ColorBoard, _React$Component);
+
+  var _super = _createSuper(ColorBoard);
+
+  function ColorBoard(props) {
+    var _this;
+
+    _classCallCheck(this, ColorBoard);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      selection: [],
+      selecting: false,
+      currentMouseover: null,
+      selectedColor: 'white'
+    };
+    _this.addToSelection = _this.addToSelection.bind(_assertThisInitialized(_this));
+    _this.onMouseDown = _this.onMouseDown.bind(_assertThisInitialized(_this));
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.currentMouseOver = _this.currentMouseOver.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ColorBoard, [{
+    key: "addToSelection",
+    value: function addToSelection(tile) {
+      this.setState(function (prevState) {
+        return {
+          selection: [].concat(_toConsumableArray(prevState.selection), [tile])
+        };
+      });
+    }
+  }, {
+    key: "selectColor",
+    value: function selectColor(color) {
+      this.setState(function (prevState) {
+        return {
+          selectedColor: color
+        };
+      });
+    }
+  }, {
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          selecting: true
+        };
+      });
+    }
+  }, {
+    key: "onMouseUp",
+    value: function onMouseUp(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      this.state.selection.forEach(function (checkTile) {
+        _this2.props.update(checkTile, event.altKey ? true : false);
+      });
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      });
+    }
+  }, {
+    key: "onContextMenu",
+    value: function onContextMenu(event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      });
+      console.log(event.button);
+    }
+  }, {
+    key: "currentMouseOver",
+    value: function currentMouseOver(tile) {
+      console.log(tile);
+      this.setState(function (prevState) {
+        return {
+          currentMouseover: tile
+        };
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseUp: this.onMouseUp.bind(this),
+        onContextMenu: this.onContextMenu.bind(this) // onMouseOut={this.onMouseLeave.bind(this)}
+        ,
+        className: "board-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_palette_left__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        selectColor: this.selectColor.bind(this)
+      }), this.props.board.tiles.map(function (ele, idx) {
+        var className = 'board-row board-row-' + idx.toString();
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+          className: className,
+          key: idx.toString()
+        }, _this3.props.board.tiles[idx].map(function (innerEle, innerIdx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_tile__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: idx.toString() + innerIdx.toString(),
+            update: _this3.props.update,
+            tile: innerEle,
+            addToSelection: _this3.addToSelection,
+            currentMouseOver: _this3.currentMouseOver,
+            board: _this3
+          });
+        }));
+      })));
+    }
+  }]);
+
+  return ColorBoard;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorBoard);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/color_puzzle/color_palette_item.jsx":
+/*!**********************************************************************!*\
+  !*** ./components/create_puzzle/color_puzzle/color_palette_item.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var ColorPaletteItem = /*#__PURE__*/function (_React$Component) {
+  _inherits(ColorPaletteItem, _React$Component);
+
+  var _super = _createSuper(ColorPaletteItem);
+
+  function ColorPaletteItem(props) {
+    _classCallCheck(this, ColorPaletteItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(ColorPaletteItem, [{
+    key: "render",
+    value: function render() {
+      var style = "--color: " + this.props.color;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, this.props.color);
+    }
+  }]);
+
+  return ColorPaletteItem;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPaletteItem);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/color_puzzle/color_palette_left.jsx":
+/*!**********************************************************************!*\
+  !*** ./components/create_puzzle/color_puzzle/color_palette_left.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _color_palette_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color_palette_item */ "./components/create_puzzle/color_puzzle/color_palette_item.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var ColorPaletteLeft = /*#__PURE__*/function (_React$Component) {
+  _inherits(ColorPaletteLeft, _React$Component);
+
+  var _super = _createSuper(ColorPaletteLeft);
+
+  function ColorPaletteLeft(props) {
+    _classCallCheck(this, ColorPaletteLeft);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(ColorPaletteLeft, [{
+    key: "render",
+    value: function render() {
+      var colors = ['blue', 'red', 'green', 'purple'];
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, colors.map(function (color, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_palette_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          color: color,
+          key: idx.toString()
+        });
+      }));
+    }
+  }]);
+
+  return ColorPaletteLeft;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPaletteLeft);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/color_puzzle/color_tile.jsx":
+/*!**************************************************************!*\
+  !*** ./components/create_puzzle/color_puzzle/color_tile.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var ColorTile = /*#__PURE__*/function (_React$Component) {
+  _inherits(ColorTile, _React$Component);
+
+  var _super = _createSuper(ColorTile);
+
+  function ColorTile(props) {
+    _classCallCheck(this, ColorTile);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(ColorTile, [{
+    key: "handleClick",
+    value: function handleClick(event) {
+      event.preventDefault();
+      this.props.update(this.props.tile, event.altKey ? true : false);
+    }
+  }, {
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
+
+      if (this.props.board.state.selecting) {
+        this.props.addToSelection(this.props.tile);
+      }
+    }
+  }, {
+    key: "onMouseOver",
+    value: function onMouseOver(event) {
+      event.preventDefault();
+      this.props.currentMouseOver(this.props.tile);
+
+      if (this.props.board.state.selecting && !this.props.tile.explored) {
+        this.props.addToSelection(this.props.tile);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var renderTile = this.props.tile;
+      var mouseOverTile = this.props.board.state.currentMouseover;
+      var text = "";
+      var classText = "tile";
+
+      if (mouseOverTile) {
+        if (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1]) {
+          classText += ' tile-highlighted';
+        } else {
+          classText += " tile-empty";
+        }
+      } else {
+        classText += ' tile-empty';
+      }
+
+      if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
+        classText = "tile tile-selected";
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        className: classText,
+        onClick: this.handleClick.bind(this),
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseOver: this.onMouseOver.bind(this)
+      }, text);
+    }
+  }]);
+
+  return ColorTile;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorTile);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/create_puzzle.jsx":
+/*!****************************************************!*\
+  !*** ./components/create_puzzle/create_puzzle.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../game_logic/board_create */ "../game_logic/board_create.js");
+/* harmony import */ var _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_puzzle_options */ "./components/create_puzzle/create_puzzle_options.jsx");
+/* harmony import */ var _color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./color_puzzle/color_board */ "./components/create_puzzle/color_puzzle/color_board.jsx");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../game_logic/util */ "../game_logic/util.js");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_game_logic_util__WEBPACK_IMPORTED_MODULE_4__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
+  _inherits(CreatePuzzle, _React$Component);
+
+  var _super = _createSuper(CreatePuzzle);
+
+  function CreatePuzzle(props) {
+    var _this;
+
+    _classCallCheck(this, CreatePuzzle);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      board: new (_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default())()
+    };
+    _this.updateBoardSetting = _this.updateBoardSetting.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreatePuzzle, [{
+    key: "updateBoardSetting",
+    value: function updateBoardSetting(options) {
+      if (options.dimensions && options.dimensions != _game_logic_util__WEBPACK_IMPORTED_MODULE_4___default().convertDimensionsToString(this.state.board.dimensions)) {
+        this.setState(function (prevState) {
+          return {
+            board: new (_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default())({
+              dimensions: options.dimensions
+            })
+          };
+        });
+      }
+
+      if (options.difficulty && options.difficulty != this.state.board.difficulty) {
+        var checkBoard = Object.assign({}, this.state.board);
+        checkBoard.difficulty = options.difficulty;
+        this.setState(function (prevState) {
+          return {
+            board: checkBoard
+          };
+        });
+      }
+
+      if (options.theme && options.theme != this.state.board.theme) {
+        var _checkBoard = Object.assign({}, this.state.board);
+
+        _checkBoard.theme = options.theme;
+        this.setState(function (prevState) {
+          return {
+            board: _checkBoard
+          };
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "main"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+        className: "title"
+      }, "Paint-by-Numbers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-content-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        update: this.updateBoardSettings,
+        board: this.state.board
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        container: this
+      }));
+    }
+  }]);
+
+  return CreatePuzzle;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreatePuzzle);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/create_puzzle_options.jsx":
+/*!************************************************************!*\
+  !*** ./components/create_puzzle/create_puzzle_options.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CreatePuzzleOptions = /*#__PURE__*/function (_React$Component) {
+  _inherits(CreatePuzzleOptions, _React$Component);
+
+  var _super = _createSuper(CreatePuzzleOptions);
+
+  function CreatePuzzleOptions(props) {
+    _classCallCheck(this, CreatePuzzleOptions);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(CreatePuzzleOptions, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-options-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-selector-options-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-size-options"
+      }, "Size"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-difficulty-options"
+      }, "Difficulty"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-genre-options"
+      }, "Genre")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-generate-puzzle-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        type: "submit"
+      }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-library-options"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "save-to-library-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "share-puzzle-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "user-library-button"
+      })));
+    }
+  }]);
+
+  return CreatePuzzleOptions;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreatePuzzleOptions);
+
+/***/ }),
+
+/***/ "./components/main.jsx":
+/*!*****************************!*\
+  !*** ./components/main.jsx ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _play_puzzle_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./play_puzzle/game */ "./components/play_puzzle/game.jsx");
+/* harmony import */ var _create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_puzzle/create_puzzle */ "./components/create_puzzle/create_puzzle.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+ // This is where Routing will occur 
+
+var Main = /*#__PURE__*/function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  var _super = _createSuper(Main);
+
+  function Main(props) {
+    _classCallCheck(this, Main);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Main, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+    }
+  }]);
+
+  return Main;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main);
+
+/***/ }),
+
+/***/ "./components/play_puzzle/board.jsx":
+/*!******************************************!*\
+  !*** ./components/play_puzzle/board.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../game_logic/tile */ "../game_logic/tile.js");
 /* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_tile__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _hintX__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hintX */ "./components/hintX.jsx");
-/* harmony import */ var _tile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tile */ "./components/tile.jsx");
-/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hint */ "./components/hint.jsx");
+/* harmony import */ var _hintX__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hintX */ "./components/play_puzzle/hintX.jsx");
+/* harmony import */ var _tile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tile */ "./components/play_puzzle/tile.jsx");
+/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hint */ "./components/play_puzzle/hint.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -622,11 +1480,13 @@ var Board = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       selection: [],
-      selecting: false
+      selecting: false,
+      currentMouseover: null
     };
     _this.addToSelection = _this.addToSelection.bind(_assertThisInitialized(_this));
     _this.onMouseDown = _this.onMouseDown.bind(_assertThisInitialized(_this));
     _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.currentMouseOver = _this.currentMouseOver.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -656,12 +1516,34 @@ var Board = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       this.state.selection.forEach(function (checkTile) {
-        _this2.props.update(checkTile, false);
+        _this2.props.update(checkTile, event.altKey ? true : false);
       });
       this.setState(function (prevState) {
         return {
           selection: [],
           selecting: false
+        };
+      });
+    }
+  }, {
+    key: "onContextMenu",
+    value: function onContextMenu(event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      });
+      console.log(event.button);
+    }
+  }, {
+    key: "currentMouseOver",
+    value: function currentMouseOver(tile) {
+      console.log(tile);
+      this.setState(function (prevState) {
+        return {
+          currentMouseover: tile
         };
       });
     }
@@ -674,15 +1556,17 @@ var Board = /*#__PURE__*/function (_React$Component) {
       this.props.board.updateHintsY();
       var hintsX = this.props.board.hintsX;
       var hintsY = this.props.board.hintsY;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
         onMouseDown: this.onMouseDown.bind(this),
         onMouseUp: this.onMouseUp.bind(this),
+        onContextMenu: this.onContextMenu.bind(this) // onMouseOut={this.onMouseLeave.bind(this)}
+        ,
         className: "board-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hintX__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hintX__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hints: hintsX
       }), this.props.board.tiles.map(function (ele, idx) {
-        var className = 'board-row-' + idx.toString();
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        var className = 'board-row board-row-' + idx.toString();
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
           className: className,
           key: idx.toString()
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hint__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -693,10 +1577,11 @@ var Board = /*#__PURE__*/function (_React$Component) {
             update: _this3.props.update,
             tile: innerEle,
             addToSelection: _this3.addToSelection,
+            currentMouseOver: _this3.currentMouseOver,
             board: _this3
           });
         }));
-      }));
+      })));
     }
   }]);
 
@@ -707,10 +1592,10 @@ var Board = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/game.jsx":
-/*!*****************************!*\
-  !*** ./components/game.jsx ***!
-  \*****************************/
+/***/ "./components/play_puzzle/game.jsx":
+/*!*****************************************!*\
+  !*** ./components/play_puzzle/game.jsx ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -720,13 +1605,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _game_logic_board__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../game_logic/board */ "../game_logic/board.js");
+/* harmony import */ var _game_logic_board__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../game_logic/board */ "../game_logic/board.js");
 /* harmony import */ var _game_logic_board__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_board__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../game_logic/tile */ "../game_logic/tile.js");
+/* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../game_logic/tile */ "../game_logic/tile.js");
 /* harmony import */ var _game_logic_tile__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_game_logic_tile__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../game_logic/util */ "../game_logic/util.js");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../game_logic/util */ "../game_logic/util.js");
 /* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_game_logic_util__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./board */ "./components/board.jsx");
+/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./board */ "./components/play_puzzle/board.jsx");
+/* harmony import */ var _puzzle_options__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./puzzle_options */ "./components/play_puzzle/puzzle_options.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -755,6 +1641,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Game = /*#__PURE__*/function (_React$Component) {
   _inherits(Game, _React$Component);
 
@@ -767,7 +1654,9 @@ var Game = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      board: new (_game_logic_board__WEBPACK_IMPORTED_MODULE_1___default())(),
+      board: new (_game_logic_board__WEBPACK_IMPORTED_MODULE_1___default())({
+        dimensions: "15x15"
+      }),
       status: 'Good Luck'
     };
     _this.updateGame = _this.updateGame.bind(_assertThisInitialized(_this));
@@ -798,18 +1687,27 @@ var Game = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "importPuzzle",
-    value: function importPuzzle(puzzleData) {}
+    key: "generatePuzzle",
+    value: function generatePuzzle(options) {
+      this.setState(function (prevState) {
+        return {
+          board: new (_game_logic_board__WEBPACK_IMPORTED_MODULE_1___default())(options)
+        };
+      });
+    }
   }, {
     key: "render",
     value: function render() {
       var status = "Good Luck";
 
-      if (this.state.board.checkComplete()) {
+      if (this.state.board.complete) {
         status = "You finished!";
+        console.log(_game_logic_util__WEBPACK_IMPORTED_MODULE_3___default().convertBoardToString(this.state.board));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "main"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
         className: "title"
@@ -820,7 +1718,7 @@ var Game = /*#__PURE__*/function (_React$Component) {
         board: this.state.board
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
         className: "status"
-      }, status));
+      }, status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_puzzle_options__WEBPACK_IMPORTED_MODULE_5__["default"], null));
     }
   }]);
 
@@ -831,10 +1729,10 @@ var Game = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/hint.jsx":
-/*!*****************************!*\
-  !*** ./components/hint.jsx ***!
-  \*****************************/
+/***/ "./components/play_puzzle/hint.jsx":
+/*!*****************************************!*\
+  !*** ./components/play_puzzle/hint.jsx ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -847,7 +1745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HintComponent = function HintComponent(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
     className: "number-hint-top-row"
   }, props.hint.map(function (hint, idx) {
     var classNames = hint.crossout ? "number-hint-top-item hint-crossout" : "number-hint-top-item";
@@ -862,10 +1760,10 @@ var HintComponent = function HintComponent(props) {
 
 /***/ }),
 
-/***/ "./components/hintX.jsx":
-/*!******************************!*\
-  !*** ./components/hintX.jsx ***!
-  \******************************/
+/***/ "./components/play_puzzle/hintX.jsx":
+/*!******************************************!*\
+  !*** ./components/play_puzzle/hintX.jsx ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -875,7 +1773,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hint */ "./components/hint.jsx");
+/* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hint */ "./components/play_puzzle/hint.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -921,14 +1819,12 @@ var HintX = /*#__PURE__*/function (_React$Component) {
   _createClass(HintX, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "number-hints-left-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
         className: "number-hints-left-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
         className: "number-hint-left-row"
       }), this.props.hints.map(function (hint, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
           className: "number-hint-left-row",
           key: idx.toString()
         }, hint.map(function (innerHint, innerIdx) {
@@ -938,7 +1834,7 @@ var HintX = /*#__PURE__*/function (_React$Component) {
             key: innerIdx.toString()
           }, innerHint.num);
         }));
-      })));
+      }));
     }
   }]);
 
@@ -949,10 +1845,96 @@ var HintX = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/tile.jsx":
-/*!*****************************!*\
-  !*** ./components/tile.jsx ***!
-  \*****************************/
+/***/ "./components/play_puzzle/puzzle_options.jsx":
+/*!***************************************************!*\
+  !*** ./components/play_puzzle/puzzle_options.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var PuzzleOptions = /*#__PURE__*/function (_React$Component) {
+  _inherits(PuzzleOptions, _React$Component);
+
+  var _super = _createSuper(PuzzleOptions);
+
+  function PuzzleOptions(props) {
+    _classCallCheck(this, PuzzleOptions);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(PuzzleOptions, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-options-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-selector-options-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-size-options"
+      }, "Size"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-difficulty-options"
+      }, "Difficulty"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-genre-options"
+      }, "Genre")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-generate-puzzle-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        type: "submit"
+      }, "Submit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-library-options"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "save-to-library-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "share-puzzle-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "user-library-button"
+      })));
+    }
+  }]);
+
+  return PuzzleOptions;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PuzzleOptions);
+
+/***/ }),
+
+/***/ "./components/play_puzzle/tile.jsx":
+/*!*****************************************!*\
+  !*** ./components/play_puzzle/tile.jsx ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1016,6 +1998,7 @@ var Tile = /*#__PURE__*/function (_React$Component) {
     key: "onMouseOver",
     value: function onMouseOver(event) {
       event.preventDefault();
+      this.props.currentMouseOver(this.props.tile);
 
       if (this.props.board.state.selecting && !this.props.tile.explored) {
         this.props.addToSelection(this.props.tile);
@@ -1025,29 +2008,39 @@ var Tile = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var renderTile = this.props.tile;
+      var mouseOverTile = this.props.board.state.currentMouseover;
       var text = "";
-      var classText = "";
+      var classText = "tile";
 
       if (renderTile.explored && renderTile.bombed) {
-        classText = 'bomb';
+        classText += ' tile-bomb';
         text = '💣';
       } else if (renderTile.explored) {
-        classText = "explored";
+        classText += " tile-explored";
         text = "E";
       } else if (renderTile.flagged) {
-        classText = "flagged";
+        classText += " tile-flagged";
         text = "⚑";
       } else {
-        classText = "unexplored";
+        if (mouseOverTile) {
+          if (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1]) {
+            classText += ' tile-highlighted';
+          } else {
+            classText += " tile-unexplored";
+          }
+        } else {
+          classText += " tile-unexplored";
+        }
+
         text = '-';
       }
 
       if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
-        classText += " tile-selected";
+        classText = "tile tile-selected";
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: 'tile tile-' + classText + ' num-' + text,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        className: classText,
         onClick: this.handleClick.bind(this),
         onMouseDown: this.onMouseDown.bind(this),
         onMouseOver: this.onMouseOver.bind(this)
@@ -34499,12 +35492,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _components_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/game */ "./components/game.jsx");
+/* harmony import */ var _components_play_puzzle_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/play_puzzle/game */ "./components/play_puzzle/game.jsx");
+/* harmony import */ var _components_main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/main */ "./components/main.jsx");
+
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_game__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_main__WEBPACK_IMPORTED_MODULE_3__["default"], null), document.getElementById('root'));
 });
 })();
 

@@ -1,9 +1,10 @@
+
+
 import React from "react";
 
-
-class Tile extends React.Component {
+class ColorTile extends React.Component {
       constructor(props) {
-            super(props);
+            super(props)
       }
 
       handleClick(event) {
@@ -20,6 +21,8 @@ class Tile extends React.Component {
 
       onMouseOver(event) {
             event.preventDefault();
+            this.props.currentMouseOver(this.props.tile)
+
             if (this.props.board.state.selecting && !this.props.tile.explored) {
                   this.props.addToSelection(this.props.tile)
             }
@@ -27,35 +30,36 @@ class Tile extends React.Component {
 
       render() {
             let renderTile = this.props.tile;
+            let mouseOverTile = this.props.board.state.currentMouseover;
             let text = ""
-            let classText = ""
-
-            if (renderTile.explored && renderTile.bombed) {
-                  classText = 'bomb'
-                  text = '💣';
-            } else if (renderTile.explored) {
-                  classText = "explored"
-                  text = "E"
-            } else if (renderTile.flagged) {
-                  classText = "flagged"
-                  text = "⚑"
+            let classText = "tile"
+            
+            if (mouseOverTile) {
+                  if (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1]) {
+                        classText += ' tile-highlighted'
+                  } else {
+                        classText += " tile-empty"
+                  }
             } else {
-                  classText = "unexplored"
-                  text = '-'
+                  classText += ' tile-empty'
             }
-            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText += " tile-selected"}
+            
+      
+            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected"}
+            
+            
             
             return (
-                  <div
-                        className={'tile tile-' + classText + ' num-' + text}
+                  <td
+                        className={classText}
                         onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
                   >
                         {text}
-                  </div>
+                  </td>
             )
       }
 }
 
-export default Tile;
+export default ColorTile;

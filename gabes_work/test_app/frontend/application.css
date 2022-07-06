@@ -7,9 +7,8 @@ body {
 }
 
 .board-container {
-      margin-top: 40px;
-      display: flex;
-      
+      margin-top: 60px;
+      display: flex;      
 }
 
 .tile {
@@ -18,7 +17,8 @@ body {
       height: 30px;
       font-size: 12px;
       font-weight: bold;
-      padding: 5px 5px;
+      border-radius: 5px;
+      /* padding: 5px 5px; */
 
       display: flex;
       justify-content: center;
@@ -41,6 +41,11 @@ body {
       font-size: 28px;
 }
 
+.board-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
 .status {
       display: flex;
       align-items: center;
@@ -82,27 +87,40 @@ body {
       width: 32px;
       font-size: 12px;
       font-weight: bold;
-      padding: 5px 5px;
+      /* padding: 5px 5px; */
       color: rgb(73, 69, 69);
 }
 
-.number-hint-left-row {
-      flex-direction: row;
+.number-hints-left-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 }
-
-.number-hint-top-row {
+.number-hint-left-row {
       flex-direction: column;
 }
 
+.number-hint-top-row {
+      flex-direction: row;
+}
+
 .number-hint-top-item {
-      padding: 3px;      
+      padding: 5px;      
 }
 
 .number-hint-left-item {
-      padding: 5px;
+      padding: 2px;
 }
 
 .hint-crossout {
       text-decoration: line-through;
       color: lightgray;
+}
+
+table {
+      border-spacing: 0px;
+}
+
+.tile-highlighted {
+      background-color: yellow;
 }

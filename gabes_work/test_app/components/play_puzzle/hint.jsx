@@ -2,7 +2,7 @@ import React from "react";
 
 const HintComponent = (props) => {
       return (
-            <div className="number-hint-top-row">
+            <td className="number-hint-top-row">
                   
                   {/* { props.hint.join("  ")} */}
                   {props.hint.map((hint, idx) => {
@@ -15,7 +15,7 @@ const HintComponent = (props) => {
                               </div>
                         )
                   })}
-            </div>
+            </td>
       )
 }
 
