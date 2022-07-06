@@ -3,6 +3,8 @@ import Tile from "../../game_logic/tile";
 import HintX from "./hintX";
 import TileComponent from "./tile";
 import HintComponent from "./hint";
+
+
 class Board extends React.Component {
       constructor(props) {
             super(props);
@@ -10,44 +12,28 @@ class Board extends React.Component {
                   selection: [],
                   selecting: false
             }
-            // this.addToSelection = this.addToSelection.bind(this);
-            // this.toggleSelecting = this.toggleSelecting.bind(this);
-            // this.onMouseDown = this.onMouseDown.bind(this)
-            // this.onMouseUp = this.onMouseUp.bind(this)
+            this.addToSelection = this.addToSelection.bind(this);
+            this.onMouseDown = this.onMouseDown.bind(this)
+            this.onMouseUp = this.onMouseUp.bind(this)
       }
 
     
-      // addToSelection(tile) {
-      //       let new_arr = this.state.selection;
-      //       new_arr.push(tile);
-      //       this.setState = {
-      //             selection: new_arr
-      //       }
-      // }
+      addToSelection(tile) {
+            this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
+      }
 
-      // toggleSelecting() {
-      //       this.setState({
-      //             selecting: false
-      //       })
-      // }
+      onMouseDown(event) {
+            event.preventDefault()
+            this.setState(prevState => ({ selecting: true }))
+      }
 
-      // onMouseDown(event) {
-      //       event.preventDefault()
-      //       this.setState({
-      //             selecting: true
-      //       })
-      // }
-
-      // onMouseUp(event) {
-      //       event.preventDefault()
-      //       this.state.selection.forEach(checkTile => {
-      //             this.props.update(checkTile.getTile(), false)
-      //             checkTile.toggleSelected()
-      //       })
-      //       this.setState({
-      //             selecting: false
-      //       })
-      // }
+      onMouseUp(event) {
+            event.preventDefault()
+            this.state.selection.forEach(checkTile => {
+                  this.props.update(checkTile, false)
+            })
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
       render() {
             this.props.board.updateHintsX();
             this.props.board.updateHintsY();
@@ -57,8 +43,8 @@ class Board extends React.Component {
             
             return (
                   <div
-                        // onMouseDown={this.onMouseDown.bind(this)}
-                        // onMouseUp={this.onMouseUp.bind(this)}
+                        onMouseDown={this.onMouseDown.bind(this)}
+                        onMouseUp={this.onMouseUp.bind(this)}
                         className="board-container">
                         <HintX hints={hintsX} />
                         {this.props.board.tiles.map((ele, idx) => {
@@ -71,8 +57,7 @@ class Board extends React.Component {
                                                       key={idx.toString() + innerIdx.toString()}
                                                       update={this.props.update}
                                                       tile={innerEle}
-                                                      // addToSelection={this.addToSelection}
-                                                      // toggleSelecting={this.toggleSelecting}
+                                                      addToSelection={this.addToSelection}
                                                       board={this}
                                                 />
                                           })}

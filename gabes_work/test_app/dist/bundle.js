@@ -571,6 +571,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hint */ "./components/hint.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -611,54 +623,60 @@ var Board = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       selection: [],
       selecting: false
-    }; // this.addToSelection = this.addToSelection.bind(this);
-    // this.toggleSelecting = this.toggleSelecting.bind(this);
-    // this.onMouseDown = this.onMouseDown.bind(this)
-    // this.onMouseUp = this.onMouseUp.bind(this)
-
+    };
+    _this.addToSelection = _this.addToSelection.bind(_assertThisInitialized(_this));
+    _this.onMouseDown = _this.onMouseDown.bind(_assertThisInitialized(_this));
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
     return _this;
-  } // addToSelection(tile) {
-  //       let new_arr = this.state.selection;
-  //       new_arr.push(tile);
-  //       this.setState = {
-  //             selection: new_arr
-  //       }
-  // }
-  // toggleSelecting() {
-  //       this.setState({
-  //             selecting: false
-  //       })
-  // }
-  // onMouseDown(event) {
-  //       event.preventDefault()
-  //       this.setState({
-  //             selecting: true
-  //       })
-  // }
-  // onMouseUp(event) {
-  //       event.preventDefault()
-  //       this.state.selection.forEach(checkTile => {
-  //             this.props.update(checkTile.getTile(), false)
-  //             checkTile.toggleSelected()
-  //       })
-  //       this.setState({
-  //             selecting: false
-  //       })
-  // }
-
+  }
 
   _createClass(Board, [{
+    key: "addToSelection",
+    value: function addToSelection(tile) {
+      this.setState(function (prevState) {
+        return {
+          selection: [].concat(_toConsumableArray(prevState.selection), [tile])
+        };
+      });
+    }
+  }, {
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          selecting: true
+        };
+      });
+    }
+  }, {
+    key: "onMouseUp",
+    value: function onMouseUp(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      this.state.selection.forEach(function (checkTile) {
+        _this2.props.update(checkTile, false);
+      });
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.props.board.updateHintsX();
       this.props.board.updateHintsY();
       var hintsX = this.props.board.hintsX;
       var hintsY = this.props.board.hintsY;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        // onMouseDown={this.onMouseDown.bind(this)}
-        // onMouseUp={this.onMouseUp.bind(this)}
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseUp: this.onMouseUp.bind(this),
         className: "board-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hintX__WEBPACK_IMPORTED_MODULE_2__["default"], {
         hints: hintsX
@@ -669,14 +687,13 @@ var Board = /*#__PURE__*/function (_React$Component) {
           key: idx.toString()
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_hint__WEBPACK_IMPORTED_MODULE_4__["default"], {
           hint: hintsY[idx]
-        }), _this2.props.board.tiles[idx].map(function (innerEle, innerIdx) {
+        }), _this3.props.board.tiles[idx].map(function (innerEle, innerIdx) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tile__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: idx.toString() + innerIdx.toString(),
-            update: _this2.props.update,
-            tile: innerEle // addToSelection={this.addToSelection}
-            // toggleSelecting={this.toggleSelecting}
-            ,
-            board: _this2
+            update: _this3.props.update,
+            tile: innerEle,
+            addToSelection: _this3.addToSelection,
+            board: _this3
           });
         }));
       }));
@@ -975,51 +992,35 @@ var Tile = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Tile);
 
   function Tile(props) {
-    var _this;
-
     _classCallCheck(this, Tile);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      selected: false
-    }; // this.getTile = this.getTile.bind(this)
-    // this.toggleSelected = this.toggleSelected.bind(this)
-
-    return _this;
-  } // getTile() {
-  //       return this.props.tile
-  // }
-  // toggleSelected() {
-  //       this.setState({selected: false})
-  // }
-
+    return _super.call(this, props);
+  }
 
   _createClass(Tile, [{
     key: "handleClick",
     value: function handleClick(event) {
       event.preventDefault();
       this.props.update(this.props.tile, event.altKey ? true : false);
-    } // onMouseDown(event) {
-    //       console.log("check")
-    //       event.preventDefault();
-    //       if (this.props.board.state.selecting) {
-    //             this.setState({ selected: true})
-    //             this.props.addToSelection(this)
-    //       }
-    // }
-    // onMouseOver(event) {
-    //       console.log("check")
-    //       event.preventDefault();
-    //       if (this.props.board.state.selecting) {
-    //             this.setState({ selected: true})
-    //             this.props.addToSelection(this)
-    //       }
-    // }
-    // onMouseUp(event) {
-    //       event.preventDefault()
-    //       this.props.toggleSelecting()
-    // }
+    }
+  }, {
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
 
+      if (this.props.board.state.selecting) {
+        this.props.addToSelection(this.props.tile);
+      }
+    }
+  }, {
+    key: "onMouseOver",
+    value: function onMouseOver(event) {
+      event.preventDefault();
+
+      if (this.props.board.state.selecting && !this.props.tile.explored) {
+        this.props.addToSelection(this.props.tile);
+      }
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1041,16 +1042,15 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         text = '-';
       }
 
-      if (this.state.selected) {
+      if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
         classText += " tile-selected";
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: 'tile tile-' + classText + ' num-' + text,
-        onClick: this.handleClick.bind(this) // onMouseDown={this.onMouseDown.bind(this)}
-        // onMouseOver={this.onMouseOver.bind(this)}
-        // onMouseUp={this.onMouseUp.bind(this)}
-
+        onClick: this.handleClick.bind(this),
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseOver: this.onMouseOver.bind(this)
       }, text);
     }
   }]);
