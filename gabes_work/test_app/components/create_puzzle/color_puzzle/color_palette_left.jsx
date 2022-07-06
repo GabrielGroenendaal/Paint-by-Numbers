@@ -12,16 +12,16 @@ class ColorPaletteLeft extends React.Component {
       
       render() {
             const colors = [
-                  'blue',
-                  'red',
-                  'green',
-                  'purple',
-                  'gray',
-                  'yellow',
                   'pink',
-                  'orange',
-                  'lightblue',
-                  'black'
+                  'plum',
+                  'powderblue',
+                  'darkseagreen',
+                  'gold',
+                  'indianred',
+                  'lightskyblue',
+                  'navajowhite',
+                  'palegreen',
+                  'tomato'
             ]
             return (
                   <tr className="color-palette-left-row">

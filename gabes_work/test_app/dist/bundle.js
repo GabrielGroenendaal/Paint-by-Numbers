@@ -820,8 +820,7 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       this.state.selection.forEach(function (checkTile) {
-        checkTile.changeColor(_this2.state.selectedColor);
-        console.log(checkTile); // this.props.update(checkTile, event.altKey ? true : false)
+        checkTile.changeColor(_this2.state.selectedColor); // this.props.update(checkTile, event.altKey ? true : false)
       });
       this.setState(function (prevState) {
         return {
@@ -845,12 +844,16 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "currentMouseOver",
     value: function currentMouseOver(tile) {
-      console.log(tile);
       this.setState(function (prevState) {
         return {
           currentMouseover: tile
         };
       });
+    }
+  }, {
+    key: "updateTile",
+    value: function updateTile(tile) {
+      tile.changeColor(this.state.selectedColor);
     }
   }, {
     key: "render",
@@ -877,7 +880,8 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
             tile: innerEle,
             addToSelection: _this3.addToSelection,
             currentMouseOver: _this3.currentMouseOver,
-            board: _this3
+            board: _this3,
+            updateTile: _this3.updateTile.bind(_this3)
           });
         }));
       })));
@@ -1025,7 +1029,7 @@ var ColorPaletteLeft = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var colors = ['blue', 'red', 'green', 'purple', 'gray', 'yellow', 'pink', 'orange', 'lightblue', 'black'];
+      var colors = ['pink', 'plum', 'powderblue', 'darkseagreen', 'gold', 'indianred', 'lightskyblue', 'navajowhite', 'palegreen', 'tomato'];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
         className: "color-palette-left-row"
       }, colors.map(function (color, idx) {
@@ -1100,6 +1104,8 @@ var ColorTile = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.board.state.selecting) {
         this.props.addToSelection(this.props.tile);
+      } else {
+        this.props.updateTile(this.props.tile);
       }
     }
   }, {
@@ -1131,18 +1137,19 @@ var ColorTile = /*#__PURE__*/function (_React$Component) {
       }
 
       var renderTileStyle;
+      renderTileStyle = renderTile.colored ? {
+        background: this.props.tile.color
+      } : {};
 
       if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
-        classText = "tile tile-selected";
-      } else {
-        renderTileStyle = renderTile.colored ? {
-          background: this.props.tile.color
-        } : {};
+        classText = "tile tile-color-selected";
+        renderTileStyle = {
+          background: this.props.board.state.selectedColor
+        };
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-        className: classText // onClick={this.handleClick.bind(this)}
-        ,
+        className: classText,
         onMouseDown: this.onMouseDown.bind(this),
         onMouseOver: this.onMouseOver.bind(this),
         style: renderTileStyle

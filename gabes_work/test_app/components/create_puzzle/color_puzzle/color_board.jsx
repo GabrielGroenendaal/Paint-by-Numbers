@@ -36,7 +36,6 @@ class ColorBoard extends React.Component {
             event.preventDefault()
             this.state.selection.forEach(checkTile => {
                   checkTile.changeColor(this.state.selectedColor);
-                  console.log(checkTile)
                   // this.props.update(checkTile, event.altKey ? true : false)
             })
             this.setState(prevState=> ({ selection: [], selecting: false }))
@@ -49,8 +48,11 @@ class ColorBoard extends React.Component {
       }
       
       currentMouseOver(tile) {
-            console.log(tile)
             this.setState(prevState => ({currentMouseover: tile}))
+      }
+
+      updateTile(tile) {
+            tile.changeColor(this.state.selectedColor);
       }
 
       render() {
@@ -78,6 +80,7 @@ class ColorBoard extends React.Component {
                                                                   addToSelection={this.addToSelection}
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
+                                                                  updateTile={this.updateTile.bind(this)}
                                                             />
                                                       })}
                                                 

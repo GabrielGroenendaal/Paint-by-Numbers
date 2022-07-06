@@ -12,6 +12,8 @@ class ColorTile extends React.Component {
             event.preventDefault();
             if (this.props.board.state.selecting) {
                   this.props.addToSelection(this.props.tile)
+            } else {
+                  this.props.updateTile(this.props.tile)
             }
       }
 
@@ -41,14 +43,17 @@ class ColorTile extends React.Component {
             }
             let renderTileStyle;  
 
-            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected" }
-            else { renderTileStyle = (renderTile.colored) ? { background: this.props.tile.color } : {}}
+            renderTileStyle = (renderTile.colored) ? { background: this.props.tile.color } : {}
+
+            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
+                  classText = "tile tile-color-selected"
+                  renderTileStyle = {background: this.props.board.state.selectedColor}
+            }
             
             
             return (
                   <td
                         className={classText}
-                        // onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
                         style={renderTileStyle}
