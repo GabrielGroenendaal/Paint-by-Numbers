@@ -24,7 +24,7 @@ body {
       justify-content: center;
       align-items: center;
 
-      transition: width .15s ease-out, border-radius .15s ease-out;
+      transition: width .15s ease-out, height .15s ease-out, border-radius .15s ease-out;
 }
 
 .tile:hover {
