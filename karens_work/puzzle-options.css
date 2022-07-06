@@ -9,7 +9,7 @@
     background-color: red;
     bottom: 0;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
 }
 
 .puzzle-selector-options-container {
@@ -50,7 +50,7 @@
     text-align: center;
 }
 
-.footer-links {
+.footer {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -63,3 +63,11 @@
     padding: 10px;
     font-size: 30px;
 }
+
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+

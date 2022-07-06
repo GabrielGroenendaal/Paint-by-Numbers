@@ -1,3 +1,10 @@
+html,
+body {
+    height: 100%;
+    margin: auto;
+    
+}
+
 .navigation-bar {
     display: flex;
     justify-content: space-between;
@@ -5,6 +12,7 @@
     background-color: rgb(207, 203, 203);
     flex-direction: row;
     align-items: center;
+    width: 100%;
 }
 
 .left-nav-bar {
