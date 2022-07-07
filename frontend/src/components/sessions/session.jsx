@@ -6,7 +6,7 @@ class SessionForm extends React.Component {
     constructor (props) {
         super(props);
 
-        this.state = this.props.formType === "Login" ? { username: "", password: "", errors: {} } : { username: "", password: "", password2: "", errors: {} };
+        this.state = this.props.formType === "Login" ? { username: "",email:"", password: "", errors: {} } : { username: "",email:"", password: "", password2: "", errors: {} };
 
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,6 +51,7 @@ class SessionForm extends React.Component {
             submissionState = {
                 // email: this.state.email,
                 username: this.state.username,
+                email: this.state.email,
                 password: this.state.password,
                 password2: this.state.password2,
 
@@ -60,6 +61,7 @@ class SessionForm extends React.Component {
             submissionState = {
                 // email: this.state.email,
                 username: this.state.username,
+                email: this.state.email,
                 password: this.state.password
             };
         }
@@ -106,7 +108,18 @@ class SessionForm extends React.Component {
         );
 
 
-
+        const email = this.props.formType === "Sign Up" ? (
+            <div className="field">
+                <label id="email-label">EMAIL</label>
+                <input id="email"  type="email" value={this.state.email} onChange={this.handleInput('email')} />
+            </div>
+        ) : (
+            <div className="field">
+                <label id="email-label" >EMAIL </label>
+                <input id="email"  type="email" value={this.state.email} onChange={this.handleInput('email')} />
+            </div>
+        )
+            ;
 
         const submitButtonMessage = this.props.formType === "Sign In" ? "Login" : "Continue";
 
@@ -118,9 +131,10 @@ class SessionForm extends React.Component {
                 <div className="form-box">
 
 
-                    <form onSubmit={this.handleSubmit}>
+                    <form autoComplete='off'onSubmit={this.handleSubmit}>
 
                         {userName}
+                        {email}
                         {password}
                         {password2}
 

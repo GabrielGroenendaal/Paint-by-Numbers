@@ -8,9 +8,11 @@ const passport = require("passport");
 const Puzzle = require("../../models/Puzzle.js");
 const validatePuzzleInput = require("../../validation/puzzles.js");
 
+//get entire library of puzzles
+
 router.get("/", (request, response) => {
   Puzzle.find()
-    .sort({ creator_id })
+    .sort({ creator_id: request.params.user_id })
     .then((puzzles) => response.json(puzzles))
     .catch((err) =>
       response.status(404).json({ noPuzzlesFound: "No Puzzles found" })
@@ -20,8 +22,8 @@ router.get("/", (request, response) => {
 //get users puzzles
 
 router.get("/user/:user_id", (request, response) => {
-  Puzzle.find({ user: request.params.user_id })
-    .sort({ creator_id })
+  Puzzle.find({ creator_id: request.params.user_id })
+    // .sort({ creator_id: request.params.user_id })
     .then((puzzles) => response.json(puzzles))
     .catch((err) =>
       response
@@ -30,7 +32,23 @@ router.get("/user/:user_id", (request, response) => {
     );
 });
 
-router.get("/", (request, response) => {
+//get a specific user puzzles
+router.get("/user/:user_id/:puzzle_id", (request, response) => {
+  Puzzle.findById(request.params.puzzle_id)
+    // .sort({ creator_id: request.params.user_id })
+    .then((puzzles) => response.json(puzzles))
+    .catch((err) =>
+      response
+        .status(404)
+        .json({ noPuzzlesFound: "No Puzzles found for that User" })
+    );
+});
+
+
+
+//get a puzzle by its own id
+
+router.get("/:id", (request, response) => {
   Puzzle.findById(request.params.id)
     .then((puzzle) => response.json(puzzle))
     .catch((err) =>
@@ -64,4 +82,3 @@ router.post(
 );
 
 module.exports = router;
-
