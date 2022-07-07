@@ -6,6 +6,7 @@ import Util from "../../../game_logic/util";
 import ColorPuzzleSubmission from "./create_puzzle_options/color_puzzle_submission";
 import ImageOptions from "./images/image_options";
 import ColorUtil from '../../../game_logic/color_util'
+import PuzzleLibrary from "../play_puzzle/puzzle_options/puzzle_library";
 
 
 class CreatePuzzle extends React.Component {
@@ -71,7 +72,8 @@ class CreatePuzzle extends React.Component {
                               </button> */}
                               <div className="puzzle-options-container">
                                     <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
-                                    <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                                          <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                                          <PuzzleLibrary />
                               {/* SubmitPuzzleButtons */}
                               {/* LibraryOptions */}
                                     </div>

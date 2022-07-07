@@ -1289,6 +1289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_image_options__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/image_options */ "./components/create_puzzle/images/image_options.jsx");
 /* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../game_logic/color_util */ "../game_logic/color_util.js");
 /* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../play_puzzle/puzzle_options/puzzle_library */ "./components/play_puzzle/puzzle_options/puzzle_library.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1310,6 +1311,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -1419,7 +1421,7 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
         updateBoard: this.updateBoardSetting
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_color_puzzle_submission__WEBPACK_IMPORTED_MODULE_5__["default"], {
         submitColor: this.submitColor.bind(this)
-      })))));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
     }
   }]);
 
@@ -2522,16 +2524,14 @@ var Game = /*#__PURE__*/function (_React$Component) {
         className: "main"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "title"
-      }, "Paint-by-Numbers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "puzzle-wrap"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-content-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_board__WEBPACK_IMPORTED_MODULE_4__["default"], {
         update: this.updateGame,
         board: this.state.board
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "status"
-      }, status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-options-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_puzzle_options_puzzle_options__WEBPACK_IMPORTED_MODULE_5__["default"], {
         changePuzzle: this.changePuzzleOptions.bind(this)

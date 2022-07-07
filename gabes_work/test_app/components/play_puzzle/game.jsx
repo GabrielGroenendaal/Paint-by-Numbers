@@ -40,15 +40,15 @@ class Game extends React.Component {
                   dimensions: this.state.dimensions,
                   difficulty: this.state.difficulty
             }
-            this.setState(prevState => ({board: new Board(options)}))
+            this.setState(prevState => ({ board: new Board(options) }))
       }
 
       changePuzzleOptions(options) {
             if (options.dimensions && options.dimensions != this.state.dimensions) {
-                  this.setState(prevState => ({dimensions: options.dimensions}))
+                  this.setState(prevState => ({ dimensions: options.dimensions }))
             }
             if (options.difficulty && options.difficulty != this.state.difficulty) {
-                  this.setState(prevState => ({difficulty: options.difficulty}))
+                  this.setState(prevState => ({ difficulty: options.difficulty }))
             }
             console.log(options)
       }
@@ -63,18 +63,19 @@ class Game extends React.Component {
             return (
                   <div className="main">
                         <div className="puzzle-container">
-                              <h1 className="title">Paint-by-Numbers</h1>
-                              <div className="puzzle-content-container">
-                                    <BoardComponent update={this.updateGame} board={this.state.board} />
+                              <div className="puzzle-wrap">
+                                    <div className="puzzle-content-container">
+                                          <BoardComponent update={this.updateGame} board={this.state.board} />
+                                    </div>
                               </div>
-                              <h2 className="status">{status}</h2>
+
                         </div>
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
                               <PuzzleSubmit generate={this.generatePuzzle.bind(this)} />
                               <PuzzleLibrary />
                         </div>
-                     
+
                   </div>
             )
       }
