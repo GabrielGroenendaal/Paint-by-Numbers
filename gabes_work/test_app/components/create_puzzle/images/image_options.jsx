@@ -40,11 +40,12 @@ class ImageOptions extends React.Component {
                   this.setState({
                         picture: true,
                         storedPicture:  <Pixelify
-                        src={this.state.pictureURL}
-                        width={550}
-                        height={550}
-                        pixelSize={550 / this.props.board.dimensions[0]}
-                        fillTransparencyColor={'black'}
+                                    src={this.state.pictureURL}
+                                    width={550}
+                                    height={550}
+                                    pixelSize={550 / this.props.board.dimensions[0]}
+                                    centered={true}
+                                    fillTransparencyColor={'black'}
                   />
             })
       }

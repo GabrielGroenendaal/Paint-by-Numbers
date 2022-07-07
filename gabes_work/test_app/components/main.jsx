@@ -16,8 +16,8 @@ class Main extends React.Component {
             return (
                   <div>
                         <NavBar />
-                        <Game />
-                        {/* <CreatePuzzle /> */}
+                        {/* <Game /> */}
+                        <CreatePuzzle />
                         <Footer />
                   </div>
             

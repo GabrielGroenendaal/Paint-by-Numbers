@@ -2263,6 +2263,7 @@ var ImageOptions = /*#__PURE__*/function (_React$Component) {
           width: 550,
           height: 550,
           pixelSize: 550 / this.props.board.dimensions[0],
+          centered: true,
           fillTransparencyColor: 'black'
         })
       });
@@ -2545,7 +2546,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
   _createClass(Main, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_nav_bar__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_game__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_nav_bar__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
     }
   }]);
 
