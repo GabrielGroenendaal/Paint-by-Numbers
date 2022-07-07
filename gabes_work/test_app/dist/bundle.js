@@ -402,6 +402,7 @@ var BoardCreate = /*#__PURE__*/function () {
     key: "makeTileMap",
     value: function makeTileMap(tileData) {
       var board = [];
+      console.log(tileData);
 
       for (var i = 0; i < this.width(); i++) {
         var row = [];
@@ -444,7 +445,7 @@ var BoardCreate = /*#__PURE__*/function () {
         for (var k = 0; k < this.height(); k++) {
           var createTileOptions = {
             board: this,
-            color: "white",
+            color: "#FFFFFF",
             pos: [i, k],
             bombed: false,
             flagged: false,
@@ -525,7 +526,8 @@ var ColorUtil = {
   },
   hexToRGB: function hexToRGB(rgb) {
     // Choose correct separator
-    var hex = "#ff64c8";
+    console.log(rgb);
+    var hex = rgb;
     var red = parseInt(hex[1] + hex[2], 16);
     var green = parseInt(hex[3] + hex[4], 16);
     var blue = parseInt(hex[5] + hex[6], 16);
@@ -537,28 +539,46 @@ var ColorUtil = {
   },
   // The big Guns
   seedBombsByColor: function seedBombsByColor(board) {
-    var _this = this;
-
     var checkTiles = _util__WEBPACK_IMPORTED_MODULE_0___default().convertBoardToString(board);
     var checkTilesOverall = _util__WEBPACK_IMPORTED_MODULE_0___default().parseTileDataFromString(checkTiles);
-    var r, g, b;
-    checkTilesOverall.forEach(function (tile) {
+    var avg = this.averageColor(checkTilesOverall);
+    var avgpixel = avg.r + avg.g + avg.b;
+    var newTiles = this.mapTiles(checkTilesOverall, avgpixel);
+    return newTiles;
+  },
+  averageColor: function averageColor(tiles) {
+    var _this = this;
+
+    var r = 0;
+    var g = 0;
+    var b = 0;
+    tiles.forEach(function (tile) {
       var hex = _this.hexToRGB(tile[0]);
 
-      console.log(hex);
-      r += hex.r;
-      g += hex.g;
-      b += hex.b;
+      r += hex.r * hex.r;
+      g += hex.g * hex.g;
+      b += hex.b * hex.b;
     });
-    var avg = this.averageColor(r, g, b, checkTiles.length);
-    console.log(avg);
-  },
-  averageColor: function averageColor(r, g, b, num) {
+    var num = tiles.length;
     return {
       r: Math.sqrt(r / num),
       g: Math.sqrt(g / num),
       b: Math.sqrt(b / num)
     };
+  },
+  mapTiles: function mapTiles(tiles, avg) {
+    var _this2 = this;
+
+    tiles.forEach(function (tile, idx) {
+      var hex = _this2.hexToRGB(tile[0]);
+
+      var hexTotal = hex.r + hex.g + hex.b;
+
+      if (hexTotal < avg) {
+        tiles[idx][1] = 'true';
+      }
+    });
+    return tiles;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorUtil);
@@ -689,7 +709,8 @@ var TileCreate = /*#__PURE__*/function () {
     _classCallCheck(this, TileCreate);
 
     this.board = options.board;
-    this.color = options.color || _color_util__WEBPACK_IMPORTED_MODULE_0__["default"].nameToHex("white");
+    this.color = options.color || "#FFFFFF";
+    console.log(this.color);
     this.pos = options.pos;
     this.explored = options.explored || false;
     this.bombed = options.bombed || false;
@@ -807,6 +828,402 @@ module.exports = Util;
 
 /***/ }),
 
+/***/ "./components/create_puzzle/bomb_puzzle/bomb_board.jsx":
+/*!*************************************************************!*\
+  !*** ./components/create_puzzle/bomb_puzzle/bomb_board.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _bomb_tile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bomb_tile */ "./components/create_puzzle/bomb_puzzle/bomb_tile.jsx");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../game_logic/util */ "../game_logic/util.js");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_game_logic_util__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var BombBoard = /*#__PURE__*/function (_React$Component) {
+  _inherits(BombBoard, _React$Component);
+
+  var _super = _createSuper(BombBoard);
+
+  function BombBoard(props) {
+    var _this;
+
+    _classCallCheck(this, BombBoard);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      selection: [],
+      selecting: false,
+      currentMouseover: null
+    };
+    _this.addToSelection = _this.addToSelection.bind(_assertThisInitialized(_this));
+    _this.onMouseDown = _this.onMouseDown.bind(_assertThisInitialized(_this));
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.currentMouseOver = _this.currentMouseOver.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(BombBoard, [{
+    key: "addToSelection",
+    value: function addToSelection(tile) {
+      this.setState(function (prevState) {
+        return {
+          selection: [].concat(_toConsumableArray(prevState.selection), [tile])
+        };
+      });
+    }
+  }, {
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          selecting: true
+        };
+      });
+    }
+  }, {
+    key: "onMouseUp",
+    value: function onMouseUp(event) {
+      event.preventDefault();
+      this.state.selection.forEach(function (checkTile) {
+        checkTile.toggleBombed(); // this.props.update(checkTile, event.altKey ? true : false)
+      });
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      });
+    }
+  }, {
+    key: "onContextMenu",
+    value: function onContextMenu(event) {
+      //event.preventDefault()
+      this.setState(function (prevState) {
+        return {
+          selection: [],
+          selecting: false
+        };
+      }); //console.log(event.button)
+    }
+  }, {
+    key: "currentMouseOver",
+    value: function currentMouseOver(tile) {
+      this.setState(function (prevState) {
+        return {
+          currentMouseover: tile
+        };
+      });
+    }
+  }, {
+    key: "updateTile",
+    value: function updateTile(tile) {
+      tile.toggleBombed(); //(this.state.selectedColor);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseUp: this.onMouseUp.bind(this),
+        onContextMenu: this.onContextMenu.bind(this) // onMouseOut={this.onMouseLeave.bind(this)}
+        ,
+        className: "board-container bomb-board-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, this.props.board.tiles.map(function (ele, idx) {
+        var className = 'board-row board-row-' + idx.toString();
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+          className: className,
+          key: idx.toString()
+        }, _this2.props.board.tiles[idx].map(function (innerEle, innerIdx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_bomb_tile__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: idx.toString() + innerIdx.toString(),
+            update: _this2.props.update,
+            tile: innerEle,
+            addToSelection: _this2.addToSelection,
+            currentMouseOver: _this2.currentMouseOver,
+            board: _this2,
+            boardObject: _this2.props.board,
+            updateTile: _this2.updateTile.bind(_this2)
+          });
+        }));
+      })));
+    }
+  }]);
+
+  return BombBoard;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BombBoard);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/bomb_puzzle/bomb_puzzle_submission.jsx":
+/*!*************************************************************************!*\
+  !*** ./components/create_puzzle/bomb_puzzle/bomb_puzzle_submission.jsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../game_logic/util */ "../game_logic/util.js");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_util__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var BombPuzzleSubmission = /*#__PURE__*/function (_React$Component) {
+  _inherits(BombPuzzleSubmission, _React$Component);
+
+  var _super = _createSuper(BombPuzzleSubmission);
+
+  function BombPuzzleSubmission(props) {
+    _classCallCheck(this, BombPuzzleSubmission);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(BombPuzzleSubmission, [{
+    key: "handleClick",
+    value: function handleClick() {
+      this.props.submitPuzzle();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-generate-puzzle-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "submit-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: this.handleClick.bind(this)
+      }, "Submit!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+        href: ""
+      }, "Generate a Random Puzzle Instead")));
+    }
+  }]);
+
+  return BombPuzzleSubmission;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BombPuzzleSubmission);
+
+/***/ }),
+
+/***/ "./components/create_puzzle/bomb_puzzle/bomb_tile.jsx":
+/*!************************************************************!*\
+  !*** ./components/create_puzzle/bomb_puzzle/bomb_tile.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../game_logic/util */ "../game_logic/util.js");
+/* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_util__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var BombTile = /*#__PURE__*/function (_React$Component) {
+  _inherits(BombTile, _React$Component);
+
+  var _super = _createSuper(BombTile);
+
+  function BombTile(props) {
+    _classCallCheck(this, BombTile);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(BombTile, [{
+    key: "onMouseDown",
+    value: function onMouseDown(event) {
+      event.preventDefault();
+
+      if (this.props.board.state.selecting) {
+        this.props.addToSelection(this.props.tile);
+      } else {
+        this.props.updateTile(this.props.tile);
+      }
+    }
+  }, {
+    key: "onMouseOver",
+    value: function onMouseOver(event) {
+      event.preventDefault();
+      this.props.currentMouseOver(this.props.tile);
+
+      if (this.props.board.state.selecting && !this.props.tile.explored) {
+        this.props.addToSelection(this.props.tile);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var renderTile = this.props.tile;
+      var mouseOverTile = this.props.board.state.currentMouseover;
+      var text = "";
+      var classText = "tile";
+
+      if (mouseOverTile) {
+        if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
+          classText += ' tile-highlighted';
+        } else {
+          classText += " tile-empty";
+        }
+      } else {
+        classText += ' tile-empty';
+      }
+
+      var renderTileStyle;
+      renderTileStyle = renderTile.colored ? {
+        background: this.props.tile.color
+      } : {};
+
+      if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
+        classText = "tile tile-color-selected";
+        renderTileStyle = {
+          background: this.props.board.state.selectedColor
+        };
+      }
+
+      var dims = _game_logic_util__WEBPACK_IMPORTED_MODULE_1___default().convertDimensionsToString(this.props.boardObject.dimensions);
+
+      switch (dims) {
+        case "5x5":
+          classText += ' puzzle-tile-5x5';
+          break;
+
+        case "10x10":
+          classText += ' puzzle-tile-10x10';
+          break;
+
+        case "15x15":
+          classText += ' puzzle-tile-15x15';
+          break;
+
+        case "20x20":
+          classText += ' puzzle-tile-20x20';
+          break;
+
+        default:
+      }
+
+      if (renderTile.bombed) {
+        classText += ' bomb-selection-tile';
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+        className: classText,
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseOver: this.onMouseOver.bind(this),
+        style: renderTileStyle
+      }, text);
+    }
+  }]);
+
+  return BombTile;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BombTile);
+
+/***/ }),
+
 /***/ "./components/create_puzzle/color_puzzle/color_board.jsx":
 /*!***************************************************************!*\
   !*** ./components/create_puzzle/color_puzzle/color_board.jsx ***!
@@ -875,7 +1292,7 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
       selection: [],
       selecting: false,
       currentMouseover: null,
-      selectedColor: 'white'
+      selectedColor: '#FFFFFF'
     };
     _this.addToSelection = _this.addToSelection.bind(_assertThisInitialized(_this));
     _this.onMouseDown = _this.onMouseDown.bind(_assertThisInitialized(_this));
@@ -887,7 +1304,6 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
   _createClass(ColorBoard, [{
     key: "addToSelection",
     value: function addToSelection(tile) {
-      console.log(this.state.selection);
       this.setState(function (prevState) {
         return {
           selection: [].concat(_toConsumableArray(prevState.selection), [tile])
@@ -902,7 +1318,6 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
           selectedColor: color
         };
       });
-      console.log(this.state.selectedColor);
     }
   }, {
     key: "onMouseDown",
@@ -1345,6 +1760,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_image_options__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/image_options */ "./components/create_puzzle/images/image_options.jsx");
 /* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../game_logic/color_util */ "../game_logic/color_util.js");
 /* harmony import */ var _play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../play_puzzle/puzzle_options/puzzle_library */ "./components/play_puzzle/puzzle_options/puzzle_library.jsx");
+/* harmony import */ var _bomb_puzzle_bomb_puzzle_submission__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bomb_puzzle/bomb_puzzle_submission */ "./components/create_puzzle/bomb_puzzle/bomb_puzzle_submission.jsx");
+/* harmony import */ var _bomb_puzzle_bomb_board__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./bomb_puzzle/bomb_board */ "./components/create_puzzle/bomb_puzzle/bomb_board.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1366,6 +1783,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -1426,7 +1845,16 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
     key: "submitColor",
     value: function submitColor() {
       var checkBoard = Object.assign({}, this.state.board);
-      _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__["default"].seedBombsByColor(this.state.board); // this.setState({
+      var newTiles = _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__["default"].seedBombsByColor(this.state.board);
+      this.setState({
+        board: new _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__["default"]({
+          difficulty: checkBoard.difficulty,
+          dimensions: _game_logic_util__WEBPACK_IMPORTED_MODULE_4___default().convertDimensionsToString(checkBoard.dimensions),
+          originalImageURL: checkBoard.originalImageURL,
+          tiles: newTiles
+        }),
+        phase: 2
+      }); // this.setState({
       //       board: new BoardCreate({}),
       //       phase: 2
       // })
@@ -1459,31 +1887,63 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "submitPuzzle",
+    value: function submitPuzzle() {
+      var puzzleData = _game_logic_util__WEBPACK_IMPORTED_MODULE_4___default().convertBoardToString(this.state.board);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "main"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "puzzle-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "puzzle-wrap"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "puzzle-content-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        update: this.updateBoardSettings,
-        board: this.state.board
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_images_image_options__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        submitImage: this.submitImage.bind(this),
-        board: this.state.board
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "puzzle-options-collapse"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "puzzle-options-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        updateBoard: this.updateBoardSetting
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_color_puzzle_submission__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        submitColor: this.submitColor.bind(this)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
+      if (this.state.phase === 1) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "main"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-content-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          update: this.updateBoardSettings,
+          board: this.state.board
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_images_image_options__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          submitImage: this.submitImage.bind(this),
+          board: this.state.board
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-options-collapse"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-options-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          updateBoard: this.updateBoardSetting
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_color_puzzle_submission__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          submitColor: this.submitColor.bind(this)
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
+      } else if (this.state.phase == 2) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "main"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-content-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_bomb_puzzle_bomb_board__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          update: this.updateBoardSettings,
+          board: this.state.board
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_images_image_options__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          submitImage: this.submitImage.bind(this),
+          board: this.state.board
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-options-collapse"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "puzzle-options-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          active: false,
+          updateBoard: this.updateBoardSetting
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_bomb_puzzle_bomb_puzzle_submission__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          submitPuzzle: this.submitPuzzle.bind(this)
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
+      }
     }
   }]);
 
@@ -2085,7 +2545,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
   _createClass(Main, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_nav_bar__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_nav_bar__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_game__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_navbar_footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
     }
   }]);
 
@@ -2506,7 +2966,7 @@ var Game = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       board: new (_game_logic_board__WEBPACK_IMPORTED_MODULE_1___default())({
-        dimensions: "5x5"
+        dimensions: "10x10"
       }),
       status: 'Good Luck',
       board_size: "10x10",
@@ -3146,10 +3606,8 @@ var Tile = /*#__PURE__*/function (_React$Component) {
 
       if (renderTile.explored && renderTile.bombed) {
         classText += ' tile-bomb';
-        text = '💣';
       } else if (renderTile.explored) {
         classText += " tile-explored";
-        text = "E";
       } else if (renderTile.flagged) {
         classText += " tile-flagged";
         text = "⚑";
@@ -3163,8 +3621,6 @@ var Tile = /*#__PURE__*/function (_React$Component) {
         } else {
           classText += " tile-unexplored";
         }
-
-        text = '-';
       }
 
       if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {

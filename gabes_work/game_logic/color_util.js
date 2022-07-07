@@ -44,7 +44,8 @@ const ColorUtil = {
 
       hexToRGB(rgb) {
             // Choose correct separator
-            var hex = "#ff64c8";
+            console.log(rgb)
+            var hex = rgb
             var red = parseInt(hex[1]+hex[2],16);
             var green = parseInt(hex[3]+hex[4],16);
             var blue = parseInt(hex[5] + hex[6], 16);
@@ -62,26 +63,43 @@ const ColorUtil = {
       seedBombsByColor(board) {
             let checkTiles = Util.convertBoardToString(board)
             let checkTilesOverall = Util.parseTileDataFromString(checkTiles)
-            let r, g, b;
-            checkTilesOverall.forEach(tile => {
-                  let hex = this.hexToRGB(tile[0])
-                  console.log(hex)
-                  r += hex.r
-                  g += hex.g
-                  b += hex.b
-            })
-            let avg = this.averageColor(r, g, b, checkTiles.length);
-            console.log(avg)
+            let avg = this.averageColor(checkTilesOverall)
+            let avgpixel = avg.r + avg.g + avg.b;
+
+            let newTiles = this.mapTiles(checkTilesOverall, avgpixel)
+            return newTiles;
       },
 
-      averageColor(r, g, b, num) {
+      averageColor(tiles) {
+            let r = 0
+            let g = 0;
+            let b = 0;
+            tiles.forEach(tile => {
+                  let hex = this.hexToRGB(tile[0])
+                  r += hex.r * hex.r
+                  g += hex.g * hex.g
+                  b += hex.b * hex.b
+            })
+            let num = tiles.length;
             return {
                   r: Math.sqrt(r / num),
                   g: Math.sqrt(g / num),
                   b: Math.sqrt(b / num)
             }
-      }
+      },
 
+      mapTiles(tiles, avg) {
+            
+            tiles.forEach((tile, idx) => {
+                  let hex = this.hexToRGB(tile[0])
+                  let hexTotal = hex.r + hex.g + hex.b;
+
+                  if (hexTotal < avg) {
+                        tiles[idx][1] = 'true'
+                  }
+            })
+            return tiles;
+      }
 
 
 }

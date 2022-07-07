@@ -11,7 +11,7 @@ class Game extends React.Component {
       constructor(props) {
             super(props)
             this.state = {
-                  board: new Board({ dimensions: "5x5" }),
+                  board: new Board({ dimensions: "10x10" }),
                   status: 'Good Luck',
                   board_size: "10x10",
                   board_difficulty: "Easy"

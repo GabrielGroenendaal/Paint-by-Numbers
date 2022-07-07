@@ -13,7 +13,8 @@ class BoardCreate {
 
       makeTileMap(tileData) {
             let board = []
-          
+            
+            console.log(tileData)
             for (let i = 0; i < this.width(); i++) {
                   let row = []
                   for (let k = 0; k < this.height(); k++) {
@@ -45,7 +46,7 @@ class BoardCreate {
                   for (let k = 0; k < this.height(); k++) {
                         let createTileOptions = {
                               board: this,
-                              color: "white",
+                              color: "#FFFFFF",
                               pos: [i, k],
                               bombed: false,
                               flagged: false,

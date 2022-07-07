@@ -7,6 +7,8 @@ import ColorPuzzleSubmission from "./create_puzzle_options/color_puzzle_submissi
 import ImageOptions from "./images/image_options";
 import ColorUtil from '../../../game_logic/color_util'
 import PuzzleLibrary from "../play_puzzle/puzzle_options/puzzle_library";
+import BombPuzzleSubmission from "./bomb_puzzle/bomb_puzzle_submission";
+import BombBoard from "./bomb_puzzle/bomb_board";
 
 
 class CreatePuzzle extends React.Component {
@@ -33,7 +35,16 @@ class CreatePuzzle extends React.Component {
       
       submitColor() {
             let checkBoard = Object.assign({}, this.state.board)
-            ColorUtil.seedBombsByColor(this.state.board)
+            let newTiles = ColorUtil.seedBombsByColor(this.state.board)
+            this.setState({
+                  board: new BoardCreate({
+                        difficulty: checkBoard.difficulty,
+                        dimensions: Util.convertDimensionsToString(checkBoard.dimensions),
+                        originalImageURL: checkBoard.originalImageURL,
+                        tiles: newTiles
+                  }),
+                  phase: 2
+            })
             // this.setState({
             //       board: new BoardCreate({}),
             //       phase: 2
@@ -53,43 +64,80 @@ class CreatePuzzle extends React.Component {
                   }),
             }))
       }
+
+
       removeImage() {
             this.setState({
                   renderImage: null
             })
       }
 
+      submitPuzzle() {
+            let puzzleData = Util.convertBoardToString(this.state.board)
+      }
+
       render() {
- 
+            
+            if (this.state.phase === 1) {
+                  return (
+                        <div className="main">
+                              <div className="puzzle-container">
+                                    <div className="puzzle-wrap">
+                                          <div className="puzzle-content-container">
+                                                <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
+                                          </div>
+                                          <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
+                                     </div>
+                              <div className="puzzle-options-collapse">
+                                    {/* <button className="Hide">
+                                          <i className="fa fa-chevron-down" id="fa-chevron-down"></i>
+                                          <i className="fa fa-chevron-up" id="fa-chevron-up"></i>
+                                    </button> */}
+                                    <div className="puzzle-options-container">
+                                                <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
+                                                <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
 
-            return (
-                  <div className="main">
-                        <div className="puzzle-container">
-                              <div className="puzzle-wrap">
-                                    <div className="puzzle-content-container">
-                                          <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
-                                    </div>
-                                    <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
-                               </div>
-                        <div className="puzzle-options-collapse">
-                              {/* <button className="Hide">
-                                    <i className="fa fa-chevron-down" id="fa-chevron-down"></i>
-                                    <i className="fa fa-chevron-up" id="fa-chevron-up"></i>
-                              </button> */}
-                              <div className="puzzle-options-container">
-                                    <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
-                                          <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
-                                          <PuzzleLibrary />
-                              {/* SubmitPuzzleButtons */}
-                              {/* LibraryOptions */}
-                                    </div>
-                                    </div>
-                        </div>
-                
+                                                <PuzzleLibrary />
+                                    {/* SubmitPuzzleButtons */}
+                                    {/* LibraryOptions */}
+                                          </div>
+                                          </div>
+                              </div>
                       
+                            
+      
+                        </div>
+                  )
+            } 
+            else if (this.state.phase == 2) {
+                  return (
+                        <div className="main">
+                              <div className="puzzle-container">
+                                    <div className="puzzle-wrap">
+                                          <div className="puzzle-content-container">
+                                                <BombBoard update={this.updateBoardSettings} board={this.state.board} />
+                                          </div>
+                                          <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
+                                     </div>
+                              <div className="puzzle-options-collapse">
+                        
+                                    <div className="puzzle-options-container">
+                                                <CreatePuzzleOptions active={false} updateBoard={this.updateBoardSetting} />
+                                                <BombPuzzleSubmission submitPuzzle={this.submitPuzzle.bind(this)} />
+                                          <PuzzleLibrary />
+                                    {/* SubmitPuzzleButtons */}
+                                    {/* LibraryOptions */}
+                                          </div>
+                                          </div>
+                              </div>
+                      
+                            
+      
+                        </div>
+                  )
+            }
 
-                  </div>
-            )
+      
       }
 }
 

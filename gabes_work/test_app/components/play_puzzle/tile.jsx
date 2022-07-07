@@ -36,10 +36,10 @@ class Tile extends React.Component {
       
             if (renderTile.explored && renderTile.bombed) {
                   classText += ' tile-bomb'
-                  text = '💣';
+                 
             } else if (renderTile.explored) {
                   classText += " tile-explored"
-                  text = "E"
+                  
             } else if (renderTile.flagged) {
                   classText += " tile-flagged"
                   text = "⚑"
@@ -53,7 +53,7 @@ class Tile extends React.Component {
                   } else {
                         classText += " tile-unexplored"
                   }
-                  text = '-'
+                  
             }
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected"}
             

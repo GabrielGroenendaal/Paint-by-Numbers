@@ -3,7 +3,8 @@ import ColorUtil from "./color_util";
 class TileCreate {
       constructor(options) {
             this.board = options.board;
-            this.color = options.color || ColorUtil.nameToHex("white");
+            this.color = options.color || "#FFFFFF";
+            console.log(this.color)
             this.pos = options.pos;
             this.explored = options.explored || false;
             this.bombed = options.bombed || false;

@@ -11,7 +11,7 @@ class ColorBoard extends React.Component {
                   selection: [],
                   selecting: false,
                   currentMouseover: null,
-                  selectedColor: 'white'
+                  selectedColor: '#FFFFFF'
             }
             this.addToSelection = this.addToSelection.bind(this);
             this.onMouseDown = this.onMouseDown.bind(this)
@@ -19,13 +19,11 @@ class ColorBoard extends React.Component {
             this.currentMouseOver = this.currentMouseOver.bind(this)
       }
       addToSelection(tile) {
-            console.log(this.state.selection)
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
       }
 
       selectColor(color) {
             this.setState(prevState => ({ selectedColor: color }))
-            console.log(this.state.selectedColor)
       }
 
       onMouseDown(event) {
