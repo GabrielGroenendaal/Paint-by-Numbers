@@ -4,7 +4,7 @@ import LoginModal from './login_modal';
 import {closeModal} from '../../actions/modal_actions'
 import { connect } from 'react-redux';
 import LoginContainer from '../sessions/login_container';
-
+import SignUpContainer from '../sessions/signup_container';
 class Modal extends React.Component {
       constructor(props){
             super(props)
@@ -23,6 +23,9 @@ class Modal extends React.Component {
                         break
                   case 'puzzle-reveal':
                         break
+                  case 'signup':
+                        component = <SignUpContainer />
+                        break;
                   default:
                         return null
             }

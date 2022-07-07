@@ -17,7 +17,7 @@ const mDTP = dispatch => {
     return {
         processForm: user => dispatch(signup(user)),
         closeModal: ()=> dispatch(closeModal()),
-        removeSessionErrors: ()=> dispatch(removeSessionErrors)
+        removeSessionErrors: ()=> dispatch(removeSessionErrors())
     }
 }
 

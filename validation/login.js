@@ -9,20 +9,20 @@ module.exports = function (data) {
   //our apps goal is to be minimalistic so email is not requird for signup or login
 
   data.username = validText(data.username) ? data.username : "";
-  data.email = validText(data.email) ? data.email : "";
+  // data.email = validText(data.email) ? data.email : "";
   data.password = validText(data.password) ? data.password : "";
 
   if (Validator.isEmpty(data.username)) {
     errors.username = "Username field is required";
   }
 
-  if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
-  }
+  // if (!Validator.isEmail(data.email)) {
+  //   errors.email = "Email is invalid";
+  // }
 
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required ";
-  }
+  // if (Validator.isEmpty(data.email)) {
+  //   errors.email = "Email field is required ";
+  // }
 
   if (Validator.isEmpty(data.password)) {
     errors.password = "Password field is Required ";

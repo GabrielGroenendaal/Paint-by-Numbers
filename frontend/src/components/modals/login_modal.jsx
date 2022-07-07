@@ -1,11 +1,11 @@
 import React from "react";
-
+import ModalCloseButton from "./modal_close_button";
 class LoginModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,17 +17,18 @@ class LoginModal extends React.Component {
     }
 
     handleSubmit(e) {
+        console.log(this.state)
         e.preventDefault();
         const values = {
+            username: this.state.username,
             password: this.state.password,
-            username: this.state.username
         }
         const user = Object.assign({}, values);
-        this.props.processForm(user).fail(() => this.renderErrors()).then(() => this.props.history.push('/channels'))
+        this.props.processForm(user)
     }
 
     createDemoUser() {
-        if (this.props.formType === 'login') {
+        if (this.props.formType === 'Login') {
             return <button
                 type="submit"
                 className="second-button"
@@ -38,13 +39,24 @@ class LoginModal extends React.Component {
             return null
         }
     }
-
+    // renderErrors () {
+    //     return (
+    //         <ul>
+    //             {Object.keys(this.state.errors).map((error, i) => (
+    //                 <li key={`error-${i}`}>
+    //                     {this.state.errors[error]}
+    //                 </li>
+    //             ))}
+    //         </ul>
+    //     );
+    // }
     render() {
+        let submitText = (this.props.formType === 'Login') ? 'Login' : 'Sign Up'
         return (
-            <div className="modal-background" >
-                <div className="modal-child">
+            <div className="modal-background" onClick={() => this.props.closeModal()}>
+                <div className="modal-child" >
                     <div className="session-form">
-                        <form className="sform" onSubmit={this.handleSubmit} >
+                        <form className="sform" onClick={e => e.stopPropagation()} onSubmit={this.handleSubmit} >
                             <br />
                             <div className="close-button"></div>
                             <div className='login-message'> PAINT BY NUMBERS</div>
@@ -52,8 +64,8 @@ class LoginModal extends React.Component {
                             <label className='text-box'>
                                 <input
                                     type="text"
-                                    value={this.state.password}
-                                    onChange={this.update('password')}
+                                    value={this.state.username}
+                                    onChange={this.update('username')}
                                 />
                             </label>
                             <label className='text-box'>
@@ -63,10 +75,10 @@ class LoginModal extends React.Component {
                                     onChange={this.update('password')}
                                 />
                             </label>
-                            <button className='login-button2' type="submit" value="">Log In</button>
+                            <button className='login-button2' type="submit" value="">{submitText}</button>
 
-                            <button className='second-button'>Demo User</button>
-                            Create an Account
+                            {this.createDemoUser()}
+                           {/* {this.renderErrors.bind(this)} */}
                             {/* {this.props.otherForm} */}
                         </form>
                     </div>
