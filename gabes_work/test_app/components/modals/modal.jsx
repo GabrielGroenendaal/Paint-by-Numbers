@@ -1,6 +1,9 @@
 
 import React from 'react';
 import LoginModal from './login_modal';
+import Manual from './manual';
+import Reveal from './reveal_puzzle';
+import Library from './library';
 
 class Modal extends React.Component {
       constructor(props){
@@ -12,12 +15,16 @@ class Modal extends React.Component {
 
             switch (this.props.modal) {
                   case 'login':
+                        component = <LoginModal />
                         break
                   case 'manual':
+                        component = <Manual />
                         break
                   case 'library':
+                        component = <Library />
                         break
                   case 'puzzle-reveal':
+                        <Reveal /> 
                         break
                   default:
                         return null
