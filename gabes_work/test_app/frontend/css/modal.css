@@ -1,0 +1,140 @@
+.session-form {
+
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    justify-content: flex-end;
+    align-items: center;
+}
+    .sform {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        min-height: 200px;
+        background: white;
+        display: flex;
+        opacity: 1;
+        border-radius: 30px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-radius: 25px;
+        text-align: center;
+        min-height: 420px;
+        min-width: 200px;
+    }
+
+    .close-button {
+        z-index: 1111;
+        height: 40px;
+        width: 40px;
+        right: 20px;
+        top: 70px;
+        position: absolute;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .login-message {
+        font-size: 23px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+    }
+
+    label {
+        padding: 5px;
+        display: block;
+    }
+
+    button {
+        display: block;
+        padding: 10px;
+        margin: 20px;
+        font-weight: 700;
+    }
+
+
+
+
+.text-box input {
+    background-color: transparent;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    margin: 4px;
+    border-color: rgb(216, 215, 215);
+      padding-left: 9px;
+    font-size: 15px;
+    width: 250px;
+    height: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-button2 {
+    width: 260px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: grey;
+    background-color: #F2F2F2;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+.login-button2:hover {
+    transition: 0.5s;
+    background-color: #5B6ED9;
+    color: white;
+}
+.second-button {
+    border: none;
+    width: 260px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color:#5B6ED9;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.other-form {
+    border: none;
+    width: 260px;
+    height: 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    color: grey;
+    background-color: white;
+    padding: 12px;
+    margin: 4px;
+    border-color: rgb(216, 215, 215);
+    border-style: solid;
+    cursor: pointer;
+}
+
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.modal-child {
+    /* position: absolute;
+    top: 40%;
+    left: 82%; 
+    transform: translate(-50%, -50%);*/
+    /* display: table-row; */
+    align-content: flex-end;
+    padding: 32px;
+    border-radius: 8px;
+}

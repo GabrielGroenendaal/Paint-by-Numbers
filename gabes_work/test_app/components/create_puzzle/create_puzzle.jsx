@@ -6,6 +6,8 @@ import Util from "../../../game_logic/util";
 import ColorPuzzleSubmission from "./create_puzzle_options/color_puzzle_submission";
 import ImageOptions from "./images/image_options";
 import ColorUtil from '../../../game_logic/color_util'
+
+
 class CreatePuzzle extends React.Component {
       constructor(props) {
             super(props)
@@ -56,19 +58,26 @@ class CreatePuzzle extends React.Component {
             return (
                   <div className="main">
                         <div className="puzzle-container">
-                              <h1 className="title">Paint-by-Numbers</h1>
+                              <div className="puzzle-wrap">
                               <div className="puzzle-content-container">
                                     <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
                               </div>
                               <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                         </div>
-
-                        <div className="puzzle-options-container">
-                              <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
-                              <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                        <div className="puzzle-options-collapse">
+                              {/* <button className="Hide">
+                                    <i className="fa fa-chevron-down" id="fa-chevron-down"></i>
+                                    <i className="fa fa-chevron-up" id="fa-chevron-up"></i>
+                              </button> */}
+                              <div className="puzzle-options-container">
+                                    <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
+                                    <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
                               {/* SubmitPuzzleButtons */}
                               {/* LibraryOptions */}
+                                    </div>
+                                    </div>
                         </div>
+                
                       
 
                   </div>

@@ -1,0 +1,110 @@
+.puzzle-container {
+    width: 750px;
+    /* height: 550px; */
+    border-radius: 10px;
+    padding: 12px;
+    /* margin: 30px; */
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    /* background-color: rgb(214, 214, 214); */
+}
+
+
+.number-hints-left-item {
+    /* color: white; */
+    padding-right: 10px;
+    text-align: right;
+    vertical-align: middle
+}
+
+.number-hints-right-item {
+    /* color: white; */
+    padding-bottom: 5px;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.puzzle-content-container {
+    display: flex;
+    margin: 40px;
+    /* width: 550px;
+    height: 550px; */
+
+    /* background-color: black; */
+}
+
+.board-rows-table {
+    float: left;
+    width: 550px;
+    height: 550px;
+}
+
+
+.board-tile-item {
+    background-color: rgb(233, 229, 229);
+    /* border-width: 1px;
+    border-style: groove;
+    border-color: rgb(213, 213, 213); */
+    border-radius: 5px;
+
+}
+
+td:nth-child(5n + 1) {
+    border-right: 1px solid rgb(205, 202, 202)
+}
+
+td.cell:nth-child(5n + 1) {
+    border-right: 1px solid rgb(205, 202, 202)
+}
+
+tr:nth-child(5n + 1) td {
+    border-bottom: 1px solid rgb(205, 202, 202)
+}
+
+/* tr:nth-child(5n + 2) td {
+    border-top: 1px solid black
+} */
+.puzzle-gameplay-options-container {
+    height: 150px;
+    width: 120px;
+    border-radius: 5px;
+    background-color: rgb(233, 229, 229);
+    display: flex;
+}
+
+.progress-bar h3 {
+    font-size: 12px;
+    text-align: center;
+}
+
+body {
+    /* display: flex; */
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 960px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.app {
+    width: 100%;
+}
+
+.puzzle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.puzzle-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

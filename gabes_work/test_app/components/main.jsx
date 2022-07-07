@@ -3,6 +3,8 @@ import React from "react";
 import Game from "./play_puzzle/game";
 import CreatePuzzle from "./create_puzzle/create_puzzle";
 import Pixelify from "./create_puzzle/images/pixel";
+import NavBar from './navbar/nav_bar'
+import Footer from './navbar/footer'
 // This is where Routing will occur 
 
 class Main extends React.Component {
@@ -13,9 +15,10 @@ class Main extends React.Component {
       render() {
             return (
                   <div>
+                        <NavBar />
                         {/* <Game /> */}
                         <CreatePuzzle />
-   
+                        <Footer />
                   </div>
             
             )
