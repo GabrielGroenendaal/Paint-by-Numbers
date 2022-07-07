@@ -86,7 +86,6 @@ class CreatePuzzle extends React.Component {
                                           <div className="puzzle-content-container">
                                                 <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
                                           </div>
-                                          <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                                      </div>
                               <div className="puzzle-options-collapse">
                                     {/* <button className="Hide">
@@ -96,6 +95,7 @@ class CreatePuzzle extends React.Component {
                                     <div className="puzzle-options-container">
                                                 <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
                                                 <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                                                <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
 
                                                 <PuzzleLibrary />
                                     {/* SubmitPuzzleButtons */}

@@ -1906,10 +1906,7 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__["default"], {
           update: this.updateBoardSettings,
           board: this.state.board
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_images_image_options__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          submitImage: this.submitImage.bind(this),
-          board: this.state.board
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "puzzle-options-collapse"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "puzzle-options-container"
@@ -1917,6 +1914,9 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
           updateBoard: this.updateBoardSetting
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_options_color_puzzle_submission__WEBPACK_IMPORTED_MODULE_5__["default"], {
           submitColor: this.submitColor.bind(this)
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_images_image_options__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          submitImage: this.submitImage.bind(this),
+          board: this.state.board
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
       } else if (this.state.phase == 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
