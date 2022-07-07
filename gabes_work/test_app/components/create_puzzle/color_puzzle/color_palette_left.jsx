@@ -27,7 +27,7 @@ class ColorPaletteLeft extends React.Component {
                   <tr className="color-palette-left-row">
                         {colors.map((color, idx) => {
                               return (
-                                    <ColorPaletteItem color={color} key={idx.toString()} selectColor={this.props.selectColor} />
+                                    <ColorPaletteItem color={color} key={idx.toString()} selectColor={this.props.selectColor} boardObject={this.props.boardObject} />
                               )
                         })}
                   </tr>

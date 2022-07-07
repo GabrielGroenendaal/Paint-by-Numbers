@@ -64,7 +64,7 @@ class ColorBoard extends React.Component {
                         // onMouseOut={this.onMouseLeave.bind(this)}
                         className="board-container">
                         <tbody>
-                              <ColorPaletteLeft selectColor={this.selectColor.bind(this)} />
+                              <ColorPaletteLeft selectColor={this.selectColor.bind(this)} boardObject={this.props.board} />
                         {/* <HintX hints={hintsX} /> */}
                               {this.props.board.tiles.map((ele, idx) => {
                                     let className = 'board-row board-row-' + idx.toString()
@@ -80,6 +80,7 @@ class ColorBoard extends React.Component {
                                                                   addToSelection={this.addToSelection}
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
+                                                                  boardObject={this.props.board}
                                                                   updateTile={this.updateTile.bind(this)}
                                                             />
                                                       })}

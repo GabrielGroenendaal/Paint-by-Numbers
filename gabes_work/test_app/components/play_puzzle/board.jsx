@@ -38,7 +38,7 @@ class Board extends React.Component {
       }
 
       onContextMenu(event) {
-            event.preventDefault()
+            // event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
             console.log(event.button)
       }
@@ -63,13 +63,13 @@ class Board extends React.Component {
                         // onMouseOut={this.onMouseLeave.bind(this)}
                         className="board-container">
                         <tbody>
-                        <HintX hints={hintsX} />
+                        <HintX hints={hintsX} boardObject={this.props.board} />
                               {this.props.board.tiles.map((ele, idx) => {
                                     let className = 'board-row board-row-' + idx.toString()
                                     return (
                                           <tr className={className} key={idx.toString()}>
                                                 
-                                                      <HintComponent hint={hintsY[idx]} />
+                                                <HintComponent hint={hintsY[idx]} boardObject={this.props.board} />
                                                       {this.props.board.tiles[idx].map((innerEle, innerIdx) => {
                                                             return <TileComponent
                                                                   key={idx.toString() + innerIdx.toString()}
@@ -78,6 +78,7 @@ class Board extends React.Component {
                                                                   addToSelection={this.addToSelection}
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
+                                                                  boardObject={this.props.board}
                                                             />
                                                       })}
                                                 

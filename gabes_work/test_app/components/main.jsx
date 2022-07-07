@@ -2,6 +2,7 @@
 import React from "react";
 import Game from "./play_puzzle/game";
 import CreatePuzzle from "./create_puzzle/create_puzzle";
+import Pixelify from "./create_puzzle/images/pixel";
 // This is where Routing will occur 
 
 class Main extends React.Component {
@@ -14,6 +15,7 @@ class Main extends React.Component {
                   <div>
                         {/* <Game /> */}
                         <CreatePuzzle />
+   
                   </div>
             
             )

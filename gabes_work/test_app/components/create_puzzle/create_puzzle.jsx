@@ -1,13 +1,17 @@
 import React from "react";
 import BoardCreate from "../../../game_logic/board_create";
-import CreatePuzzleOptions from "./create_puzzle_options";
+import CreatePuzzleOptions from "./create_puzzle_options/create_puzzle_options";
 import ColorBoard from "./color_puzzle/color_board";
 import Util from "../../../game_logic/util";
+import ColorPuzzleSubmission from "./create_puzzle_options/color_puzzle_submission";
+import ImageOptions from "./images/image_options";
+import ColorUtil from '../../../game_logic/color_util'
 class CreatePuzzle extends React.Component {
       constructor(props) {
             super(props)
             this.state = {
-                  board: new BoardCreate()
+                  board: new BoardCreate({ dimensions: "15x15" }),
+                  renderImage: null
             }
             this.updateBoardSetting = this.updateBoardSetting.bind(this)
       }
@@ -21,16 +25,34 @@ class CreatePuzzle extends React.Component {
                   checkBoard.difficulty = options.difficulty;
                   this.setState(prevState => ({board: checkBoard}))
             }
-
-            if (options.theme && options.theme != this.state.board.theme) {
-                  let checkBoard = Object.assign({}, this.state.board);
-                  checkBoard.theme = options.theme;
-                  this.setState(prevState => ({board: checkBoard}))
-            }
       }
       
+      submitColor() {
+            
+      }
+
+      submitImage(tiles, picURL) {
+            if (!tiles) { return null }
+            let dims = Util.convertDimensionsToString(this.state.board.dimensions)
+            let diff = this.state.board.difficulty
+            this.setState(prevState => ({
+                  board: new BoardCreate({
+                        tiles: tiles,
+                        dimensions: dims,
+                        difficulty: diff,
+                        originalImageURL: picURL
+                  })
+            }))
+      }
+      removeImage() {
+            this.setState({
+                  renderImage: null
+            })
+      }
 
       render() {
+ 
+
             return (
                   <div className="main">
                         <div className="puzzle-container">
@@ -38,9 +60,17 @@ class CreatePuzzle extends React.Component {
                               <div className="puzzle-content-container">
                                     <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
                               </div>
+                              <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                         </div>
 
-                        <CreatePuzzleOptions container={this} /> 
+                        <div className="puzzle-options-container">
+                              <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
+                              <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                              {/* SubmitPuzzleButtons */}
+                              {/* LibraryOptions */}
+                        </div>
+                      
+
                   </div>
             )
       }

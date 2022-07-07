@@ -7,7 +7,7 @@ body {
 }
 
 .board-container {
-      margin-top: 60px;
+      margin-top: 30px;
       display: flex;      
 }
 
@@ -98,6 +98,7 @@ body {
 }
 .number-hint-left-row {
       flex-direction: column;
+      position: relative;
 }
 
 .number-hint-top-row {
@@ -138,7 +139,7 @@ table {
 .color-palette-left-row {
       padding: 5px 0px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
 }
 
@@ -152,4 +153,61 @@ table {
       /* box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24) inset; */
       transform: translateY(1px);
     
+}
+
+
+.puzzle-tile-5x5 {
+      width: 96px;
+      height: 96px;
+}
+.puzzle-tile-10x10 {
+      width: 48px;
+      height: 48px;
+}
+
+.puzzle-tile-15x15 {
+      width: 36px;
+      height: 36px;
+}
+
+.puzzle-tile-20x20 {
+      width: 24px;
+      height: 24px; 
+}
+
+.hint-tile-5x5 {
+      width: 96px;
+      height: 96px;
+      font-size: 18px;
+}
+
+.hint-tile-10x10 {
+      width: 48px;
+      height: 48px;
+      font-size: 16px;
+}
+
+.hint-tile-15x15 {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+}
+
+.hint-tile-20x20 {
+      width: 24px;
+      height: 24px; 
+      font-size: 12px;
+}
+
+
+.puzzle-options-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+  }
+  
+
+#hiddenPixels {
+      display: none
 }

@@ -6,29 +6,31 @@ class BoardCreate {
       constructor(options = {}) {
             this.dimensions = Util.parseDimension(options.dimensions || "10x10")
             this.difficulty = options.difficulty || "easy"
-            this.originalImageUril = options.originalImageUrl || "default"
+            this.originalImageURL = options.originalImageURL || ""
             this.genre = options.genre || "NA"
             this.tiles = (options.tiles) ? this.makeTileMap(options.tiles) : this.generateBoard();
       }
 
       makeTileMap(tileData) {
             let board = []
-
+          
             for (let i = 0; i < this.width(); i++) {
                   let row = []
                   for (let k = 0; k < this.height(); k++) {
                         let thisTileData = tileData.shift();
+                        console.log(thisTileData)
                         let bombedStatus = Util.parseBoolean(thisTileData[1]);
                         if (bombedStatus == false) { this.total += 1; }
                         let tileOptions = {
                               color: thisTileData[0],
                               bombed: bombedStatus,
                               board: this,
+                              colored: true,
                               explored: false, 
                               flagged: false,
                               pos: [i,k]
                         }
-                        let tile = new Tile(tileOptions)
+                        let tile = new TileCreate(tileOptions)
                         row.push(tile)
                   }
                   board.push(row)

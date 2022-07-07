@@ -1,6 +1,7 @@
 
 
 import React from "react";
+import Util from "../../../../game_logic/util";
 
 class ColorTile extends React.Component {
       constructor(props) {
@@ -33,7 +34,7 @@ class ColorTile extends React.Component {
             let classText = "tile"
 
             if (mouseOverTile) {
-                  if (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1]) {
+                  if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
                         classText += ' tile-highlighted'
                   } else {
                         classText += " tile-empty"
@@ -48,6 +49,24 @@ class ColorTile extends React.Component {
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
                   classText = "tile tile-color-selected"
                   renderTileStyle = {background: this.props.board.state.selectedColor}
+            }
+
+            let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
+            switch (dims) {
+                  case "5x5":
+                        classText += ' puzzle-tile-5x5'
+                        break;
+                  case "10x10":
+                        classText += ' puzzle-tile-10x10'
+                        break
+                  case "15x15":
+                        classText += ' puzzle-tile-15x15'
+                        break
+                  case "20x20":
+                        classText += ' puzzle-tile-20x20'
+                        break
+                  default:
+
             }
             
             
