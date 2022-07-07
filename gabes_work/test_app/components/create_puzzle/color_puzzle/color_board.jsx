@@ -61,7 +61,7 @@ class ColorBoard extends React.Component {
                         onMouseUp={this.onMouseUp.bind(this)}
                         onContextMenu={this.onContextMenu.bind(this)}
                         // onMouseOut={this.onMouseLeave.bind(this)}
-                        className="board-container">
+                        className="board-container color-board-container">
                         <tbody>
                               <ColorPaletteLeft selectColor={this.selectColor.bind(this)} boardObject={this.props.board} />
                         {/* <HintX hints={hintsX} /> */}

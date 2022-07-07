@@ -8,6 +8,9 @@
       margin-top: 60px;
       display: flex;
 }
+.color-board-container, .bomb-board-container {
+      margin-top: 0px;
+}
 
 .tile {
       border: 1px solid rgb(192, 192, 192);

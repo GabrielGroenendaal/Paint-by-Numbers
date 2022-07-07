@@ -17,7 +17,6 @@ class CreatePuzzleOptions extends React.Component {
       render() {
             return (
                   <div className="puzzle-selector-options-container">
-                        <p className="puzzle-selector-options-header">Puzzle Options</p>
                         <div className="puzzle-size-options">
                               <label className="puzzle-size-options-header">SIZE</label>
                               <form className="puzzle-size-options-items">

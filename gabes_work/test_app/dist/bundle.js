@@ -1380,7 +1380,7 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
         onMouseUp: this.onMouseUp.bind(this),
         onContextMenu: this.onContextMenu.bind(this) // onMouseOut={this.onMouseLeave.bind(this)}
         ,
-        className: "board-container"
+        className: "board-container color-board-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_color_palette_left__WEBPACK_IMPORTED_MODULE_2__["default"], {
         selectColor: this.selectColor.bind(this),
         boardObject: this.props.board
@@ -2099,9 +2099,7 @@ var CreatePuzzleOptions = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-selector-options-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-        className: "puzzle-selector-options-header"
-      }, "Puzzle Options"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "puzzle-size-options"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
         className: "puzzle-size-options-header"

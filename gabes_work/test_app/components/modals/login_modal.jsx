@@ -1,6 +1,6 @@
 import React from "react";
 
-class Modal extends React.Component {
+class LoginModal extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -38,4 +38,4 @@ render() {
         )
 }
 }
-export default Modal;
+export default LoginModal;
