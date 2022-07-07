@@ -1,4 +1,4 @@
-
+import Util from "./util";
 
 
 const ColorUtil = {
@@ -35,19 +35,55 @@ const ColorUtil = {
       rgbToHex(r, g, b) {
             return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
       },
-      rotateClockwise(a) {
-            var n=a.length;
-            for (var i=0; i<n/2; i++) {
-                for (var j=i; j<n-i-1; j++) {
-                    var tmp=a[i][j];
-                    a[i][j]=a[n-j-1][i];
-                    a[n-j-1][i]=a[n-i-1][n-j-1];
-                    a[n-i-1][n-j-1]=a[j][n-i-1];
-                    a[j][n-i-1]=tmp;
-                }
+
+      nameToHex(str) {
+            let ctx = document.createElement('canvas').getContext('2d')
+            ctx.fillStyle = str;
+            return ctx.fillStyle
+      },
+
+      hexToRGB(rgb) {
+            // Choose correct separator
+            var hex = "#ff64c8";
+            var red = parseInt(hex[1]+hex[2],16);
+            var green = parseInt(hex[3]+hex[4],16);
+            var blue = parseInt(hex[5] + hex[6], 16);
+            return {
+                  r: red,
+                  g: green,
+                  b: blue
+            }      
+      },
+
+
+
+      // The big Guns
+
+      seedBombsByColor(board) {
+            let checkTiles = Util.convertBoardToString(board)
+            let checkTilesOverall = Util.parseTileDataFromString(checkTiles)
+            let r, g, b;
+            checkTilesOverall.forEach(tile => {
+                  let hex = this.hexToRGB(tile[0])
+                  console.log(hex)
+                  r += hex.r
+                  g += hex.g
+                  b += hex.b
+            })
+            let avg = this.averageColor(r, g, b, checkTiles.length);
+            console.log(avg)
+      },
+
+      averageColor(r, g, b, num) {
+            return {
+                  r: Math.sqrt(r / num),
+                  g: Math.sqrt(g / num),
+                  b: Math.sqrt(b / num)
             }
-            return a;
-        }
+      }
+
+
+
 }
 
-module.exports = ColorUtil;
+export default ColorUtil;

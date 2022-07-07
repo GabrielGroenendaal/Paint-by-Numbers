@@ -14,7 +14,8 @@ class CreatePuzzle extends React.Component {
             super(props)
             this.state = {
                   board: new BoardCreate({ dimensions: "15x15" }),
-                  renderImage: null
+                  renderImage: null,
+                  phase: 1
             }
             this.updateBoardSetting = this.updateBoardSetting.bind(this)
       }
@@ -31,7 +32,12 @@ class CreatePuzzle extends React.Component {
       }
       
       submitColor() {
-            
+            let checkBoard = Object.assign({}, this.state.board)
+            ColorUtil.seedBombsByColor(this.state.board)
+            // this.setState({
+            //       board: new BoardCreate({}),
+            //       phase: 2
+            // })
       }
 
       submitImage(tiles, picURL) {
@@ -44,7 +50,7 @@ class CreatePuzzle extends React.Component {
                         dimensions: dims,
                         difficulty: diff,
                         originalImageURL: picURL
-                  })
+                  }),
             }))
       }
       removeImage() {
@@ -60,11 +66,11 @@ class CreatePuzzle extends React.Component {
                   <div className="main">
                         <div className="puzzle-container">
                               <div className="puzzle-wrap">
-                              <div className="puzzle-content-container">
-                                    <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
-                              </div>
-                              <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
-                        </div>
+                                    <div className="puzzle-content-container">
+                                          <ColorBoard update={this.updateBoardSettings} board={this.state.board} />
+                                    </div>
+                                    <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
+                               </div>
                         <div className="puzzle-options-collapse">
                               {/* <button className="Hide">
                                     <i className="fa fa-chevron-down" id="fa-chevron-down"></i>

@@ -365,8 +365,15 @@ module.exports = Board;
 /*!*************************************!*\
   !*** ../game_logic/board_create.js ***!
   \*************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _test_app_components_play_puzzle_board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../test_app/components/play_puzzle/board */ "./components/play_puzzle/board.jsx");
+/* harmony import */ var _tile_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tile_create */ "../game_logic/tile_create.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -375,7 +382,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Util = __webpack_require__(/*! ./util */ "../game_logic/util.js");
 
-var TileCreate = __webpack_require__(/*! ./tile_create */ "../game_logic/tile_create.js");
+
+
 
 var BoardCreate = /*#__PURE__*/function () {
   function BoardCreate() {
@@ -416,7 +424,7 @@ var BoardCreate = /*#__PURE__*/function () {
             flagged: false,
             pos: [i, k]
           };
-          var tile = new TileCreate(tileOptions);
+          var tile = new _tile_create__WEBPACK_IMPORTED_MODULE_1__["default"](tileOptions);
           row.push(tile);
         }
 
@@ -440,9 +448,10 @@ var BoardCreate = /*#__PURE__*/function () {
             pos: [i, k],
             bombed: false,
             flagged: false,
-            explored: false
+            explored: false,
+            colored: false
           };
-          var thing = new TileCreate(createTileOptions);
+          var thing = new _tile_create__WEBPACK_IMPORTED_MODULE_1__["default"](createTileOptions);
           row.push(thing);
         }
 
@@ -471,7 +480,7 @@ var BoardCreate = /*#__PURE__*/function () {
   return BoardCreate;
 }();
 
-module.exports = BoardCreate;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardCreate);
 
 /***/ }),
 
@@ -479,7 +488,15 @@ module.exports = BoardCreate;
 /*!***********************************!*\
   !*** ../game_logic/color_util.js ***!
   \***********************************/
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "../game_logic/util.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_util__WEBPACK_IMPORTED_MODULE_0__);
 
 var ColorUtil = {
   convertImageToPixels: function convertImageToPixels(dimensions) {
@@ -501,23 +518,50 @@ var ColorUtil = {
   rgbToHex: function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   },
-  rotateClockwise: function rotateClockwise(a) {
-    var n = a.length;
+  nameToHex: function nameToHex(str) {
+    var ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = str;
+    return ctx.fillStyle;
+  },
+  hexToRGB: function hexToRGB(rgb) {
+    // Choose correct separator
+    var hex = "#ff64c8";
+    var red = parseInt(hex[1] + hex[2], 16);
+    var green = parseInt(hex[3] + hex[4], 16);
+    var blue = parseInt(hex[5] + hex[6], 16);
+    return {
+      r: red,
+      g: green,
+      b: blue
+    };
+  },
+  // The big Guns
+  seedBombsByColor: function seedBombsByColor(board) {
+    var _this = this;
 
-    for (var i = 0; i < n / 2; i++) {
-      for (var j = i; j < n - i - 1; j++) {
-        var tmp = a[i][j];
-        a[i][j] = a[n - j - 1][i];
-        a[n - j - 1][i] = a[n - i - 1][n - j - 1];
-        a[n - i - 1][n - j - 1] = a[j][n - i - 1];
-        a[j][n - i - 1] = tmp;
-      }
-    }
+    var checkTiles = _util__WEBPACK_IMPORTED_MODULE_0___default().convertBoardToString(board);
+    var checkTilesOverall = _util__WEBPACK_IMPORTED_MODULE_0___default().parseTileDataFromString(checkTiles);
+    var r, g, b;
+    checkTilesOverall.forEach(function (tile) {
+      var hex = _this.hexToRGB(tile[0]);
 
-    return a;
+      console.log(hex);
+      r += hex.r;
+      g += hex.g;
+      b += hex.b;
+    });
+    var avg = this.averageColor(r, g, b, checkTiles.length);
+    console.log(avg);
+  },
+  averageColor: function averageColor(r, g, b, num) {
+    return {
+      r: Math.sqrt(r / num),
+      g: Math.sqrt(g / num),
+      b: Math.sqrt(b / num)
+    };
   }
 };
-module.exports = ColorUtil;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorUtil);
 
 /***/ }),
 
@@ -624,20 +668,28 @@ module.exports = Tile;
 /*!************************************!*\
   !*** ../game_logic/tile_create.js ***!
   \************************************/
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _color_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color_util */ "../game_logic/color_util.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
+
+
 var TileCreate = /*#__PURE__*/function () {
   function TileCreate(options) {
     _classCallCheck(this, TileCreate);
 
     this.board = options.board;
-    this.color = options.color || "white";
+    this.color = options.color || _color_util__WEBPACK_IMPORTED_MODULE_0__["default"].nameToHex("white");
     this.pos = options.pos;
     this.explored = options.explored || false;
     this.bombed = options.bombed || false;
@@ -661,7 +713,7 @@ var TileCreate = /*#__PURE__*/function () {
   return TileCreate;
 }();
 
-module.exports = TileCreate;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TileCreate);
 
 /***/ }),
 
@@ -835,6 +887,7 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
   _createClass(ColorBoard, [{
     key: "addToSelection",
     value: function addToSelection(tile) {
+      console.log(this.state.selection);
       this.setState(function (prevState) {
         return {
           selection: [].concat(_toConsumableArray(prevState.selection), [tile])
@@ -880,14 +933,13 @@ var ColorBoard = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "onContextMenu",
     value: function onContextMenu(event) {
-      event.preventDefault();
+      //event.preventDefault()
       this.setState(function (prevState) {
         return {
           selection: [],
           selecting: false
         };
-      });
-      console.log(event.button);
+      }); //console.log(event.button)
     }
   }, {
     key: "currentMouseOver",
@@ -1064,6 +1116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _color_palette_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color_palette_item */ "./components/create_puzzle/color_puzzle/color_palette_item.jsx");
+/* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../game_logic/color_util */ "../game_logic/color_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1089,6 +1142,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ColorPaletteLeft = /*#__PURE__*/function (_React$Component) {
   _inherits(ColorPaletteLeft, _React$Component);
 
@@ -1106,6 +1160,9 @@ var ColorPaletteLeft = /*#__PURE__*/function (_React$Component) {
       var _this = this;
 
       var colors = ['pink', 'plum', 'powderblue', 'darkseagreen', 'gold', 'indianred', 'lightskyblue', 'navajowhite', 'palegreen', 'tomato'];
+      colors = colors.map(function (color) {
+        return _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__["default"].nameToHex(color);
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
         className: "color-palette-left-row"
       }, colors.map(function (color, idx) {
@@ -1280,7 +1337,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../game_logic/board_create */ "../game_logic/board_create.js");
-/* harmony import */ var _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _create_puzzle_options_create_puzzle_options__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_puzzle_options/create_puzzle_options */ "./components/create_puzzle/create_puzzle_options/create_puzzle_options.jsx");
 /* harmony import */ var _color_puzzle_color_board__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./color_puzzle/color_board */ "./components/create_puzzle/color_puzzle/color_board.jsx");
 /* harmony import */ var _game_logic_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../game_logic/util */ "../game_logic/util.js");
@@ -1288,7 +1344,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _create_puzzle_options_color_puzzle_submission__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create_puzzle_options/color_puzzle_submission */ "./components/create_puzzle/create_puzzle_options/color_puzzle_submission.jsx");
 /* harmony import */ var _images_image_options__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/image_options */ "./components/create_puzzle/images/image_options.jsx");
 /* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../game_logic/color_util */ "../game_logic/color_util.js");
-/* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _play_puzzle_puzzle_options_puzzle_library__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../play_puzzle/puzzle_options/puzzle_library */ "./components/play_puzzle/puzzle_options/puzzle_library.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -1334,10 +1389,11 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      board: new (_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default())({
+      board: new _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__["default"]({
         dimensions: "15x15"
       }),
-      renderImage: null
+      renderImage: null,
+      phase: 1
     };
     _this.updateBoardSetting = _this.updateBoardSetting.bind(_assertThisInitialized(_this));
     return _this;
@@ -1349,7 +1405,7 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
       if (options.dimensions && options.dimensions != _game_logic_util__WEBPACK_IMPORTED_MODULE_4___default().convertDimensionsToString(this.state.board.dimensions)) {
         this.setState(function (prevState) {
           return {
-            board: new (_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default())({
+            board: new _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__["default"]({
               dimensions: options.dimensions
             })
           };
@@ -1368,7 +1424,13 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "submitColor",
-    value: function submitColor() {}
+    value: function submitColor() {
+      var checkBoard = Object.assign({}, this.state.board);
+      _game_logic_color_util__WEBPACK_IMPORTED_MODULE_7__["default"].seedBombsByColor(this.state.board); // this.setState({
+      //       board: new BoardCreate({}),
+      //       phase: 2
+      // })
+    }
   }, {
     key: "submitImage",
     value: function submitImage(tiles, picURL) {
@@ -1380,7 +1442,7 @@ var CreatePuzzle = /*#__PURE__*/function (_React$Component) {
       var diff = this.state.board.difficulty;
       this.setState(function (prevState) {
         return {
-          board: new (_game_logic_board_create__WEBPACK_IMPORTED_MODULE_1___default())({
+          board: new _game_logic_board_create__WEBPACK_IMPORTED_MODULE_1__["default"]({
             tiles: tiles,
             dimensions: dims,
             difficulty: diff,
@@ -1659,7 +1721,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _pixel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pixel */ "./components/create_puzzle/images/pixel.js");
 /* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../game_logic/color_util */ "../game_logic/color_util.js");
-/* harmony import */ var _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1763,7 +1824,7 @@ var ImageOptions = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       if (document.getElementById('hiddenPixels') && this.state.picture) {
         console.log(document.getElementById('hiddenPixels'));
-        var tile_data = _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2___default().convertImageToPixels(this.props.board.dimensions[0]);
+        var tile_data = _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__["default"].convertImageToPixels(this.props.board.dimensions[0]);
         this.props.submitImage(tile_data, this.state.pictureURL);
         this.toggleImage();
       }

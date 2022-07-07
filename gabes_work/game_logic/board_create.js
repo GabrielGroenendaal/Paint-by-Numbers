@@ -1,6 +1,6 @@
 const Util = require('./util')
-const TileCreate = require('./tile_create')
-
+import Board from '../test_app/components/play_puzzle/board'
+import TileCreate from './tile_create'
 
 class BoardCreate {
       constructor(options = {}) {
@@ -49,7 +49,8 @@ class BoardCreate {
                               pos: [i, k],
                               bombed: false,
                               flagged: false,
-                              explored: false
+                              explored: false,
+                              colored: false
                         }
                         let thing = new TileCreate(createTileOptions)
                         row.push(thing)
@@ -73,4 +74,4 @@ class BoardCreate {
 
 }
 
-module.exports = BoardCreate;
+export default BoardCreate;

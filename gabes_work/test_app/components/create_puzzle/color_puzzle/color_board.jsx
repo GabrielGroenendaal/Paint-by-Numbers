@@ -19,6 +19,7 @@ class ColorBoard extends React.Component {
             this.currentMouseOver = this.currentMouseOver.bind(this)
       }
       addToSelection(tile) {
+            console.log(this.state.selection)
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
       }
 
@@ -42,9 +43,9 @@ class ColorBoard extends React.Component {
       }
 
       onContextMenu(event) {
-            event.preventDefault()
+            //event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
-            console.log(event.button)
+            //console.log(event.button)
       }
       
       currentMouseOver(tile) {

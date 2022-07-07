@@ -2,7 +2,7 @@
 
 import React from "react";
 import ColorPaletteItem from "./color_palette_item";
-
+import ColorUtil from "../../../../game_logic/color_util";
 
 class ColorPaletteLeft extends React.Component {
       constructor(props) {
@@ -11,7 +11,7 @@ class ColorPaletteLeft extends React.Component {
 
       
       render() {
-            const colors = [
+            let colors = [
                   'pink',
                   'plum',
                   'powderblue',
@@ -23,6 +23,7 @@ class ColorPaletteLeft extends React.Component {
                   'palegreen',
                   'tomato'
             ]
+            colors = colors.map(color => ColorUtil.nameToHex(color))
             return (
                   <tr className="color-palette-left-row">
                         {colors.map((color, idx) => {

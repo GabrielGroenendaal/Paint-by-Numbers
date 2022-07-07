@@ -1,9 +1,9 @@
-
+import ColorUtil from "./color_util";
 
 class TileCreate {
       constructor(options) {
             this.board = options.board;
-            this.color = options.color || "white";
+            this.color = options.color || ColorUtil.nameToHex("white");
             this.pos = options.pos;
             this.explored = options.explored || false;
             this.bombed = options.bombed || false;
@@ -21,4 +21,4 @@ class TileCreate {
       }
 }
 
-module.exports = TileCreate;
+export default TileCreate;
