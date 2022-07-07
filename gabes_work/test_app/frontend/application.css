@@ -27,11 +27,6 @@ body {
       transition: width .15s ease-out, height .15s ease-out, border-radius .15s ease-out;
 }
 
-.tile:hover {
-      width: 31px;
-      height: 31px;
-      border-radius: 15%;
-}
 
 .puzzle-container {
       display: flex;

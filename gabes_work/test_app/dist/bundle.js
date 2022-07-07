@@ -1431,14 +1431,17 @@ var Main = /*#__PURE__*/function (_React$Component) {
   _createClass(Main, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_create_puzzle_create_puzzle__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
   return Main;
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main); // Step #1 Pixelate the Image using a pixel size = to the image's width / the number of tiles on the grid
+// Step #2: place the image on a canvas, and then iterate through each "tile" on the canvas to create an array of colors 
+// Step #3: analyze this array of colors somehow to determine a watershed point for what will be positive or negative space, then  return a string of this information
+// Step #4: apply this information to the board, allowing users to interact with it one last time to toggle spaces before final submission
 
 /***/ }),
 
