@@ -17,7 +17,7 @@ class ProgressBoard extends React.Component {
                   <div className="puzzle-gameplay-options-container puzzle-gameplay-options-container-gameplay">
                         <div className="puzzle-progress-container">
                               <label className="puzzle-progress-label">PROGRESS
-                                    <div className="progress-count">{(this.props.board.guesses / this.props.board.total).toFixed(4) * 100} %</div>
+                                    <div className="progress-count">{((this.props.board.guesses / this.props.board.total) * 100).toFixed(1)} %</div>
                               </label>
                               <label className="puzzle-progress-mistakes-label">MISTAKES
                                     <div className="progress-mistakes">{this.props.board.mistakes}</div>
