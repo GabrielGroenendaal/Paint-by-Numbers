@@ -24,8 +24,10 @@ class SeedOption extends React.Component {
             return (
                   <div className="puzzle-gameplay-options-container">
                         <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label className="puzzle-image-options-header">ENTER SEED</label>
+
                               <input type="text" onChange={this.update('seed')} value={this.state.seed} />
-                              <button type="submit">Enter Puzzle Seed</button>
+                              <button type="submit" className="image-submit-button">SUBMIT</button>
                         </form>
                   </div>
             )

@@ -1218,3 +1218,14 @@ body .tile-flagged {
   text-align: center;
 }
 
+.puzzle-bomb-reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-create-puzzle {
+  font-size: 20px;
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 500;
+}

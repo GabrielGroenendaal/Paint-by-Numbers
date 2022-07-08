@@ -68,12 +68,13 @@ class ImageOptions extends React.Component {
             let component = (this.state.storedPicture) ? this.state.storedPicture : null
             return (
                   <div className="puzzle-gameplay-options-container">
-                        <form onSubmit={this.handleSubmit.bind(this)}>
-                              <input type="text" onChange={this.update('pictureURL')} value={this.state.pictureURL} />
-                              <button type="submit">Submit Image URL</button>
-                        </form>
-                        {this.state.storedPicture}
-                  </div>
+                  <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label className="puzzle-image-options-header">IMAGE URL</label>
+                        <input type="text" onChange={this.update('pictureURL')} value={this.state.pictureURL} />
+                        <button type="submit" className="image-submit-button">UPLOAD</button>
+                  </form>
+                  {this.state.storedPicture}
+            </div>
             )
       }
 }

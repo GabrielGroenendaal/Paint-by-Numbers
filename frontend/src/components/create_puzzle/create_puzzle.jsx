@@ -20,6 +20,7 @@ class CreatePuzzle extends React.Component {
                   phase: 1
             }
             this.updateBoardSetting = this.updateBoardSetting.bind(this)
+            this.reset = this.reset.bind(this)
       }
 
       updateBoardSetting(options) {
@@ -72,6 +73,14 @@ class CreatePuzzle extends React.Component {
             })
       }
 
+      reset() {
+            let oldBoard = Util.convertDimensionsToString(this.state.board.dimensions)
+            this.setState({
+                  board: new BoardCreate({ dimensions: oldBoard.dimensions }),
+                  renderImage: null,
+                  phase: 1
+            })
+      }
       submitPuzzle() {
             let puzzleDatum = {
                   title: 'Title',
@@ -103,7 +112,7 @@ class CreatePuzzle extends React.Component {
                                           <i className="fa fa-chevron-up" id="fa-chevron-up"></i>
                                     </button> */}
                                     <div className="puzzle-options-container">
-                                                <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
+                                                <CreatePuzzleOptions active={true} updateBoard={this.updateBoardSetting} />
                                                 <div className="middle-option-container">
                                                       <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                                                       <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} swap={this.props.swap} />
@@ -122,7 +131,7 @@ class CreatePuzzle extends React.Component {
                         </div>
                   )
             } 
-            else if (this.state.phase == 2) {
+            else if (this.state.phase === 2) {
                   return (
                         <div className="main">
                               <div className="puzzle-container">
@@ -134,7 +143,7 @@ class CreatePuzzle extends React.Component {
                               <div className="puzzle-options-collapse">
                         
                                     <div className="puzzle-options-container">
-                                                <CreatePuzzleOptions active={false} updateBoard={this.updateBoardSetting} />
+                                                <CreatePuzzleOptions active={false} reset={this.reset} updateBoard={this.updateBoardSetting} />
                                                 <div className="middle-option-container">
                                                       <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                                                       <BombPuzzleSubmission submitPuzzle={this.submitPuzzle.bind(this)} swap={this.props.swap}/>

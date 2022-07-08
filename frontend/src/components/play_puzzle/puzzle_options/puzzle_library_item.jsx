@@ -6,6 +6,7 @@ class PuzzleLibraryItem extends React.Component {
             super(props)
       }
       render() {
+        
             return (
                   <div className="puzzle-library-options">
                         <div className="save-to-library-button">SAVE</div>
