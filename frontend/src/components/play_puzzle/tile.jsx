@@ -59,8 +59,8 @@ class Tile extends React.Component {
 
             renderTileStyle = (renderTile.colored && renderTile.explored) ? { background: this.props.tile.color } : {}
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
-                  classText = "tile tile-color-selected"
-                  renderTileStyle = {background: this.props.board.state.selectedColor}
+                  classText = "tile tile-selected"
+                  //renderTileStyle = {background: this.props.board.state.selectedColor}
             }
             let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
             switch (dims) {
