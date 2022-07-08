@@ -6,7 +6,8 @@ import BoardComponent from './board'
 import PuzzleOptions from './puzzle_options/puzzle_options';
 import PuzzleSubmit from './puzzle_options/puzzle_submit';
 import PuzzleLibraryContainer from './puzzle_options/puzzle_library_container';
-
+import SeedOption from './puzzle_options/seed_option';
+import { fetchPuzzle } from '../../actions/puzzle_actions';
 class PlayPuzzle extends React.Component {
       constructor(props) {
             super(props)
@@ -18,6 +19,7 @@ class PlayPuzzle extends React.Component {
             }
 
             this.updateGame = this.updateGame.bind(this)
+            this.updatePuzzle = this.updatePuzzle.bind(this)
       }
 
       updateGame(tile, isFlagging) {
@@ -50,7 +52,22 @@ class PlayPuzzle extends React.Component {
             if (options.difficulty && options.difficulty != this.state.difficulty) {
                   this.setState(prevState => ({ difficulty: options.difficulty }))
             }
-            console.log(options)
+      }
+      updatePuzzle(seed) {
+            // let newBoard = null;
+           
+      
+            //       newBoard = new Board({
+            //             dimensions: puzzle.size,
+            //             originalImageUrl: puzzle.original_img_url,
+            //             tiles: Util.parseTileDataFromString(puzzle.tile_data)
+            //       })
+            // })
+            // if (newBoard) {
+            //       this.setState({
+            //             board: newBoard
+            //       })
+            // }
       }
 
       render() {
@@ -73,6 +90,7 @@ class PlayPuzzle extends React.Component {
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
                               <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
+                              <SeedOption updatePuzzle={this.updatePuzzle} />
                               <PuzzleLibraryContainer />
                         </div>
 

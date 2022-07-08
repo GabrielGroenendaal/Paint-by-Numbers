@@ -17,7 +17,6 @@ class LoginModal extends React.Component {
     }
 
     handleSubmit(e) {
-        console.log(this.state)
         e.preventDefault();
         const values = {
             username: this.state.username,

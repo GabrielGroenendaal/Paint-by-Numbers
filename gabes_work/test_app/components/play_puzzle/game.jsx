@@ -50,7 +50,6 @@ class Game extends React.Component {
             if (options.difficulty && options.difficulty != this.state.difficulty) {
                   this.setState(prevState => ({ difficulty: options.difficulty }))
             }
-            console.log(options)
       }
 
       render() {

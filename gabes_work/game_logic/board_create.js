@@ -14,12 +14,10 @@ class BoardCreate {
       makeTileMap(tileData) {
             let board = []
             
-            console.log(tileData)
             for (let i = 0; i < this.width(); i++) {
                   let row = []
                   for (let k = 0; k < this.height(); k++) {
                         let thisTileData = tileData.shift();
-                        console.log(thisTileData)
                         let bombedStatus = Util.parseBoolean(thisTileData[1]);
                         if (bombedStatus == false) { this.total += 1; }
                         let tileOptions = {

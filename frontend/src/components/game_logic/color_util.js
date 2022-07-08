@@ -44,7 +44,6 @@ const ColorUtil = {
 
       hexToRGB(rgb) {
             // Choose correct separator
-            console.log(rgb)
             var hex = rgb
             var red = parseInt(hex[1]+hex[2],16);
             var green = parseInt(hex[3]+hex[4],16);

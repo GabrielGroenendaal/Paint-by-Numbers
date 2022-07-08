@@ -7,7 +7,7 @@ export const getPuzzles = () => {
 
 // get a  specific puzzle to play
 export const getPuzzle = (puzzle) => {
-    return axios.get(`api/puzzles/${puzzle.id}`);
+    return axios.get(`api/puzzles/${puzzle}`);
 }
 
 

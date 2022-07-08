@@ -13,7 +13,6 @@ class NavBar extends React.Component {
     }
 
     signup() {
-        console.log(this.props.currentUser)
         if (!this.props.currentUser) {
             return (
                 <button className="signup-button" type="submit" onClick={() => this.props.openModal('signup')}>Sign Up</button>

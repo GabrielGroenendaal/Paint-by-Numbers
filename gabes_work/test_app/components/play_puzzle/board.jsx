@@ -40,12 +40,10 @@ class Board extends React.Component {
       onContextMenu(event) {
             // event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
-            console.log(event.button)
       }
       
       currentMouseOver(tile) {
-            console.log(tile)
-            this.setState(prevState => ({currentMouseover: tile}))
+            this.setState(prevState => ({ currentMouseover: tile }))
       }
 
       render() {

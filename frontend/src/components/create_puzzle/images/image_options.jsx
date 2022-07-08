@@ -35,7 +35,6 @@ class ImageOptions extends React.Component {
       }
 
       handleSubmit(event) {
-            console.log(this.state.pictureUrl)
             event.preventDefault()
                   this.setState({
                         picture: true,
@@ -61,7 +60,6 @@ class ImageOptions extends React.Component {
       }
       render() {
             if (document.getElementById('hiddenPixels') && this.state.picture) {
-                  console.log(document.getElementById('hiddenPixels'))
                   let tile_data = ColorUtil.convertImageToPixels(this.props.board.dimensions[0])
                   this.props.submitImage(tile_data, this.state.pictureURL)
                   this.toggleImage()
