@@ -2,11 +2,16 @@
 
 import { connect } from 'react-redux'
 import PlayPuzzle from "./play_puzzle";
+import { fetchPuzzle } from '../../actions/puzzle_actions';
 
-
-const mDTP = dispatch => {
+const mSTP = state => {
       return {
-
+            currentPuzzle: state.new
       }
 }
-export default connect(null, mDTP)(PlayPuzzle)
+const mDTP = dispatch => {
+      return {
+            fetchPuzzle: puzzleId => dispatch(fetchPuzzle(puzzleId))
+      }
+}
+export default connect(mSTP, mDTP)(PlayPuzzle)

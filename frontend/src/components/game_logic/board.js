@@ -11,6 +11,7 @@ class Board {
             this.difficulty = options.difficulty || "moderate";
             this.originalImageUrl = options.originalImageUrl || "default";
             this.genre = options.genre || "NA";
+            this.id = options.id || "empty";
             this.total = 0;
 
             // Parse the Tile Data 

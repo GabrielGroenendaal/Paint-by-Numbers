@@ -8,20 +8,22 @@ class PuzzleSubmit extends React.Component {
       constructor(props) {
             super(props)
       }
-      
+
       handleClick() {
             this.props.generate();
       }
       render() {
+
+
             return (
                   <div className="submit-generate-puzzle-container">
                         <div className="submit-button">
-                              <button onClick={this.handleClick.bind(this)}>Generate</button>
+                              <button className="submit-actual-button" onClick={this.handleClick.bind(this)}>GENERATE</button>
                         </div>
-
-                        <p onClick={() => this.props.swap()}>Create a Puzzle Instead</p>
+                        <p className="generate-link" onClick={() => this.props.swap()}>Create a Puzzle Instead</p>
                   </div>
             )
+            
       }
 }
 

@@ -47,6 +47,12 @@ class Board extends React.Component {
       }
 
       render() {
+            
+            if (!this.props.board === null)
+            {
+                  return null
+            }
+
             this.props.board.updateHintsX();
             this.props.board.updateHintsY();
             let hintsX = this.props.board.hintsX;

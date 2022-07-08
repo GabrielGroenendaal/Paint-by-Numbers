@@ -13,12 +13,14 @@ class ColorPuzzleSubmission extends React.Component {
             return (
                   <div className="submit-generate-puzzle-container">
                   <div className="submit-button">
-                        <button onClick={this.handleClick.bind(this)}>Create</button>
+                        <button className="submit-actual-button" onClick={this.handleClick.bind(this)}>Create a Picross</button>
                   </div>
 
-                  <p className="redirect" onClick={() => this.props.swap()}>Generate a Random Puzzle Instead</p>
+                  <p className="generate-link" onClick={() => this.props.swap()}>Generate a Random Puzzle Instead</p>
             </div>
             )
+
+         
       }
 }
 

@@ -1,12 +1,12 @@
 import { RECEIVE_NEW_PUZZLES, RECEIVE_PUZZLES, RECEIVE_USER_PUZZLES,RECEIVE_USER_PUZZLE, RECEIVE_PUZZLE } from '../actions/puzzle_actions.js';
 
-const puzzleReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const puzzleReducer = (state = { all: {}, user: {}, new: {}}, action) => {
     Object.freeze(state);
     let nextState = Object.assign({}, state);
 
     switch (action.type) {
         case RECEIVE_PUZZLE:
-            nextState[action.puzzle.puzzle] = action.puzzle.puzzle;
+            nextState.new = action.puzzle.data;
             return nextState;
         case RECEIVE_PUZZLES:
             nextState.all = action.puzzles.data;

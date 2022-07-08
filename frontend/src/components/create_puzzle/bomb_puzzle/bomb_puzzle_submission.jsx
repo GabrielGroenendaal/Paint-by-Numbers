@@ -14,7 +14,7 @@ class BombPuzzleSubmission extends React.Component {
             return (
                   <div className="submit-generate-puzzle-container">
                   <div className="submit-button">
-                        <button onClick={this.handleClick.bind(this)}>Submit!</button>
+                        <button onClick={this.handleClick.bind(this)}>Finalize</button>
                   </div>
 
                   <p className="redirect" onClick={() => this.props.swap()}>Generate a Random Puzzle Instead</p>

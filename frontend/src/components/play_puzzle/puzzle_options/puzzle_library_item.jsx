@@ -10,7 +10,7 @@ class PuzzleLibraryItem extends React.Component {
                   <div className="puzzle-library-options">
                         <div className="save-to-library-button">SAVE</div>
                         <div className="share-puzzle-button">SHARE</div>
-                        <div className="user-library-button" onClick={() => this.props.openModal('library')}>LIBRARY</div>
+                        <div className="user-library-button">LIBRARY</div>
                   </div>
             )
       }

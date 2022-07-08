@@ -8,6 +8,9 @@ import PuzzleSubmit from './puzzle_options/puzzle_submit';
 import PuzzleLibraryContainer from './puzzle_options/puzzle_library_container';
 import SeedOption from './puzzle_options/seed_option';
 import { fetchPuzzle } from '../../actions/puzzle_actions';
+import ProgressBoard from './puzzle_options/progress_board';
+
+
 class PlayPuzzle extends React.Component {
       constructor(props) {
             super(props)
@@ -54,29 +57,27 @@ class PlayPuzzle extends React.Component {
             }
       }
       updatePuzzle(seed) {
-            // let newBoard = null;
-           
-      
-            //       newBoard = new Board({
-            //             dimensions: puzzle.size,
-            //             originalImageUrl: puzzle.original_img_url,
-            //             tiles: Util.parseTileDataFromString(puzzle.tile_data)
-            //       })
-            // })
-            // if (newBoard) {
-            //       this.setState({
-            //             board: newBoard
-            //       })
-            // }
+            let new_board = {}
+            this.props.fetchPuzzle(seed).then(response => {
+                  let new_puzzle = response.puzzle.data;
+                  console.log(new_puzzle)
+                  
+                        new_board = new Board({
+                              difficulty: new_puzzle.difficulty,
+                              dimensions: new_puzzle.size,
+                              tiles: Util.parseTileDataFromString(new_puzzle.tile_data),
+                              originalImageUrl: new_puzzle.original_img_url,
+                              id: new_puzzle._id
+                        })
+                  this.setState({board: new_board})
+                  console.log(new_board)
+                  
+            }).catch(err => err.responseJSON)
       }
 
-      render() {
-            // let status = "Good Luck"
-            // if (this.state.board.complete) {
-            //       status = "You finished!"
-            //       console.log(Util.convertBoardToString(this.state.board))
-            // }
 
+      render() {
+  
             return (
                   <div className="main">
                         <div className="puzzle-container">
@@ -89,9 +90,13 @@ class PlayPuzzle extends React.Component {
                         </div>
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
-                              <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
-                              <SeedOption updatePuzzle={this.updatePuzzle} />
+                              <div className="middle-option-container">
+                                    {/* <ProgressBoard board={this.state.board} /> */}
+                                    <SeedOption updatePuzzle={this.updatePuzzle} /> 
+                                    <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
+                              </div>
                               <PuzzleLibraryContainer />
+                              
                         </div>
 
                   </div>
