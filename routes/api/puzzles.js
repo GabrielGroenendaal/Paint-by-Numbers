@@ -10,39 +10,39 @@ const validatePuzzleInput = require("../../validation/puzzles.js");
 
 //get entire library of puzzles
 
-router.get("/", (request, response) => {
-  Puzzle.find()
-    .sort({ creator_id: request.params.user_id })
-    .then((puzzles) => response.json(puzzles))
-    .catch((err) =>
-      response.status(404).json({ noPuzzlesFound: "No Puzzles found" })
-    );
-});
+// router.get("/", (request, response) => {
+//   Puzzle.find()
+//     .sort({ creator_id: request.params.user_id })
+//     .then((puzzles) => response.json(puzzles))
+//     .catch((err) =>
+//       response.status(404).json({ noPuzzlesFound: "No Puzzles found" })
+//     );
+// });
 
 //get users puzzles
 
-router.get("/user/:user_id", (request, response) => {
-  Puzzle.find({ creator_id: request.params.user_id })
-    // .sort({ creator_id: request.params.user_id })
-    .then((puzzles) => response.json(puzzles))
-    .catch((err) =>
-      response
-        .status(404)
-        .json({ noPuzzlesFound: "No Puzzles found for that User" })
-    );
-});
+// router.get("/user/:user_id", (request, response) => {
+//   Puzzle.find({ creator_id: request.params.user_id })
+//     // .sort({ creator_id: request.params.user_id })
+//     .then((puzzles) => response.json(puzzles))
+//     .catch((err) =>
+//       response
+//         .status(404)
+//         .json({ noPuzzlesFound: "No Puzzles found for that User" })
+//     );
+// });
 
 //get a specific user puzzles
-router.get("/user/:user_id/:puzzle_id", (request, response) => {
-  Puzzle.findById(request.params.puzzle_id)
-    // .sort({ creator_id: request.params.user_id })
-    .then((puzzles) => response.json(puzzles))
-    .catch((err) =>
-      response
-        .status(404)
-        .json({ noPuzzlesFound: "No Puzzles found for that User" })
-    );
-});
+// router.get("/user/:user_id/:puzzle_id", (request, response) => {
+//   Puzzle.findById(request.params.puzzle_id)
+//     // .sort({ creator_id: request.params.user_id })
+//     .then((puzzles) => response.json(puzzles))
+//     .catch((err) =>
+//       response
+//         .status(404)
+//         .json({ noPuzzlesFound: "No Puzzles found for that User" })
+//     );
+// });
 
 
 
@@ -60,7 +60,7 @@ router.get("/:id", (request, response) => {
 
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (request, response) => {
     const { errors, isValid } = validatePuzzleInput(request.body);
 
@@ -70,7 +70,7 @@ router.post(
 
     const newPuzzle = new Puzzle({
       title: request.body.title,
-      creator_id: request.user.id,
+      //creator_id: request.user.id,
       original_img_url: request.body.original_img_url,
       tile_data: request.body.tile_data,
       size: request.body.size,

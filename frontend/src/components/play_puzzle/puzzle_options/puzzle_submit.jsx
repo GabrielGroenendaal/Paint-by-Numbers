@@ -19,7 +19,7 @@ class PuzzleSubmit extends React.Component {
                               <button onClick={this.handleClick.bind(this)}>Generate</button>
                         </div>
 
-                        <p><a href="">Create a Puzzle Instead</a></p>
+                        <p onClick={() => this.props.swap()}>Create a Puzzle Instead</p>
                   </div>
             )
       }

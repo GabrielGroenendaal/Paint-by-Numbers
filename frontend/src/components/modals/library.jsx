@@ -6,10 +6,10 @@ class Library extends React.Component {
     }
     render() {
         return (
-            <div className="modal-instruction-background" >
+            <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
                 <div className="modal-instruction-child">
                     <div className="instruction-form">
-                        <form className="manual" >
+                        <form className="manual" onClick={e => e.stopPropagation()}>
                             <div className="close-button"></div>
                             <div className='login-message'> Puzzles You've Saved</div>
                             <div className="manual-title">------- Date -------</div>

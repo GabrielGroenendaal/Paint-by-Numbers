@@ -1,6 +1,6 @@
 import React from "react";
 import Util from "../../game_logic/util";
-
+import { withRouter } from "react-router";
 class ColorPuzzleSubmission extends React.Component {
       constructor(props) {
             super(props)
@@ -16,10 +16,10 @@ class ColorPuzzleSubmission extends React.Component {
                         <button onClick={this.handleClick.bind(this)}>Create</button>
                   </div>
 
-                  <p><a href="">Generate a Random Puzzle Instead</a></p>
+                  <p className="redirect" onClick={() => this.props.swap()}>Generate a Random Puzzle Instead</p>
             </div>
             )
       }
 }
 
-export default ColorPuzzleSubmission;
+export default withRouter(ColorPuzzleSubmission);

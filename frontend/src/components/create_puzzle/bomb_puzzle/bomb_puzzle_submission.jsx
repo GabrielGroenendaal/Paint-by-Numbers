@@ -8,6 +8,7 @@ class BombPuzzleSubmission extends React.Component {
 
       handleClick() {
             this.props.submitPuzzle();
+            this.props.swap()
       }
       render() {
             return (
@@ -16,7 +17,7 @@ class BombPuzzleSubmission extends React.Component {
                         <button onClick={this.handleClick.bind(this)}>Submit!</button>
                   </div>
 
-                  <p><a href="">Generate a Random Puzzle Instead</a></p>
+                  <p className="redirect" onClick={() => this.props.swap()}>Generate a Random Puzzle Instead</p>
             </div>
             )
       }

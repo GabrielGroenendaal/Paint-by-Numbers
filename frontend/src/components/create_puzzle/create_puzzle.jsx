@@ -6,10 +6,10 @@ import Util from "../game_logic/util";
 import ColorPuzzleSubmission from "./create_puzzle_options/color_puzzle_submission";
 import ImageOptions from "./images/image_options";
 import ColorUtil from '../game_logic/color_util'
-import PuzzleLibrary from "../play_puzzle/puzzle_options/puzzle_library";
+
 import BombPuzzleSubmission from "./bomb_puzzle/bomb_puzzle_submission";
 import BombBoard from "./bomb_puzzle/bomb_board";
-
+import PuzzleLibraryContainer from "../play_puzzle/puzzle_options/puzzle_library_container";
 
 class CreatePuzzle extends React.Component {
       constructor(props) {
@@ -73,7 +73,17 @@ class CreatePuzzle extends React.Component {
       }
 
       submitPuzzle() {
-            let puzzleData = Util.convertBoardToString(this.state.board)
+            let puzzleDatum = {
+                  title: 'Title',
+                  difficulty: this.state.board.difficulty || "easy",
+                  size: Util.convertDimensionsToString(this.state.board.dimensions),
+                  tile_data: Util.convertBoardToString(this.state.board),
+                  original_img_url: (this.state.board.originalImageURL || 'default'),
+                  //creator_id: (this.props.currentUser.id || 1)
+            }
+            this.props.processPuzzle(puzzleDatum).then(() => this.props.openModal('seed'))
+
+            //let puzzleData = Util.convertBoardToString(this.state.board)
       }
 
       render() {
@@ -94,10 +104,10 @@ class CreatePuzzle extends React.Component {
                                     </button> */}
                                     <div className="puzzle-options-container">
                                                 <CreatePuzzleOptions updateBoard={this.updateBoardSetting} />
-                                                <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} />
+                                                <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} swap={this.props.swap} />
                                                 <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
 
-                                                <PuzzleLibrary />
+                                                <PuzzleLibraryContainer />
                                     {/* SubmitPuzzleButtons */}
                                     {/* LibraryOptions */}
                                           </div>
@@ -123,8 +133,8 @@ class CreatePuzzle extends React.Component {
                         
                                     <div className="puzzle-options-container">
                                                 <CreatePuzzleOptions active={false} updateBoard={this.updateBoardSetting} />
-                                                <BombPuzzleSubmission submitPuzzle={this.submitPuzzle.bind(this)} />
-                                          <PuzzleLibrary />
+                                                <BombPuzzleSubmission submitPuzzle={this.submitPuzzle.bind(this)} swap={this.props.swap}/>
+                                                <PuzzleLibraryContainer />
                                     {/* SubmitPuzzleButtons */}
                                     {/* LibraryOptions */}
                                           </div>

@@ -70,7 +70,7 @@ export const login = user => (dispatch) =>
         });
 
 export const signup = user => (dispatch) =>
-    SessionAPIUtil.signUp(user).then(() => dispatch(receiveUserSignIn()), err => dispatch(receiveSessionErrors(err.response.data)));
+    SessionAPIUtil.signUp(user).then(() => dispatch(receiveCurrentUser(user)), err => dispatch(receiveSessionErrors(err.response.data)));
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('jwtToken');

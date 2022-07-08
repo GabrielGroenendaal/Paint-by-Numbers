@@ -47,7 +47,6 @@ router.post("/register", (request, response) => {
 //   we are not using emails for this app
 
   User.findOne({
-    email: request.body.email,
     username: request.body.username,
   }).then((user) => {
     if (user) {
@@ -59,7 +58,6 @@ router.post("/register", (request, response) => {
 
       const newUser = new User({
         username: request.body.username,
-        email: request.body.email,
         password: request.body.password,
       });
 
@@ -88,15 +86,15 @@ router.post("/login", (request, response) => {
     return response.status(400).json(errors);
   }
 
-  const email = request.body.email;
+  const username = request.body.username;
   const password = request.body.password;
 
   // use bycrpt and password to look up said user for the inputted credentials
   // this one will check for the email findOne is self explanatory
-  User.findOne({ email }).then((user) => {
+  User.findOne({ username }).then((user) => {
     if (!user) {
       // if user email not found return json error response
-      return response.status(404).json({ email: "This user does not exist" });
+      return response.status(404).json({ username: "This user does not exist" });
     }
 
     // user email must then exists using bcrypt to verifiy password
@@ -108,7 +106,6 @@ router.post("/login", (request, response) => {
         const payload = {
           id: user.id,
           username: user.username,
-          email: user.email,
         };
         jwt.sign(
           payload,

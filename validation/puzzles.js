@@ -7,13 +7,13 @@ module.exports = function validatePuzzleInput(data) {
   data.difficulty = validText(data.difficulty) ? data.difficulty : "";
   data.size = validText(data.size) ? data.size : "";
 
-  if (!Validator.isLength(data.title, { min: 5, max: 50 })) {
-    errors.title = "Puzzle Title must be between 5 and 50 characters in length";
-  }
+  // if (!Validator.isLength(data.title, { min: 5, max: 50 })) {
+  //   errors.title = "Puzzle Title must be between 5 and 50 characters in length";
+  // }
 
-  if (Validator.isEmpty(data.title)) {
-    errors.title = "Puzzle Title Field required";
-  }
+  // if (Validator.isEmpty(data.title)) {
+  //   errors.title = "Puzzle Title Field required";
+  // }
 
   if (Validator.isEmpty(data.difficulty)) {
     errors.difficulty = "Puzzle difficulty required";

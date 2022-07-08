@@ -6,10 +6,10 @@ class Manual extends React.Component {
     }
     render() {
         return (
-            <div className="modal-instruction-background" >
+            <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
                 <div className="modal-instruction-child">
                     <div className="instruction-form">
-                        <form className="manual" >
+                        <form className="manual"onClick={e => e.stopPropagation()} >
                             <br />
                             <div className="close-button"></div>
                             <div className='login-message'> PAINT BY NUMBERS</div>

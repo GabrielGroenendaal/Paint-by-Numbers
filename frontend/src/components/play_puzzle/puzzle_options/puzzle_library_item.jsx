@@ -1,19 +1,19 @@
 import React from "react";
 
-class PuzzleLibrary extends React.Component {
+class PuzzleLibraryItem extends React.Component {
+      
       constructor(props) {
             super(props)
       }
-
       render() {
             return (
                   <div className="puzzle-library-options">
                         <div className="save-to-library-button">SAVE</div>
                         <div className="share-puzzle-button">SHARE</div>
-                        <div className="user-library-button">LIBRARY</div>
+                        <div className="user-library-button" onClick={() => this.props.openModal('library')}>LIBRARY</div>
                   </div>
             )
       }
 }
 
-export default PuzzleLibrary;
+export default PuzzleLibraryItem;

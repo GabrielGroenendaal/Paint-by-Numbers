@@ -37,7 +37,7 @@ app.use("/api/users", users);
 //for users to creaate a puzzle of their own
 app.use("/api/puzzles", puzzles);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

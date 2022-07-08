@@ -5,9 +5,9 @@ import Util from '../game_logic/util'
 import BoardComponent from './board'
 import PuzzleOptions from './puzzle_options/puzzle_options';
 import PuzzleSubmit from './puzzle_options/puzzle_submit';
-import PuzzleLibrary from './puzzle_options/puzzle_library';
+import PuzzleLibraryContainer from './puzzle_options/puzzle_library_container';
 
-class Game extends React.Component {
+class PlayPuzzle extends React.Component {
       constructor(props) {
             super(props)
             this.state = {
@@ -72,8 +72,8 @@ class Game extends React.Component {
                         </div>
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
-                              <PuzzleSubmit generate={this.generatePuzzle.bind(this)} />
-                              <PuzzleLibrary />
+                              <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
+                              <PuzzleLibraryContainer />
                         </div>
 
                   </div>
@@ -81,4 +81,4 @@ class Game extends React.Component {
       }
 }
 
-export default Game;
+export default PlayPuzzle;

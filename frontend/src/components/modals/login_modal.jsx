@@ -24,7 +24,7 @@ class LoginModal extends React.Component {
             password: this.state.password,
         }
         const user = Object.assign({}, values);
-        this.props.processForm(user)
+        this.props.processForm(user).then((()=>{this.props.closeModal()}))
     }
 
     createDemoUser() {
