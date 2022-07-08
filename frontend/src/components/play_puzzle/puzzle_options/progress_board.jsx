@@ -14,7 +14,7 @@ class ProgressBoard extends React.Component {
 
       render() {
             return (
-                  <div className="puzzle-gameplay-options-container">
+                  <div className="puzzle-gameplay-options-container puzzle-gameplay-options-container-gameplay">
                         <div className="puzzle-progress-container">
                               <label className="puzzle-progress-label">PROGRESS
                                     <div className="progress-count">{(this.props.board.guesses / this.props.board.total).toFixed(4) * 100} %</div>
@@ -22,6 +22,15 @@ class ProgressBoard extends React.Component {
                               <label className="puzzle-progress-mistakes-label">MISTAKES
                                     <div className="progress-mistakes">{this.props.board.mistakes}</div>
                               </label>
+                        </div>
+                        <div>
+                        <form id="reset">
+                              <button
+                                    type="submit"
+                                    className="image-submit-button reveal-button"
+                                    onClick={() => this.props.reset()}
+                              >RESET</button>
+                        </form>
                         </div>
                   </div>
             )

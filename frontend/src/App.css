@@ -1144,6 +1144,10 @@ input[type="radio"]:hover {
   font-size: 15px;
 }
 
+.generate-link:hover {
+  color: blue
+}
+
 .submit-button {
   color: white;
   text-align: center;
@@ -1269,6 +1273,7 @@ body .tile-flagged {
 #seed-input-header {
   text-align: center;
   padding-left: 0px;
+  padding-top: 10px;
 }
 
 #modal-cover-child-reveal {
@@ -1286,4 +1291,36 @@ body .tile-flagged {
 
 .reveal-message {
   margin-top: 30px;
+}
+
+.reveal-button {
+  width: 80px;
+  height: 25px;
+
+  padding: 5px;
+  margin: 10px;
+}
+
+.puzzle-library-options {
+  height: 255px;
+  justify-content: space-between;
+}
+
+.puzzle-selector-options-container {
+  height: 255px;
+}
+
+.puzzle-gameplay-options-container-gameplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.progress-mistakes, .progress-count {
+  padding-top: 10px;
+}
+
+.puzzle-progress-mistakes-label {
+  padding-top: 20px;
 }

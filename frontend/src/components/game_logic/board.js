@@ -201,9 +201,13 @@ class Board {
       }
 
       revealAll() {
-            this.tiles.flat().forEach(tile => tile.explore())
+            let apple = this.tiles.flat().forEach(tile => tile.explore())
+            // let count = 0;
+            // while (count < apple.length) {
+            //       setTimeout(apple[count], 200)
+            //       count++
+            // }
       }
-
 
       checkComplete() {
             if (this.guesses >= this.total) {

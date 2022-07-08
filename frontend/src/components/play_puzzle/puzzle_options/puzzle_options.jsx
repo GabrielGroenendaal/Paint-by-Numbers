@@ -18,8 +18,12 @@ class PuzzleOptions extends React.Component {
 
       render() {
             return (
+                  
                   <div className="puzzle-selector-options-container">
-                        <p className="puzzle-selector-options-header"></p>
+                        {/* <p className="puzzle-selector-options-header"></p> */}
+                        <div>
+                              
+                        </div>
                         <div className="puzzle-size-options">
                               <label className="puzzle-size-options-header">SIZE</label>
                               <form className="puzzle-size-options-items">
@@ -46,7 +50,11 @@ class PuzzleOptions extends React.Component {
                                     
                               </div>
                         </div>
-                  </div>
+                        
+                              
+                       
+                        </div>
+                        
             )
       }
 }

@@ -35,9 +35,16 @@ class PlayPuzzle extends React.Component {
       }
 
       reset() {
-            let data = Util.convertBoardToString(this.state.board.tiles);
+            let new_puzzle = this.state.board
+            let tile_data = Util.parseTileDataFromString(Util.convertBoardToString(new_puzzle))
             this.setState({
-                  board: new Board({ tiles: data })
+                  board: new Board({
+                        difficulty: new_puzzle.difficulty,
+                              dimensions: new_puzzle.size,
+                              tiles: tile_data,
+                              originalImageUrl: new_puzzle.original_img_url,
+                              id: new_puzzle._id
+                  })
             })
       }
 
@@ -109,7 +116,7 @@ class PlayPuzzle extends React.Component {
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
                               <div className="middle-option-container">
-                                    <ProgressBoard board={this.state.board} />
+                                    <ProgressBoard board={this.state.board} reset={this.reset.bind(this)} />
                                     {/* <SeedOption updatePuzzle={this.updatePuzzle} />  */}
                                     <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
                               </div>
