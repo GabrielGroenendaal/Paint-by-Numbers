@@ -30,6 +30,7 @@ class Board {
             this.updateHintsX();
             this.hintsY = [];
             this.updateHintsY();
+
       }
 
 
@@ -200,7 +201,7 @@ class Board {
       }
 
       revealAll() {
-            this.tiles.flatten.forEach(tile => tile.explore())
+            //this.tiles.forEach(tile => tile.explore())
       }
 
       checkComplete() {

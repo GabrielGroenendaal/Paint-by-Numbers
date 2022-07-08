@@ -9,8 +9,9 @@ import ManualContainer from './manual_container';
 import Reveal from './reveal_puzzle'
 import LibraryContainer from './library_container';
 import SeedContainer from '../create_puzzle/create_puzzle_options/seed_container';
-
+import RevealContainer from './reveal_container';
 class Modal extends React.Component {
+      
       constructor(props){
             super(props)
       }
@@ -28,7 +29,8 @@ class Modal extends React.Component {
                   case 'library':
                         component=<LibraryContainer />
                         break
-                  case 'puzzle-reveal':
+                  case 'reveal':
+                        component=<RevealContainer />
                         break
                   case 'signup':
                         component = <SignUpContainer />

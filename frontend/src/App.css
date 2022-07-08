@@ -1229,3 +1229,41 @@ body .tile-flagged {
   font-family: 'Montserrat',sans-serif;
   font-weight: 500;
 }
+
+
+.text-box input {
+  background-color: transparent;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  margin: 4px;
+  border-color: rgb(216, 215, 215);
+    padding-left: 9px;
+  font-size: 15px;
+  width: 250px;
+  height: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+#seed-input {
+  width: 130px;
+}
+
+#seed-input-header {
+  text-align: center;
+  padding-left: 0px;
+}
+
+#modal-cover-child-reveal {
+  min-height: 300px;
+  min-width: 280px;
+  max-height: 400px;
+  max-width: 400px;
+  
+}
+
+.reveal-img {
+  width: 400px;
+  height: 400px;
+}

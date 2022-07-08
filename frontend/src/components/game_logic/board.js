@@ -201,8 +201,9 @@ class Board {
       }
 
       revealAll() {
-            this.tiles.flatten.forEach(tile => tile.explore())
+            this.tiles.flat().forEach(tile => tile.explore())
       }
+
 
       checkComplete() {
             if (this.guesses >= this.total) {

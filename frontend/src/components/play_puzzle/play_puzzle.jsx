@@ -23,6 +23,7 @@ class PlayPuzzle extends React.Component {
 
             this.updateGame = this.updateGame.bind(this)
             this.updatePuzzle = this.updatePuzzle.bind(this)
+            this.revealAllTiles = this.revealAllTiles.bind(this)
       }
 
       updateGame(tile, isFlagging) {
@@ -56,11 +57,11 @@ class PlayPuzzle extends React.Component {
                   this.setState(prevState => ({ difficulty: options.difficulty }))
             }
       }
+
       updatePuzzle(seed) {
             let new_board = {}
             this.props.fetchPuzzle(seed).then(response => {
                   let new_puzzle = response.puzzle.data;
-                  console.log(new_puzzle)
                   
                         new_board = new Board({
                               difficulty: new_puzzle.difficulty,
@@ -70,14 +71,31 @@ class PlayPuzzle extends React.Component {
                               id: new_puzzle._id
                         })
                   this.setState({board: new_board})
-                  console.log(new_board)
                   
             }).catch(err => err.responseJSON)
       }
 
+      reveal() {
+            this.props.openModal('reveal')
+            // this.setState({
+            //       board: new Board({ dimensions: "10x10" })
+            // })
+      }
+
+      revealAllTiles() {
+            this.state.board.revealAll()
+            this.setState({
+                  board: this.state.board
+            })
+      }
 
       render() {
-  
+            if (!this.state.board) {
+                  return null
+            } 
+            if (this.state.board.complete) {
+                  this.reveal()
+            }
             return (
                   <div className="main">
                         <div className="puzzle-container">
@@ -91,12 +109,17 @@ class PlayPuzzle extends React.Component {
                         <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
                               <div className="middle-option-container">
-                                    {/* <ProgressBoard board={this.state.board} /> */}
-                                    <SeedOption updatePuzzle={this.updatePuzzle} /> 
+                                    <ProgressBoard board={this.state.board} />
+                                    {/* <SeedOption updatePuzzle={this.updatePuzzle} />  */}
                                     <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
                               </div>
-                              <PuzzleLibraryContainer />
-                              
+                              <PuzzleLibraryContainer
+                                    active={true}
+                                    currentUser={this.props.currentUser}
+                                    openModal={this.props.openModal}
+                                    revealAll={this.revealAllTiles}
+                                    generate={this.generatePuzzle.bind(this)} 
+                                    updatePuzzle={this.updatePuzzle} />
                         </div>
 
                   </div>
