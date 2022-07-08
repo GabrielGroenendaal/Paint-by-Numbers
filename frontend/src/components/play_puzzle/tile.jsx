@@ -55,8 +55,13 @@ class Tile extends React.Component {
                   }
                   
             }
-            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) { classText = "tile tile-selected"}
-            
+            let renderTileStyle;  
+
+            renderTileStyle = (renderTile.colored && renderTile.explored) ? { background: this.props.tile.color } : {}
+            if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
+                  classText = "tile tile-color-selected"
+                  renderTileStyle = {background: this.props.board.state.selectedColor}
+            }
             let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
             switch (dims) {
                   case "5x5":
@@ -82,6 +87,7 @@ class Tile extends React.Component {
                         onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
+                        style={renderTileStyle}
                   >
                         {text}
                   </td>

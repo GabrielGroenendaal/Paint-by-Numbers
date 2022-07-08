@@ -9,6 +9,7 @@ class Tile {
             this.bombed = options.bombed || false;
             this.explored = options.explored || false;
             this.flagged = options.flagged || false;
+            this.colored = (this.color === 'white' || this.color === 'gray') ? false : true
       }
 
       explore() {
