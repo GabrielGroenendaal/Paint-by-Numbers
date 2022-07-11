@@ -50,6 +50,10 @@ class ColorTile extends React.Component {
                   renderTileStyle = {background: this.props.board.state.selectedColor}
             }
 
+            if (mouseOverTile && mouseOverTile === renderTile) {
+                  renderTileStyle= {background: this.props.board.state.selectedColor}
+            } 
+
             let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
             switch (dims) {
                   case "5x5":

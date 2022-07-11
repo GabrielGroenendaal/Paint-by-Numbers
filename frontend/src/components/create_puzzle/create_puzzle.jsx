@@ -87,7 +87,7 @@ class CreatePuzzle extends React.Component {
                   difficulty: this.state.board.difficulty || "easy",
                   size: Util.convertDimensionsToString(this.state.board.dimensions),
                   tile_data: Util.convertBoardToString(this.state.board),
-                  original_img_url: (this.state.board.originalImageURL || 'default'),
+                  original_img_url: (this.state.board.originalImageURL || 'https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c='),
                   //creator_id: (this.props.currentUser.id || 1)
             }
             this.props.processPuzzle(puzzleDatum).then(() => this.props.openModal('seed'))

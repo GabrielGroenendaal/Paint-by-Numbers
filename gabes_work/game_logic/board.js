@@ -9,7 +9,7 @@ class Board {
             this.dimensions = options.dimensions || "10x10";
             this.dimensions = Util.parseDimension(this.dimensions)
             this.difficulty = options.difficulty || "moderate";
-            this.originalImageUrl = options.originalImageUrl || "default";
+            this.originalImageUrl = options.originalImageUrl || "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c=";
             this.genre = options.genre || "NA";
             this.total = 0;
 
