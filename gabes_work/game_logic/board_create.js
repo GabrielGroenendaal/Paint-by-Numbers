@@ -1,5 +1,4 @@
-const Util = require('./util')
-import Board from '../test_app/components/play_puzzle/board'
+import Util from './util'// import Board from '../test_app/components/play_puzzle/board'
 import TileCreate from './tile_create'
 
 class BoardCreate {

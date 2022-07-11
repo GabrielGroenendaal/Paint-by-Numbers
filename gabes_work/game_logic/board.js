@@ -1,8 +1,11 @@
 
 const { default: Hint } = require('../test_app/components/play_puzzle/hint');
-const Tile = require('./tile');
-const Util = require('./util')
-const HintItem = require('./hint')
+// const Tile = require('./tile');
+// const Util = require('./util')
+// const HintItem = require('./hint')
+import Tile from './tile';
+import Util from './util';
+import HintItem from './hint';
 
 class Board {
       constructor(options = {}, progress = {}) {
@@ -287,4 +290,6 @@ class Board {
       }
 }
 
-module.exports = Board;
+// module.exports = Board;
+
+export default Board;
