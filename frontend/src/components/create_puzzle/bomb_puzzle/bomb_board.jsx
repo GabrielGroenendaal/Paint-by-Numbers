@@ -34,7 +34,7 @@ class BombBoard extends React.Component {
       }
 
       onContextMenu(event) {
-            //event.preventDefault()
+            event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
             //console.log(event.button)
       }
