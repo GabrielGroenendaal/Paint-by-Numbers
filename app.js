@@ -12,7 +12,12 @@ const puzzles = require("./routes/api/puzzles.js");
 const Puzzle = require("./models/Puzzle.js");
 const path = require('path');
 
-
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
 
 app.use(passport.initialize());
 require("./config/passport.js")(passport);
@@ -46,12 +51,7 @@ app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  })
-}
+
 
 //at this point node.js is too dumb to know about any new changes so we use nodedemon to
 // retransplie changes like webpack does or atleast tries to do .
