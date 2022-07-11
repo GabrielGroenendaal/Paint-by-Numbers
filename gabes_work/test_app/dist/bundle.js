@@ -258,10 +258,7 @@ var Board = /*#__PURE__*/function () {
     }
   }, {
     key: "revealAll",
-    value: function revealAll() {
-      this.tiles.flatten.forEach(function (tile) {
-        return tile.explore();
-      });
+    value: function revealAll() {//this.tiles.forEach(tile => tile.explore())
     }
   }, {
     key: "checkComplete",
@@ -402,14 +399,12 @@ var BoardCreate = /*#__PURE__*/function () {
     key: "makeTileMap",
     value: function makeTileMap(tileData) {
       var board = [];
-      console.log(tileData);
 
       for (var i = 0; i < this.width(); i++) {
         var row = [];
 
         for (var k = 0; k < this.height(); k++) {
           var thisTileData = tileData.shift();
-          console.log(thisTileData);
           var bombedStatus = Util.parseBoolean(thisTileData[1]);
 
           if (bombedStatus == false) {
@@ -526,7 +521,6 @@ var ColorUtil = {
   },
   hexToRGB: function hexToRGB(rgb) {
     // Choose correct separator
-    console.log(rgb);
     var hex = rgb;
     var red = parseInt(hex[1] + hex[2], 16);
     var green = parseInt(hex[3] + hex[4], 16);
@@ -710,7 +704,6 @@ var TileCreate = /*#__PURE__*/function () {
 
     this.board = options.board;
     this.color = options.color || "#FFFFFF";
-    console.log(this.color);
     this.pos = options.pos;
     this.explored = options.explored || false;
     this.bombed = options.bombed || false;
@@ -2252,7 +2245,6 @@ var ImageOptions = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      console.log(this.state.pictureUrl);
       event.preventDefault();
       this.setState({
         picture: true,
@@ -2282,7 +2274,6 @@ var ImageOptions = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (document.getElementById('hiddenPixels') && this.state.picture) {
-        console.log(document.getElementById('hiddenPixels'));
         var tile_data = _game_logic_color_util__WEBPACK_IMPORTED_MODULE_2__["default"].convertImageToPixels(this.props.board.dimensions[0]);
         this.props.submitImage(tile_data, this.state.pictureURL);
         this.toggleImage();
@@ -2838,12 +2829,10 @@ var Board = /*#__PURE__*/function (_React$Component) {
           selecting: false
         };
       });
-      console.log(event.button);
     }
   }, {
     key: "currentMouseOver",
     value: function currentMouseOver(tile) {
-      console.log(tile);
       this.setState(function (prevState) {
         return {
           currentMouseover: tile
@@ -3029,8 +3018,6 @@ var Game = /*#__PURE__*/function (_React$Component) {
           };
         });
       }
-
-      console.log(options);
     }
   }, {
     key: "render",

@@ -1,5 +1,10 @@
 import React from "react";
+import { ReactDOM } from "react";
 import ModalCloseButton from "./modal_close_button";
+import { CSSTransition } from 'react-transition-group';
+var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
+
+
 class LoginModal extends React.Component {
     constructor(props) {
         super(props)
@@ -52,23 +57,27 @@ class LoginModal extends React.Component {
     render() {
         let submitText = (this.props.formType === 'Login') ? 'Login' : 'Sign Up'
         return (
-            <div className="modal-background" onClick={() => this.props.closeModal()}>
+            <div  className="modal-background"  onClick={() => this.props.closeModal()}>
                 <div className="modal-child" >
                     <div className="session-form">
+                        
+                           
                         <form className="sform" onClick={e => e.stopPropagation()} onSubmit={this.handleSubmit} >
                             <br />
-                            <div className="close-button"></div>
+                            <div className="close-button" onClick={() => this.props.closeModal()} >X</div>
                             <div className='login-message'> PAINT BY NUMBERS</div>
                             <br />
                             <label className='text-box'>
                                 <input
                                     type="text"
+                                    placeholder= {submitText === 'Login'? "Username" : "Email"}
                                     value={this.state.username}
                                     onChange={this.update('username')}
                                 />
                             </label>
                             <label className='text-box'>
                                 <input
+                                    placeholder="Password"
                                     type="password"
                                     value={this.state.password}
                                     onChange={this.update('password')}
@@ -80,6 +89,7 @@ class LoginModal extends React.Component {
                            {/* {this.renderErrors.bind(this)} */}
                             {/* {this.props.otherForm} */}
                         </form>
+
                     </div>
                 </div>
             </div>

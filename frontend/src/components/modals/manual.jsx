@@ -11,8 +11,8 @@ class Manual extends React.Component {
                     <div className="instruction-form">
                         <form className="manual"onClick={e => e.stopPropagation()} >
                             <br />
-                            <div className="close-button"></div>
-                            <div className='login-message'> PAINT BY NUMBERS</div>
+                            <div className="close-button-manual" onClick={() => this.props.closeModal()}>X</div>
+                            <div className='manual-login-message'> PAINT BY NUMBERS</div>
                            
                             <div className="manual-text">
                                 Paint by Numbers (Picross) is a game in which you solve puzzles using numbers,
@@ -28,7 +28,7 @@ class Manual extends React.Component {
                             </div>
                             <div className="manual-title">------- More Tips! -------</div>
                             <div className="manual-text">
-                                <li> Use "X" marks.</li>
+                                <li> Use option-click to flag tiles.</li>
                                 <li> Complete the larger numbers first.</li>
                                 <li> Complete the puzzle using the finished columns and rows.</li></div>
                         </form>

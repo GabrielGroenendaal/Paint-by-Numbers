@@ -91,19 +91,19 @@ class SessionForm extends React.Component {
         const userName = (
             <div className="field">
                 <label id="username-label" >USERNAME</label>
-                <input id="username" type="text" value={this.state.username} onChange={this.handleInput('username')} />
+                <input id="username" placeholder='Username' type="text" value={this.state.username} onChange={this.handleInput('username')} />
             </div>
         );
         const password = (
             <div className="field">
                 <label id="password-label" >PASSWORD</label>
-                <input id="password" type="password" value={this.state.password} onChange={this.handleInput('password')} />
+                <input id="password" placeholder='Password' type="password" value={this.state.password} onChange={this.handleInput('password')} />
             </div>
         );
         const password2 = this.props.formType === "Login" ? ("") : (
             <div className="field">
                 <label id="password-label" >PASSWORD2</label>
-                <input id="password" type="password" value={this.state.password2} onChange={this.handleInput('password2')} />
+                <input id="password" placeholder='Password' type="password" value={this.state.password2} onChange={this.handleInput('password2')} />
             </div>
         );
 

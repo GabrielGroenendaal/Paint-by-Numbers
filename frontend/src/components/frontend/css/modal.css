@@ -5,6 +5,7 @@
     height: 80vh;
     justify-content: flex-end;
     align-items: center;
+    
 }
     .sform {
         font-family: 'Montserrat', sans-serif;
@@ -23,6 +24,7 @@
         text-align: center;
         min-height: 420px;
         min-width: 200px;
+        
     }
 
     .close-button {
@@ -137,4 +139,17 @@
     align-content: flex-end;
     padding: 32px;
     border-radius: 8px;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 2000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
 }

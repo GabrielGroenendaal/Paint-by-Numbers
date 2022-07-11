@@ -10,6 +10,13 @@ import Reveal from './reveal_puzzle'
 import LibraryContainer from './library_container';
 import SeedContainer from '../create_puzzle/create_puzzle_options/seed_container';
 import RevealContainer from './reveal_container';
+
+import "../../App.css";
+var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
+
+// import {CSSTransition} from 'react-transition-group';
+
+// var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup')
 class Modal extends React.Component {
       
       constructor(props){
@@ -19,18 +26,18 @@ class Modal extends React.Component {
       render(){
             let component;
 
-            switch (this.props.modal) {
+            switch (this.props.modal)  {
                   case 'login':
-                        component=<LoginContainer/>
+                        component = <LoginContainer />
                         break
                   case 'manual':
-                        component=<ManualContainer />
+                        component = <ManualContainer />
                         break
                   case 'library':
-                        component=<LibraryContainer />
+                        component = <LibraryContainer />
                         break
                   case 'reveal':
-                        component=<RevealContainer />
+                        component = <RevealContainer />
                         break
                   case 'signup':
                         component = <SignUpContainer />
@@ -45,7 +52,12 @@ class Modal extends React.Component {
             if (!this.props.modal) { return null }
 
             return(
-                  <div>{component}</div>
+                  <div >
+                          
+                       <div>{component}</div> 
+                        
+                  </div>
+                 
             )
       }
 }
