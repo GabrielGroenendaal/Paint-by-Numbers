@@ -41,6 +41,10 @@ class Board extends React.Component {
             event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }
+
+      clearSelection() {
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
       
       currentMouseOver(tile) {
             this.setState(prevState => ({currentMouseover: tile}))
@@ -83,6 +87,7 @@ class Board extends React.Component {
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
                                                                   boardObject={this.props.board}
+                                                                  clearSelection={this.clearSelection.bind.this}
                                                             />
                                                       })}
                                                 

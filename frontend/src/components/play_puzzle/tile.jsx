@@ -27,6 +27,12 @@ class Tile extends React.Component {
             }
       }
 
+      onContextMenu(event) {
+            event.preventDefault()
+            this.props.clearSelection()
+      }
+      
+
       render() {
             let renderTile = this.props.tile;
             let mouseOverTile = this.props.board.state.currentMouseover;
@@ -87,6 +93,7 @@ class Tile extends React.Component {
                         onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
+                        onContextMenu={this.onContextMenu.bind(this)}
                         style={renderTileStyle}
                   >
                         {text}
