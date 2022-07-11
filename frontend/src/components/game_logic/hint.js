@@ -7,4 +7,4 @@ class HintItem {
       }
 }
 
-module.exports = HintItem;
+export default HintItem

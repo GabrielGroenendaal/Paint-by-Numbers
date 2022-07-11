@@ -1,8 +1,11 @@
 
-const { default: Hint } = require('./hint');
-const Tile = require('./tile');
-const Util = require('./util')
-const HintItem = require('./hint')
+// const { default: Hint } = require('./hint');
+// const Tile = require('./tile');
+// const Util = require('./util')
+// const HintItem = require('./hint')
+import Util from "./util";
+import Tile from "./tile";
+import HintItem from "./hint";
 
 class Board {
       constructor(options = {}, progress = {}) {
@@ -292,4 +295,4 @@ class Board {
       }
 }
 
-module.exports = Board;
+export default Board;

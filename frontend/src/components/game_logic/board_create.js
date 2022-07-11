@@ -1,5 +1,5 @@
 import TileCreate from './tile_create';
-const Util = require('./util')
+import Util from './util';
 // import Board from '../test_app/components/play_puzzle/board'
 // const TileCreate = require('./tile_create');
 

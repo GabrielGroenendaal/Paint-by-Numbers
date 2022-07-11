@@ -1,7 +1,7 @@
-const Board = require('./board')
-const Util = require('./util')
 
 
+import Board from './board'
+import Util from './util'
 class Game {
       constructor(puzzle = {}, progress = {}) {
             if (puzzle.tiles) { puzzle.tiles = Util.parseTileDataFromString(puzzle.tiles) }
@@ -41,3 +41,4 @@ newGame.board.revealTile(0, 2);
 // console.log("----------------------------")
 // newGame2.print()
 //console.log(newGame.board.tiles)
+export default Game;
