@@ -17,6 +17,7 @@ class Board extends React.Component {
             this.onMouseDown = this.onMouseDown.bind(this)
             this.onMouseUp = this.onMouseUp.bind(this)
             this.currentMouseOver = this.currentMouseOver.bind(this)
+            this.clearSelection = this.clearSelection.bind(this)
       }
 
     
@@ -87,7 +88,7 @@ class Board extends React.Component {
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
                                                                   boardObject={this.props.board}
-                                                                  clearSelection={this.clearSelection.bind.this}
+                                                                  clearSelection={this.clearSelection}
                                                             />
                                                       })}
                                                 
