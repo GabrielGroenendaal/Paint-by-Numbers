@@ -218,29 +218,30 @@ table {
 .puzzle-tile-20x20 {
   width: 24px;
   height: 24px;
+  
 }
 
 .hint-tile-5x5 {
-  width: 96px;
-  height: 96px;
+  width: 98px;
+  height: 98px;
   font-size: 18px;
 }
 
 .hint-tile-10x10 {
-  width: 48px;
+  width: 50px;
   height: 48px;
   font-size: 16px;
 }
 
 .hint-tile-15x15 {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   font-size: 14px;
 }
 
 .hint-tile-20x20 {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   font-size: 12px;
 }
 
@@ -531,10 +532,10 @@ button {
 td:nth-child(5n + 1) {
   border-right: 1px solid rgb(205, 202, 202)
 }
-
+/* 
 td.cell:nth-child(5n + 1) {
   border-right: 1px solid rgb(205, 202, 202)
-}
+} */
 
 tr:nth-child(5n + 1) td {
   border-bottom: 1px solid rgb(205, 202, 202)
@@ -1405,6 +1406,8 @@ body .tile-flagged {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+
 /* 
 .fade-enter {
   opacity: .01;
