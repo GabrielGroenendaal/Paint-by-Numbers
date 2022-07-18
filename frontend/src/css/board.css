@@ -52,13 +52,13 @@ table {
       border-radius: 5px;
 }
 
-.number-hint-left-row:nth-child(5n + 1) {
-      border-right: 1px solid rgb(205, 202, 202);
+.number-hint-left-row:nth-child(5n + 1), .tile:nth-child(5n+1) {
+      border-right: 2px solid rgb(195, 192, 192);
       margin-right: 0px;
 }
 
 .board-row:nth-child(5n + 1) td {
-      border-bottom: 1px solid rgb(205, 202, 202)
+      border-bottom: 2px solid rgb(195, 192, 192)
 }
 
 .puzzle-wrap {

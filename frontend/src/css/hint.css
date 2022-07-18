@@ -21,7 +21,6 @@
 .number-hint-left-row {
       flex-direction: column;
       margin-right: 1px;
-      padding-left: 1px;
 }
 
 .number-hint-top-row {
@@ -34,7 +33,7 @@
 }
 
 .number-hint-left-item {
-      padding: 2px;
+      padding: 1px;
 }
 
 .hint-crossout {
