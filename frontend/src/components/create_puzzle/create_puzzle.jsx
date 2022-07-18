@@ -17,7 +17,8 @@ class CreatePuzzle extends React.Component {
             this.state = {
                   board: new BoardCreate({ dimensions: "15x15" }),
                   renderImage: null,
-                  phase: 1
+                  phase: 1,
+                  storedPicture: null
             }
             this.updateBoardSetting = this.updateBoardSetting.bind(this)
             this.reset = this.reset.bind(this)
@@ -27,11 +28,11 @@ class CreatePuzzle extends React.Component {
             if (options.dimensions && options.dimensions != Util.convertDimensionsToString(this.state.board.dimensions)) {
                   this.setState(prevState => ({board: new BoardCreate({dimensions: options.dimensions})}))
             }
-            if (options.difficulty && options.difficulty != this.state.board.difficulty) {
-                  let checkBoard = Object.assign({}, this.state.board);
-                  checkBoard.difficulty = options.difficulty;
-                  this.setState(prevState => ({board: checkBoard}))
-            }
+            // if (options.difficulty && options.difficulty != this.state.board.difficulty) {
+            //       let checkBoard = Object.assign({}, this.state.board);
+            //       // checkBoard.difficulty = options.difficulty;
+            //       this.setState(prevState => ({board: checkBoard}))
+            // }
       }
       
       submitColor() {
@@ -39,7 +40,7 @@ class CreatePuzzle extends React.Component {
             let newTiles = ColorUtil.seedBombsByColor(this.state.board)
             this.setState({
                   board: new BoardCreate({
-                        difficulty: checkBoard.difficulty,
+                        // difficulty: checkBoard.difficulty,
                         dimensions: Util.convertDimensionsToString(checkBoard.dimensions),
                         originalImageURL: checkBoard.originalImageURL,
                         tiles: newTiles
@@ -51,16 +52,20 @@ class CreatePuzzle extends React.Component {
             //       phase: 2
             // })
       }
-
+      submitImageForCheck(image) {
+            this.setState({
+                  storedPicture: image
+            })
+      }
       submitImage(tiles, picURL) {
             if (!tiles) { return null }
             let dims = Util.convertDimensionsToString(this.state.board.dimensions)
-            let diff = this.state.board.difficulty
+            // let diff = this.state.board.difficulty
             this.setState(prevState => ({
                   board: new BoardCreate({
                         tiles: tiles,
                         dimensions: dims,
-                        difficulty: diff,
+                        // difficulty: diff,
                         originalImageURL: picURL
                   }),
             }))
@@ -100,6 +105,7 @@ class CreatePuzzle extends React.Component {
             if (this.state.phase === 1) {
                   return (
                         <div className="main">
+                              {this.state.storedPicture}
                               <div className="puzzle-container">
                                     <div className="puzzle-wrap">
                                           <div className="puzzle-content-container">
@@ -114,7 +120,10 @@ class CreatePuzzle extends React.Component {
                                     <div className="puzzle-options-container">
                                                 <CreatePuzzleOptions active={true} updateBoard={this.updateBoardSetting} />
                                                 <div className="middle-option-container">
-                                                      <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
+                                                      <ImageOptions
+                                                            submitImageForCheck={this.submitImageForCheck.bind(this)}
+                                                            submitImage={this.submitImage.bind(this)}
+                                                            board={this.state.board} />
                                                       <ColorPuzzleSubmission submitColor={this.submitColor.bind(this)} swap={this.props.swap} />
 
                                                 </div>

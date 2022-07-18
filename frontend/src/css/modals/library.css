@@ -1,0 +1,27 @@
+/*library css */
+
+.saved-puzzles {
+      width: 500px;
+      height: 170px;
+      /* background-color: grey; */
+      display: flex;
+      align-items: center;
+
+}
+
+.made-puzzles {
+      width: 500px;
+      height: 170px;
+      /* background-color: grey; */
+      display: flex;
+}
+
+.cover-puzzle {
+      /* flex-direction: row; */
+      flex-wrap: wrap;
+      width: 200px;
+      height: 130px;
+      background-color: #5B6ED9;
+      margin: 5px;
+      border-radius: 10px;
+}

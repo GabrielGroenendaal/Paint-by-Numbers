@@ -1,0 +1,29 @@
+.progress-bar h3 {
+      font-size: 12px;
+      text-align: center;
+}
+
+
+
+.puzzle-progress-container {
+      text-align: center;
+      padding: 10px;
+
+}
+
+.progress-count {
+      padding-top: 20px;
+}
+
+.progress-mistakes {
+      padding-top: 20px;
+}
+
+.progress-mistakes,
+.progress-count {
+      padding-top: 10px;
+}
+
+.puzzle-progress-mistakes-label {
+      padding-top: 20px;
+}

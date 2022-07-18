@@ -1,0 +1,56 @@
+/*reveal puzzle css */
+
+.cover-image {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      background: white;
+      display: flex;
+      opacity: 1;
+      border-radius: 30px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 25px;
+      min-height: 700px;
+      min-width: 700px;
+
+}
+
+.modal-cover-background {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      /* background: rgba(0, 0, 0, 0.7); */
+      z-index: 10;
+}
+
+.modal-cover-child {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: 32px;
+      transform: translate(-50%, -50%);
+      border-radius: 8px;
+}
+
+.message {
+      align-items: center;
+      text-align: center;
+}
+
+
+#modal-cover-child-reveal {
+      min-height: 300px;
+      min-width: 280px;
+      max-height: 400px;
+      max-width: 400px;
+
+}
+
+.reveal-img {
+      width: 400px;
+      height: 400px;
+}

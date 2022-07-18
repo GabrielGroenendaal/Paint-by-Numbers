@@ -1,0 +1,29 @@
+
+.second-button {
+      border: none;
+      width: 260px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: white;
+      background-color: #5B6ED9;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+}
+
+.other-form {
+      border: none;
+      width: 260px;
+      height: 40px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      color: grey;
+      background-color: white;
+      padding: 12px;
+      margin: 4px;
+      border-color: rgb(216, 215, 215);
+      border-style: solid;
+      cursor: pointer;
+}

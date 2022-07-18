@@ -12,9 +12,9 @@ class PuzzleOptions extends React.Component {
 
       }
 
-      changeDifficulty(event) {
-            this.props.changePuzzle({difficulty: event.currentTarget.value})
-      }
+      // changeDifficulty(event) {
+      //       this.props.changePuzzle({difficulty: event.currentTarget.value})
+      // }
 
       render() {
             return (
@@ -38,7 +38,7 @@ class PuzzleOptions extends React.Component {
                                     
                               </form>
                         </div>
-                        <div className="puzzle-difficulty-options">
+                        {/* <div className="puzzle-difficulty-options">
                         <label className="puzzle-difficulty-options-header">DIFFICULTY</label>
                               <div className="puzzle-difficulty-options-items">
                                     <label>Easy</label>
@@ -49,7 +49,7 @@ class PuzzleOptions extends React.Component {
                                     <input type="radio" name="puzzle-difficulty-options" onClick={this.changeDifficulty.bind(this)} className="puzzle-difficulty-options-item" value="Hard" />
                                     
                               </div>
-                        </div>
+                        </div> */}
                         
                               
                        

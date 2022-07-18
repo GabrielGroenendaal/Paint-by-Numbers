@@ -1,0 +1,127 @@
+@import "./modals/library.css";
+@import "./modals/manual.css";
+@import "./modals/login.css";
+@import "./modals/reveal.css";
+@import "./modals/signup.css";
+
+
+@keyframes appear {
+      0% {
+            opacity: 0;
+            transform: translateY(-10px);
+      }
+}
+
+.close-button {
+      z-index: 1111;
+      height: 40px;
+      width: 40px;
+      /* right: 30px;*/
+      top: 130px;
+      display: inline-flex;
+      align-items: right;
+      margin-left: 220px;
+      justify-content: right;
+      /* position: absolute; */
+      margin-top: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #3854A6;
+      font-weight: 600;
+      opacity: .8;
+      animation: none;
+
+}
+
+
+
+
+label {
+      padding: 5px;
+      display: block;
+}
+
+button {
+      display: block;
+      padding: 10px;
+      margin: 20px;
+      /* font-weight: 700; */
+}
+
+
+
+.text-box input {
+      background-color: transparent;
+      border-radius: 10px;
+      border-style: solid;
+      border-width: 2px;
+      margin: 4px;
+      border-color: rgb(216, 215, 215);
+      padding-left: 9px;
+      font-size: 15px;
+      width: 250px;
+      height: 40px;
+      font-family: 'Montserrat', sans-serif;
+}
+
+.modal-background {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      animation: appear 350ms ease-in 1
+}
+
+.modal-child {
+      align-content: flex-end;
+      padding: 32px;
+      border-radius: 8px;
+}
+
+
+@keyframes manual-animation {
+      0% {
+            opacity: 0;
+      }
+
+}
+
+
+li {
+      padding-top: 9px;
+}
+
+
+
+
+/* modal transition*/
+
+.example-appear {
+      opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+      opacity: 1;
+      transition: opacity .5s ease-in;
+}
+
+.example-enter {
+      opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+      opacity: 1;
+}
+
+.example-leave.example-leave-active {
+      opacity: 0.01;
+      transition: opacity 300ms ease-in;
+}

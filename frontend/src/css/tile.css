@@ -1,0 +1,125 @@
+.tile {
+      border: 1px solid rgb(192, 192, 192);
+      width: 30px;
+      height: 30px;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 5px;
+}
+
+
+.tile-unexplored {
+      background: #F2F2F2;
+      /* border-style: inset */
+}
+
+.tile-unexplored:hover {
+      background: #5B6ED9;
+
+}
+
+.tile:hover {
+      transform: scale(1.2);
+}
+
+.tile-explored {
+      background: #5B6ED9;
+      /* border-style: outset; */
+}
+
+.tile-bomb {
+      background: rgb(255, 115, 197);
+      /* border-style: outset; */
+}
+
+
+.tile-highlighted {
+      background-color: #9c9c9c;
+}
+
+.color-tile {
+      background-color: attr(data-palettecolor);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin-right: 4px;
+      margin-left: 4px;
+      box-shadow: 1px 1px;
+      transition: border-radius .15s ease-out;
+}
+
+.tile-selected {
+      background-color: #3D52B3;
+      /* border-style: inset; */
+}
+
+
+
+.puzzle-tile-5x5 {
+      width: 96px;
+      height: 96px;
+}
+
+.puzzle-tile-10x10 {
+      width: 48px;
+      height: 48px;
+}
+
+.puzzle-tile-15x15 {
+      width: 36px;
+      height: 36px;
+}
+
+.puzzle-tile-20x20 {
+      width: 24px;
+      height: 24px;
+
+}
+
+
+.color-tile:hover {
+      border-radius: 35%;
+      /* box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24) inset; */
+      transform: translateY(1px);
+
+}
+
+
+
+
+.bomb-selection-tile.puzzle-tile-10x10,
+.tile-bomb.puzzle-tile-10x10 {
+      width: 42px;
+      height: 42px;
+      border: 4px solid tomato;
+}
+
+.bomb-selection-tile.puzzle-tile-5x5,
+.tile-bomb.puzzle-tile-5x5 {
+      width: 88px;
+      height: 88px;
+      border: 4px solid tomato;
+}
+
+.bomb-selection-tile.puzzle-tile-15x15,
+.tile-bomb.puzzle-tile-15x15 {
+      width: 32px;
+      height: 32px;
+      border: 2px solid tomato;
+}
+
+.bomb-selection-tile.puzzle-tile-20x20,
+.tile-bomb.puzzle-tile-20x20 {
+      width: 22;
+      height: 22px;
+      border: 1px solid tomato;
+}
+
+
+body .tile-flagged {
+      color: #5B6ED9;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 30px;
+      text-align: center;
+}

@@ -18,7 +18,7 @@ class PlayPuzzle extends React.Component {
                   board: new Board({ dimensions: "10x10" }),
                   status: 'Good Luck',
                   board_size: "10x10",
-                  board_difficulty: "Easy"
+                  // board_difficulty: "Easy"
             }
 
             this.updateGame = this.updateGame.bind(this)
@@ -39,11 +39,11 @@ class PlayPuzzle extends React.Component {
             let tile_data = Util.parseTileDataFromString(Util.convertBoardToString(new_puzzle))
             this.setState({
                   board: new Board({
-                        difficulty: new_puzzle.difficulty,
-                              dimensions: new_puzzle.size,
-                              tiles: tile_data,
-                              originalImageUrl: new_puzzle.original_img_url,
-                              id: new_puzzle._id
+                        // difficulty: new_puzzle.difficulty,
+                        dimensions: Util.convertDimensionsToString(new_puzzle.dimensions),
+                        tiles: tile_data,
+                        originalImageUrl: new_puzzle.original_img_url,
+                        id: new_puzzle._id
                   })
             })
       }
@@ -51,7 +51,7 @@ class PlayPuzzle extends React.Component {
       generatePuzzle() {
             let options = {
                   dimensions: this.state.dimensions,
-                  difficulty: this.state.difficulty
+                  // difficulty: this.state.difficulty
             }
             this.setState(prevState => ({ board: new Board(options) }))
       }
@@ -60,9 +60,9 @@ class PlayPuzzle extends React.Component {
             if (options.dimensions && options.dimensions != this.state.dimensions) {
                   this.setState(prevState => ({ dimensions: options.dimensions }))
             }
-            if (options.difficulty && options.difficulty != this.state.difficulty) {
-                  this.setState(prevState => ({ difficulty: options.difficulty }))
-            }
+            // if (options.difficulty && options.difficulty != this.state.difficulty) {
+            //       this.setState(prevState => ({ difficulty: options.difficulty }))
+            // }
       }
 
       updatePuzzle(seed) {
@@ -71,7 +71,7 @@ class PlayPuzzle extends React.Component {
                   let new_puzzle = response.puzzle.data;
                   
                         new_board = new Board({
-                              difficulty: new_puzzle.difficulty,
+                              // difficulty: new_puzzle.difficulty,
                               dimensions: new_puzzle.size,
                               tiles: Util.parseTileDataFromString(new_puzzle.tile_data),
                               originalImageUrl: new_puzzle.original_img_url,
