@@ -52,12 +52,12 @@ table {
       border-radius: 5px;
 }
 
-.tile:nth-child(5n + 1) {
+td:nth-child(5n + 1) {
       border-right: 1px solid rgb(205, 202, 202);
       margin-right: 0px;
 }
 
-.board-row:nth-child(5n + 1) td {
+tr:nth-child(5n + 1) td {
       border-bottom: 1px solid rgb(205, 202, 202)
 }
 
