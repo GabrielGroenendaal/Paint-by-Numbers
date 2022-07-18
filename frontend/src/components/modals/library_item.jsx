@@ -6,11 +6,17 @@ class LibraryItem extends React.Component {
       constructor(props) {
             super(props)
 
+            let progress = (this.props.type === "saved") ? Util.parseProgressFromString(this.props.puzzle.progressData) : null
+            let newBoard = new Board({
+                  tiles: Util.parseTileDataFromString(this.props.puzzle.tileData),
+                  dimensions: this.props.puzzle.size
+            }, { tiles: progress });
+            if (this.props.type === "made") {
+                  newBoard.revealAll()
+            }
+
             this.state = {
-                  board: new Board({
-                        tiles: Util.parseTileDataFromString(this.props.puzzle.tileData),
-                        dimensions: this.props.puzzle.size
-                  }, { tiles: Util.parseProgressFromString(this.props.puzzle.progressData) })
+                  board: newBoard
             }
       }
 

@@ -40,9 +40,9 @@ class Library extends React.Component {
                             <div className='login-message'> Puzzles You've Made</div>
                             <div className="manual-title">------- Date -------</div>
                             <div className="made-puzzles">
-                                <div className="cover-puzzle"></div>
-                                <div className="cover-puzzle"></div>
-                                <div className="cover-puzzle"></div>
+                                <LibraryItemContainer type={"made"} puzzle={SamplePuzzle1} />
+                                <LibraryItemContainer type={"made"} puzzle={SamplePuzzle2} />
+                                <LibraryItemContainer type={"made"} puzzle={SamplePuzzle3} />
                             </div>
 
                         </form>
