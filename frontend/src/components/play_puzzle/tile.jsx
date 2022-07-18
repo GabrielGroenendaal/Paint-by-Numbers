@@ -6,10 +6,10 @@ class Tile extends React.Component {
             super(props);
       }
 
-      handleClick(event) {
-            event.preventDefault();
-            this.props.update(this.props.tile, (event.altKey ? true : false))
-      }
+      // handleClick(event) {
+      //       event.preventDefault();
+      //       //this.props.update(this.props.tile, (event.altKey ? true : false))
+      // }
 
       onMouseDown(event) {
             event.preventDefault();
@@ -26,11 +26,7 @@ class Tile extends React.Component {
             }
       }
 
-      onContextMenu(event) {
-            event.preventDefault()
-            this.props.clearSelection()
-      }
-      
+     
 
       render() {
             let renderTile = this.props.tile;
@@ -89,10 +85,8 @@ class Tile extends React.Component {
             return (
                   <td
                         className={classText}
-                        onClick={this.handleClick.bind(this)}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
-                        onContextMenu={this.onContextMenu.bind(this)}
                         style={renderTileStyle}
                   >
                         {text}

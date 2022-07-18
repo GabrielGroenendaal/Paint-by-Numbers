@@ -19,6 +19,7 @@ class Board extends React.Component {
             this.currentMouseOver = this.currentMouseOver.bind(this)
             this.clearSelection = this.clearSelection.bind(this)
       }
+
       componentDidMount() {
             document.addEventListener('keydown', (event) => {
                   this.clearSelection()
@@ -45,15 +46,7 @@ class Board extends React.Component {
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }
 
-      onContextMenu(event) {
-            event.preventDefault()
-            this.setState(prevState=> ({ selection: [], selecting: false }))
-      }
-
-      clearSelection() {
-            this.setState(prevState=> ({ selection: [], selecting: false }))
-      }
-      
+  
       currentMouseOver(tile) {
             this.setState(prevState => ({currentMouseover: tile}))
       }
@@ -75,8 +68,7 @@ class Board extends React.Component {
                   <table
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseUp={this.onMouseUp.bind(this)}
-                        onContextMenu={this.onContextMenu.bind(this)}
-                        // onMouseOut={this.onMouseLeave.bind(this)}
+       
                         className="board-container">
                         <tbody>
                         <HintX hints={hintsX} boardObject={this.props.board} />
@@ -95,7 +87,6 @@ class Board extends React.Component {
                                                                   currentMouseOver={this.currentMouseOver}
                                                                   board={this}
                                                                   boardObject={this.props.board}
-                                                                  clearSelection={this.clearSelection}
                                                             />
                                                       })}
                                                 
