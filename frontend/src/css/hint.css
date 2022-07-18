@@ -20,10 +20,13 @@
 
 .number-hint-left-row {
       flex-direction: column;
+      margin-right: 1px;
+      padding-left: 1px;
 }
 
 .number-hint-top-row {
       flex-direction: row;
+    
 }
 
 .number-hint-top-item {
@@ -41,26 +44,26 @@
 
 
 .hint-tile-5x5 {
-      width: 98px;
-      height: 98px;
+      width: 96px;
+      height: 96px;
       font-size: 18px;
 }
 
 .hint-tile-10x10 {
-      width: 50px;
+      width: 48px;
       height: 48px;
       font-size: 16px;
 }
 
 .hint-tile-15x15 {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       font-size: 14px;
 }
 
 .hint-tile-20x20 {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       font-size: 12px;
 }
 
@@ -78,4 +81,5 @@
       padding-bottom: 5px;
       text-align: center;
       vertical-align: bottom;
+
 }

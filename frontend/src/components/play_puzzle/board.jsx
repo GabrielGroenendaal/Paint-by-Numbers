@@ -1,5 +1,4 @@
 import React from "react";
-import Tile from "../game_logic/tile";
 import HintX from "./hintX";
 import TileComponent from "./tile";
 import HintComponent from "./hint";
@@ -25,12 +24,13 @@ class Board extends React.Component {
                   this.clearSelection()
             });
       }
+      
       clearSelection() {
-            this.setState(prevState=> ({ selection: [], selecting: false }))
+            this.setState(prevState => ({ selection: [], selecting: false }))
       }
-    
+
       addToSelection(tile) {
-            this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
+            this.setState(prevState => ({ selection: [...prevState.selection, tile] }))
       }
 
       onMouseDown(event) {
@@ -43,18 +43,17 @@ class Board extends React.Component {
             this.state.selection.forEach(checkTile => {
                   this.props.update(checkTile, event.altKey ? true : false)
             })
-            this.setState(prevState=> ({ selection: [], selecting: false }))
+            this.setState(prevState => ({ selection: [], selecting: false }))
       }
 
-  
+
       currentMouseOver(tile) {
-            this.setState(prevState => ({currentMouseover: tile}))
+            this.setState(prevState => ({ currentMouseover: tile }))
       }
 
       render() {
-            
-            if (!this.props.board === null)
-            {
+
+            if (!this.props.board === null) {
                   return null
             }
 
@@ -62,34 +61,34 @@ class Board extends React.Component {
             this.props.board.updateHintsY();
             let hintsX = this.props.board.hintsX;
             let hintsY = this.props.board.hintsY;
-           
-            
+
+
             return (
                   <table
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseUp={this.onMouseUp.bind(this)}
-       
+
                         className="board-container">
                         <tbody>
-                        <HintX hints={hintsX} boardObject={this.props.board} />
+                              <HintX hints={hintsX} boardObject={this.props.board} />
                               {this.props.board.tiles.map((ele, idx) => {
                                     let className = 'board-row board-row-' + idx.toString()
                                     return (
                                           <tr className={className} key={idx.toString()}>
-                                                
+
                                                 <HintComponent hint={hintsY[idx]} boardObject={this.props.board} />
-                                                      {this.props.board.tiles[idx].map((innerEle, innerIdx) => {
-                                                            return <TileComponent
-                                                                  key={idx.toString() + innerIdx.toString()}
-                                                                  update={this.props.update}
-                                                                  tile={innerEle}
-                                                                  addToSelection={this.addToSelection}
-                                                                  currentMouseOver={this.currentMouseOver}
-                                                                  board={this}
-                                                                  boardObject={this.props.board}
-                                                            />
-                                                      })}
-                                                
+                                                {this.props.board.tiles[idx].map((innerEle, innerIdx) => {
+                                                      return <TileComponent
+                                                            key={idx.toString() + innerIdx.toString()}
+                                                            update={this.props.update}
+                                                            tile={innerEle}
+                                                            addToSelection={this.addToSelection}
+                                                            currentMouseOver={this.currentMouseOver}
+                                                            board={this}
+                                                            boardObject={this.props.board}
+                                                      />
+                                                })}
+
                                           </tr>
                                     )
                               })}

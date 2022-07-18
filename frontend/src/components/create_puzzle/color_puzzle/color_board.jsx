@@ -51,10 +51,7 @@ class ColorBoard extends React.Component {
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }
 
-      onContextMenu(event) {
-            event.preventDefault()
-            this.setState(prevState=> ({ selection: [], selecting: false }))
-      }
+    
       
       currentMouseOver(tile) {
             this.setState(prevState => ({currentMouseover: tile}))
@@ -73,7 +70,6 @@ class ColorBoard extends React.Component {
                   <table
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseUp={this.onMouseUp.bind(this)}
-                        onContextMenu={this.onContextMenu.bind(this)}
                         className="board-container color-board-container">
                         <tbody>
                               <ColorPaletteLeft selectColor={this.selectColor.bind(this)} boardObject={this.props.board} />

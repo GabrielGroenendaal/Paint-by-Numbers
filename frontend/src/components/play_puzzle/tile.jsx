@@ -34,48 +34,51 @@ class Tile extends React.Component {
             let text = ""
             let classText = "tile"
             
-      
+            let overlayClassText = "tile-overlay puzzle-tile-overlay"
             if (renderTile.explored && renderTile.bombed) {
-                  classText += ' tile-bomb'
-                 
+                  overlayClassText += ' tile-bomb'
+                 classText += ' tile-bomb'
             } else if (renderTile.explored) {
                   classText += " tile-explored"
                   
             } else if (renderTile.flagged) {
-                  classText += " tile-flagged"
+                  overlayClassText += " tile-flagged"
                   text = "⚑"
             } else {
-                  if (mouseOverTile) { 
-                        if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
-                              classText += ' tile-highlighted'
-                        } else {
-                              classText += " tile-unexplored"
-                        }
-                  } else {
+                
                         classText += " tile-unexplored"
+            }
+            if (mouseOverTile) {
+                  if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
+                        //classText += ' tile-highlighted'
+                        overlayClassText += ' tile-highlighted'
                   }
-                  
             }
             let renderTileStyle;  
 
             renderTileStyle = (renderTile.colored && renderTile.explored) ? { background: this.props.tile.color } : {}
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
-                  classText = "tile tile-selected"
+                  overlayClassText += " tile-selected"
                   //renderTileStyle = {background: this.props.board.state.selectedColor}
             }
             let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
             switch (dims) {
                   case "5x5":
                         classText += ' puzzle-tile-5x5'
+                        overlayClassText += ' puzzle-tile-overlay-5x5'
+
                         break;
                   case "10x10":
                         classText += ' puzzle-tile-10x10'
+                        overlayClassText += ' puzzle-tile-overlay-10x10'
                         break
                   case "15x15":
                         classText += ' puzzle-tile-15x15'
+                        overlayClassText += ' puzzle-tile-overlay-15x15'
                         break
                   case "20x20":
                         classText += ' puzzle-tile-20x20'
+                        overlayClassText += ' puzzle-tile-overlay-20x20'
                         break
                   default:
 
@@ -89,7 +92,10 @@ class Tile extends React.Component {
                         onMouseOver={this.onMouseOver.bind(this)}
                         style={renderTileStyle}
                   >
-                        {text}
+                        <div className={overlayClassText}>
+                              {text}
+                        </div>
+                        
                   </td>
             )
       }

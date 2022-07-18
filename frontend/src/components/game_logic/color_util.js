@@ -91,7 +91,7 @@ const ColorUtil = {
             tiles.forEach((tile, idx) => {
                   let hex = this.hexToRGB(tile[0])
                   let hexTotal = hex.r + hex.g + hex.b;
-                  if (avg > 350) {
+                  if (avg < 350) {
                         if (hexTotal < avg) {
                               tiles[idx][1] = 'true'
                         }
