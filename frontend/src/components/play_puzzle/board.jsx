@@ -19,7 +19,14 @@ class Board extends React.Component {
             this.currentMouseOver = this.currentMouseOver.bind(this)
             this.clearSelection = this.clearSelection.bind(this)
       }
-
+      componentDidMount() {
+            document.addEventListener('keydown', (event) => {
+                  this.clearSelection()
+            });
+      }
+      clearSelection() {
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
     
       addToSelection(tile) {
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))

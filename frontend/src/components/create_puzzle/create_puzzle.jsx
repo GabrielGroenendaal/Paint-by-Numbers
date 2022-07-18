@@ -86,6 +86,7 @@ class CreatePuzzle extends React.Component {
                   phase: 1
             })
       }
+      
       submitPuzzle() {
             let puzzleDatum = {
                   title: 'Title',

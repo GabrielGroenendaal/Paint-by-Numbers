@@ -15,6 +15,15 @@ class BombBoard extends React.Component {
             this.onMouseUp = this.onMouseUp.bind(this)
             this.currentMouseOver = this.currentMouseOver.bind(this)
       }
+      componentDidMount() {
+            document.addEventListener('keydown', (event) => {
+                  this.clearSelection()
+            });
+      }
+      clearSelection() {
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
+
       addToSelection(tile) {
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
       }

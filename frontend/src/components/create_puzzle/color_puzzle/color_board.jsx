@@ -17,6 +17,12 @@ class ColorBoard extends React.Component {
             this.onMouseDown = this.onMouseDown.bind(this)
             this.onMouseUp = this.onMouseUp.bind(this)
             this.currentMouseOver = this.currentMouseOver.bind(this)
+            this.clearSelection = this.clearSelection.bind(this)
+      }
+      componentDidMount() {
+            document.addEventListener('keydown', (event) => {
+                  this.clearSelection()
+            });
       }
       addToSelection(tile) {
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
@@ -40,10 +46,14 @@ class ColorBoard extends React.Component {
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }
 
+
+      clearSelection() {
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
+
       onContextMenu(event) {
             event.preventDefault()
             this.setState(prevState=> ({ selection: [], selecting: false }))
-            //console.log(event.button)
       }
       
       currentMouseOver(tile) {
@@ -56,21 +66,22 @@ class ColorBoard extends React.Component {
 
       render() {
             return (
+                  // <div
+                  //       tabIndex="0"
+                  //       onKeyDown={this.onKeyDown.bind(this)}
+                  // >
                   <table
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseUp={this.onMouseUp.bind(this)}
                         onContextMenu={this.onContextMenu.bind(this)}
-                        // onMouseOut={this.onMouseLeave.bind(this)}
                         className="board-container color-board-container">
                         <tbody>
                               <ColorPaletteLeft selectColor={this.selectColor.bind(this)} boardObject={this.props.board} />
-                        {/* <HintX hints={hintsX} /> */}
                               {this.props.board.tiles.map((ele, idx) => {
                                     let className = 'board-row board-row-' + idx.toString()
                                     return (
                                           <tr className={className} key={idx.toString()}>
                                                 
-                                                      {/* <HintComponent hint={hintsY[idx]} /> */}
                                                       {this.props.board.tiles[idx].map((innerEle, innerIdx) => {
                                                             return <ColorTile
                                                                   key={idx.toString() + innerIdx.toString()}
@@ -81,6 +92,7 @@ class ColorBoard extends React.Component {
                                                                   board={this}
                                                                   boardObject={this.props.board}
                                                                   updateTile={this.updateTile.bind(this)}
+                                                                  clearSelection={this.clearSelection}
                                                             />
                                                       })}
                                                 
@@ -89,6 +101,10 @@ class ColorBoard extends React.Component {
                               })}
                         </tbody>
                   </table>
+                  // </div>
+
+                  
+                 
             )
       }
 }

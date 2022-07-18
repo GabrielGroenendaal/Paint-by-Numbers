@@ -13,9 +13,8 @@ class Tile extends React.Component {
 
       onMouseDown(event) {
             event.preventDefault();
-            if (this.props.board.state.selecting) {
-                  this.props.addToSelection(this.props.tile)
-            }
+            this.props.addToSelection(this.props.tile)
+            
       }
 
       onMouseOver(event) {

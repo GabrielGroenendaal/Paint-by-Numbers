@@ -17,10 +17,9 @@ class ImageOptions extends React.Component {
                   let tile_data = ColorUtil.convertImageToPixels(this.props.board.dimensions[0])
                   this.props.submitImage(tile_data, this.state.pictureURL)
                   this.toggleImage()
-                  console.log("apple")
             }
       }
- 
+
       toggleImage() {
             this.setState({ picture: null })
       }
@@ -28,25 +27,26 @@ class ImageOptions extends React.Component {
       handleSubmit(event) {
             event.preventDefault()
             let component = <Pixelify
-                              src={this.state.pictureURL}
-                              width={550}
-                              height={550}
-                              pixelSize={550 / this.props.board.dimensions[0]}
-                              centered={true}
-                              fillTransparencyColor={'black'}
-                              />
+                  src={this.state.pictureURL}
+                  width={550}
+                  height={550}
+                  pixelSize={550 / this.props.board.dimensions[0]}
+                  centered={true}
+                  fillTransparencyColor={'black'}
+            />
             this.props.submitImageForCheck(component)
 
-                  this.setState({
-                        picture: true,
-                        storedPicture: component
-                  })
+            this.setState({
+                  picture: true,
+                  storedPicture: component
+            })
+            
             setTimeout(() => {
                   this.setState({
                         picture: true,
                         storedPicture: component
                   })
-            }, 50);
+            }, 150);
       }
 
       update(field) {
@@ -59,12 +59,12 @@ class ImageOptions extends React.Component {
 
             return (
                   <div className="puzzle-gameplay-options-container">
-                  <form onSubmit={this.handleSubmit.bind(this)}>
-                        <label className="puzzle-image-options-header">IMAGE URL</label>
-                        <input type="text" onChange={this.update('pictureURL')} value={this.state.pictureURL} />
-                        <button type="submit" className="image-submit-button">UPLOAD</button>
-                  </form>
-            </div>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                              <label className="puzzle-image-options-header">IMAGE URL</label>
+                              <input type="text" onChange={this.update('pictureURL')} value={this.state.pictureURL} />
+                              <button type="submit" className="image-submit-button">UPLOAD</button>
+                        </form>
+                  </div>
             )
       }
 }

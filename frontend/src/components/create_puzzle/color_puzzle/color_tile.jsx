@@ -10,14 +10,9 @@ class ColorTile extends React.Component {
 
 
       onMouseDown(event) {
-            event.preventDefault();
-            if (this.props.board.state.selecting) {
-                  this.props.addToSelection(this.props.tile)
-            } else {
-                  this.props.updateTile(this.props.tile)
-            }
+            event.preventDefault()
+            this.props.addToSelection(this.props.tile)
       }
-
       onMouseOver(event) {
             event.preventDefault();
             this.props.currentMouseOver(this.props.tile)
@@ -27,6 +22,10 @@ class ColorTile extends React.Component {
             }
       }
 
+      onKeyDown(event) {
+            event.preventDefault()
+            this.props.clearSelection()
+      }
       render() {
             let renderTile = this.props.tile;
             let mouseOverTile = this.props.board.state.currentMouseover;
@@ -78,6 +77,7 @@ class ColorTile extends React.Component {
                         className={classText}
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseOver={this.onMouseOver.bind(this)}
+                        onKeyUp={this.onKeyDown.bind(this)}
                         style={renderTileStyle}
                   >
                         {text}
