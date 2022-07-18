@@ -33,7 +33,7 @@ class HintX extends React.Component {
 
             return (
 
-                  <tr className="number-hints-left-content">
+                  <tr className="number-hints-left-content board-row">
                         <td className={classNames}></td>
                         {
                               this.props.hints.map((hint, idx) => {
