@@ -40,3 +40,5 @@ const PuzzleSchema = new Schema(
 const Puzzle = mongoose.model("puzzles", PuzzleSchema);
 module.exports = Puzzle;
 
+//property add theme section = []
+//
