@@ -21,7 +21,8 @@ class ColorPaletteLeft extends React.Component {
                   'lightskyblue',
                   'navajowhite',
                   'palegreen',
-                  'tomato'
+                  'tomato',
+                  "black      "
             ]
             colors = colors.map(color => ColorUtil.nameToHex(color))
             return (

@@ -32,7 +32,7 @@ class ImageOptions extends React.Component {
                   height={550}
                   pixelSize={550 / this.props.board.dimensions[0]}
                   centered={true}
-                  fillTransparencyColor={'black'}
+                  fillTransparencyColor={'white'}
             />
             this.props.submitImageForCheck(component)
 

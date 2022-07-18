@@ -88,6 +88,7 @@ const ColorUtil = {
       },
 
       mapTiles(tiles, avg) {
+            console.log(avg)
             tiles.forEach((tile, idx) => {
                   let hex = this.hexToRGB(tile[0])
                   let hexTotal = hex.r + hex.g + hex.b;
@@ -96,7 +97,7 @@ const ColorUtil = {
                               tiles[idx][1] = 'true'
                         }
                   } else {
-                        if (hexTotal > avg) {
+                        if (hexTotal >  avg) {
                               tiles[idx][1] = 'true'
                         }
                   }

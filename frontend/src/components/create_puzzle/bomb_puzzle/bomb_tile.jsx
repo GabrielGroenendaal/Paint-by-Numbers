@@ -36,7 +36,7 @@ class BombTile extends React.Component {
             } else {
                   classText += ' tile-empty'
             }
-            let renderTileStyle;
+      let renderTileStyle;
 
             renderTileStyle = (renderTile.colored) ? { background: this.props.tile.color } : {}
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {

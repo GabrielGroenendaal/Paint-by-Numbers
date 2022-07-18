@@ -90,7 +90,10 @@ class PlayPuzzle extends React.Component {
       }
 
       revealAllTiles() {
-            this.state.board.revealAll()
+            // this.state.board.revealAll()
+            console.log(Util.convertBoardToString(this.state.board));
+            console.log(Util.convertProgressToString(this.state.board))
+            this.state.board.revealAll();
             this.setState({
                   board: this.state.board
             })

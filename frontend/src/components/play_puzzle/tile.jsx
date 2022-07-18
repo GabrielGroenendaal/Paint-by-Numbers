@@ -37,7 +37,7 @@ class Tile extends React.Component {
             let overlayClassText = "tile-overlay puzzle-tile-overlay"
             if (renderTile.explored && renderTile.bombed) {
                   overlayClassText += ' tile-bomb'
-                 classText += ' tile-bomb'
+                  classText += ' tile-bomb'
             } else if (renderTile.explored) {
                   classText += " tile-explored"
                   
