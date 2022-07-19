@@ -54,9 +54,11 @@ table {
 
 .number-hint-left-row:nth-child(5n + 1), .tile:nth-child(5n+1) {
       border-right: 2px solid rgb(195, 192, 192);
-      margin-right: 0px;
 }
 
+.number-hint-left-row:nth-child(5n + 1) {
+      padding-right: 0px;
+}
 .board-row:nth-child(5n + 1) td {
       border-bottom: 2px solid rgb(195, 192, 192)
 }
