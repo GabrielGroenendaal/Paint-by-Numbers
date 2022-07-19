@@ -34,7 +34,7 @@ class ColorTile extends React.Component {
             let classText = "tile tile-board-color"
             let overlayClassText = "tile-overlay puzzle-tile-overlay"
             if (mouseOverTile) {
-                  if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
+                  if (renderTile.pos !== mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
                         overlayClassText += ' tile-highlighted'
                   } else {
                         classText += " tile-empty"
