@@ -1,20 +1,33 @@
 import React from "react";
-import { ReactDOM } from "react";
-import ModalCloseButton from "./modal_close_button";
-import { CSSTransition } from 'react-transition-group';
-var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
+// import { ReactDOM } from "react";
+// import ModalCloseButton from "./modal_close_button";
+// import { CSSTransition } from 'react-transition-group';
+// var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
 
 
 class LoginModal extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             username: '',
             password: '',
+            
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.demoUserLogin = this.demoUserLogin.bind(this);
+        this.passwordErrors = this.passwordErrors.bind(this);
+        this.usernameErrors = this.usernameErrors.bind(this);
+      
+
     }
+
+   
+    componentWillUnmount() {
+        this.props.removeSessionErrors();
+    }
+
+
     update(field) {
         return e => this.setState({
             [field]: e.currentTarget.value
@@ -28,53 +41,128 @@ class LoginModal extends React.Component {
             password: this.state.password,
         }
         const user = Object.assign({}, values);
-        this.props.processForm(user).then((()=>{this.props.closeModal()}))
+        this.props.processForm(user)
+        .then( () => {
+            if(Object.values(this.props.errors).length > 0){
+                    console.log("");
+            }
+            else{
+                    this.props.closeModal();
+            }
+        })
     }
 
-    createDemoUser() {
-        if (this.props.formType === 'Login') {
-            return <button
-                type="submit"
-                className="second-button"
-                id="demo-user-button"
-                onClick={() => this.setState({ username: 'demo@gmail.com', password: 'password' })}>
-                Demo Login</button>
-        } else {
-            return null
+
+    demoUserLogin() {
+        let demoUser = {
+            username: "demoUser",
+            password: "Helloworld"
         }
+
+        this.setState({ username: demoUser["username"] });
+        this.setState({ password: demoUser["password"] });
+        this.props.processForm(demoUser);
+
     }
-    // renderErrors () {
-    //     return (
-    //         <ul>
-    //             {Object.keys(this.state.errors).map((error, i) => (
-    //                 <li key={`error-${i}`}>
-    //                     {this.state.errors[error]}
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     );
-    // }
+
+
+
+    passwordErrors() {
+
+
+        let passwordErrorList = ['Password field is Required', 'Incorrect Password',
+            'Password cannot be the same as username!',
+            'Password must be between 8 and 30 characters in length'
+        ];
+
+        let passwordErrorMessage = {
+            0: "Password is Required",
+            1: "Incorrect Password!",
+            2: "Password cannot be the same as Username!",
+            3: "Password must be between 8 - 30 characters"
+        }
+
+        for (let i = 0; i < passwordErrorList.length; i++) {
+            if (Object.values(this.props.errors).includes(passwordErrorList[i])) {
+                return passwordErrorMessage[i];
+               
+            }
+        }
+        return "";
+    }
+
+
+    usernameErrors() {
+
+        let usernameLoginErrors = ['Username field is required', 'This User does not exist',
+            'A User has already registered with this email or username',
+            'Username must be between 2 and 30 characters'];
+
+
+       
+
+        let usernameErrorMessage = {
+            0: "Username is Required",
+            1: "This Account does not Exist!",
+            2: "An account with this Username exists",
+            3: "Username must be between 2 - 30 characters"
+        }
+
+        for (let i = 0; i < usernameLoginErrors.length; i++) {
+            if (Object.values(this.props.errors).includes(usernameLoginErrors[i])) {
+                return usernameErrorMessage[i];
+                
+            }
+        }
+
+        return "";
+
+    }
+
+
+
+
+
+
     render() {
+
+
+
         let submitText = (this.props.formType === 'Login') ? 'Login' : 'Sign Up'
+        let userNameErrorTag = "";
+        let passwordErrorTag = "";
+
+        userNameErrorTag = Object.values(this.props.errors).length > 0 ? "login-error" : "";
+
+        passwordErrorTag = Object.values(this.props.errors).length > 0 ? "login-error" : "";
+
+
+
+
+
         return (
-            <div  className="modal-background"  onClick={() => this.props.closeModal()}>
+            <div className="modal-background" onClick={() => this.props.closeModal()}>
                 <div className="modal-child" >
                     <div className="session-form">
-                        
-                           
+
+
                         <form className="sform" onClick={e => e.stopPropagation()} onSubmit={this.handleSubmit} >
                             <br />
                             <div className="close-button" onClick={() => this.props.closeModal()} >X</div>
                             <div className='login-message'> PAINT BY NUMBERS</div>
                             <br />
+                            <label className={userNameErrorTag}>{this.usernameErrors()}</label>
                             <label className='text-box'>
                                 <input
                                     type="text"
-                                    placeholder= {submitText === 'Login'? "Username" : "Email"}
+                                    placeholder={submitText === 'Login' ? "Username" : "Username"}
                                     value={this.state.username}
                                     onChange={this.update('username')}
                                 />
                             </label>
+
+
+                            <label className={passwordErrorTag}>{this.passwordErrors()}</label>
                             <label className='text-box'>
                                 <input
                                     placeholder="Password"
@@ -85,9 +173,10 @@ class LoginModal extends React.Component {
                             </label>
                             <button className='login-button2' type="submit" value="">{submitText}</button>
 
-                            {this.createDemoUser()}
-                           {/* {this.renderErrors.bind(this)} */}
-                            {/* {this.props.otherForm} */}
+
+                            <button type="submit" className="second-button" id="demo-user-button" onClick={() => this.demoUserLogin()}>Demo Login</button>
+
+                     
                         </form>
 
                     </div>
