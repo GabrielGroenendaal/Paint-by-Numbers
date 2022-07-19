@@ -6,21 +6,21 @@ import { closeModal } from '../../actions/modal_actions.js';
 
 const mSTP = state => {
     return {
-            formType : "Login",
-            errors:state.errors.session
+        formType: "Login",
+        errors: state.errors.session
     }
 };
 
 
 const mDTP = dispatch => {
     return {
-            // login: user => dispatch(login(user))
-            processForm: user => dispatch(login(user)),
-            closeModal:  ()=> dispatch(closeModal()),
-            removeSessionErrors: ()=> dispatch(removeSessionErrors)
+        // login: user => dispatch(login(user))
+        processForm: user => dispatch(login(user)),
+        closeModal: () => dispatch(closeModal()),
+        removeSessionErrors: () => dispatch(removeSessionErrors())
     }
 }
 
 
-const LoginContainer = connect(mSTP,mDTP)(LoginModal);
+const LoginContainer = connect(mSTP, mDTP)(LoginModal);
 export default LoginContainer;
