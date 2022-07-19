@@ -25,7 +25,7 @@ class CreatePuzzle extends React.Component {
       }
 
       updateBoardSetting(options) {
-            if (options.dimensions && options.dimensions != Util.convertDimensionsToString(this.state.board.dimensions)) {
+            if (options.dimensions && options.dimensions !== Util.convertDimensionsToString(this.state.board.dimensions)) {
                   this.setState(prevState => ({board: new BoardCreate({dimensions: options.dimensions})}))
             }
             // if (options.difficulty && options.difficulty != this.state.board.difficulty) {
