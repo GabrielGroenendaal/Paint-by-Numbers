@@ -25,7 +25,7 @@ module.exports = function (data) {
   // }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is Required ";
+    errors.password = "Password field is Required";
   }
 
   return {
