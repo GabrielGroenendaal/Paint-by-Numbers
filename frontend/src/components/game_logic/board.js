@@ -87,11 +87,10 @@ class Board {
 
       plantBombs() {
             let numOfBombs = 0;
-            let totalBombs = Util.randomInt(4 * this.area() / 10, 6 * this.area() / 10);
+            let totalBombs = Util.randomInt(4 * this.area() / 10, 7 * this.area() / 10);
             let positions = Util.allPositions(this.dimensions);
             while (numOfBombs < totalBombs) {
                   let i = Util.randomIndex(positions);
-                  
                   let x = positions[i][0];
                   let y = positions[i][1];
                   this.tiles[x][y].bombed = true;

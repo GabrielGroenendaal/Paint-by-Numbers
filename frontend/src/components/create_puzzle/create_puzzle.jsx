@@ -81,11 +81,12 @@ class CreatePuzzle extends React.Component {
       reset() {
             let oldBoard = Util.convertDimensionsToString(this.state.board.dimensions)
             this.setState({
-                  board: new BoardCreate({ dimensions: oldBoard.dimensions }),
+                  board: new BoardCreate({ dimensions: oldBoard }),
                   renderImage: null,
                   phase: 1
             })
       }
+
       submitPuzzle() {
             let puzzleDatum = {
                   title: 'Title',

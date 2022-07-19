@@ -8,11 +8,7 @@ class BombTile extends React.Component {
       }
       onMouseDown(event) {
             event.preventDefault();
-            if (this.props.board.state.selecting) {
-                  this.props.addToSelection(this.props.tile)
-            } else {
-                  this.props.updateTile(this.props.tile)
-            }
+            this.props.addToSelection(this.props.tile)
       }
 
       onMouseOver(event) {
@@ -29,53 +25,62 @@ class BombTile extends React.Component {
             let mouseOverTile = this.props.board.state.currentMouseover;
             let text = ""
             let classText = "tile"
+            let overlayClassText = 'tile-overlay puzzle-tile-overlay'
 
             if (mouseOverTile) {
                   if (renderTile.pos != mouseOverTile.pos && (renderTile.pos[0] === mouseOverTile.pos[0] || renderTile.pos[1] === mouseOverTile.pos[1])) {
-                        classText += ' tile-highlighted'
+                        overlayClassText += ' tile-highlighted'
                   } else {
                         classText += " tile-empty"
                   }
             } else {
                   classText += ' tile-empty'
             }
-            let renderTileStyle;  
+      let renderTileStyle;
 
             renderTileStyle = (renderTile.colored) ? { background: this.props.tile.color } : {}
             if (this.props.board.state.selection.includes(renderTile) && !renderTile.explored) {
-                  classText = "tile tile-color-selected"
-                  renderTileStyle = {background: this.props.board.state.selectedColor}
+                  overlayClassText += " tile-color-selected"
+                  renderTileStyle = { background: this.props.board.state.selectedColor }
             }
 
             let dims = Util.convertDimensionsToString(this.props.boardObject.dimensions)
             switch (dims) {
                   case "5x5":
                         classText += ' puzzle-tile-5x5'
+                        overlayClassText += ' puzzle-tile-overlay-5x5'
+
                         break;
                   case "10x10":
                         classText += ' puzzle-tile-10x10'
+                        overlayClassText += ' puzzle-tile-overlay-10x10'
                         break
                   case "15x15":
                         classText += ' puzzle-tile-15x15'
+                        overlayClassText += ' puzzle-tile-overlay-15x15'
                         break
                   case "20x20":
                         classText += ' puzzle-tile-20x20'
+                        overlayClassText += ' puzzle-tile-overlay-20x20'
                         break
                   default:
             }
 
             if (renderTile.bombed) {
-                  classText += ' bomb-selection-tile'
+                  overlayClassText += ' bomb-selection-tile'
             }
             return (
                   <td
-                  className={classText}
-                  onMouseDown={this.onMouseDown.bind(this)}
-                  onMouseOver={this.onMouseOver.bind(this)}
-                  style={renderTileStyle}
-            >
-                  {text}
-            </td>
+                        className={classText}
+                        onMouseDown={this.onMouseDown.bind(this)}
+                        onMouseOver={this.onMouseOver.bind(this)}
+                        style={renderTileStyle}
+                  >
+                        <div className={overlayClassText}>
+                               {text}
+                        </div>
+                    
+                  </td>
             )
       }
 }

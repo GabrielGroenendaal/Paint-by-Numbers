@@ -15,6 +15,15 @@ class BombBoard extends React.Component {
             this.onMouseUp = this.onMouseUp.bind(this)
             this.currentMouseOver = this.currentMouseOver.bind(this)
       }
+      componentDidMount() {
+            document.addEventListener('keydown', (event) => {
+                  this.clearSelection()
+            });
+      }
+      clearSelection() {
+            this.setState(prevState=> ({ selection: [], selecting: false }))
+      }
+
       addToSelection(tile) {
             this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
       }
@@ -33,11 +42,6 @@ class BombBoard extends React.Component {
             this.setState(prevState=> ({ selection: [], selecting: false }))
       }
 
-      onContextMenu(event) {
-            event.preventDefault()
-            this.setState(prevState=> ({ selection: [], selecting: false }))
-            //console.log(event.button)
-      }
       currentMouseOver(tile) {
             this.setState(prevState => ({currentMouseover: tile}))
       }
@@ -52,8 +56,6 @@ class BombBoard extends React.Component {
                   <table
                         onMouseDown={this.onMouseDown.bind(this)}
                         onMouseUp={this.onMouseUp.bind(this)}
-                        onContextMenu={this.onContextMenu.bind(this)}
-                        // onMouseOut={this.onMouseLeave.bind(this)}
                         className="board-container bomb-board-container">
                         <tbody>
                               {/* <ColorPaletteLeft selectColor={this.selectColor.bind(this)} boardObject={this.props.board} /> */}

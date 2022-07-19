@@ -18,24 +18,14 @@
 
 }
 
-.tile:hover {
+.tile-unexplored:hover, .tile-flagged:hover, .tile-board-color:hover, .tile-color-selected:hover, .bomb-selection-tile:hover{
       transform: scale(1.2);
 }
 
 .tile-explored {
       background: #5B6ED9;
-      /* border-style: outset; */
 }
 
-.tile-bomb {
-      background: rgb(255, 115, 197);
-      /* border-style: outset; */
-}
-
-
-.tile-highlighted {
-      background-color: #9c9c9c;
-}
 
 .color-tile {
       background-color: attr(data-palettecolor);
@@ -52,7 +42,6 @@
       background-color: #3D52B3;
       /* border-style: inset; */
 }
-
 
 
 .puzzle-tile-5x5 {
@@ -87,39 +76,6 @@
 
 
 
-.bomb-selection-tile.puzzle-tile-10x10,
-.tile-bomb.puzzle-tile-10x10 {
-      width: 42px;
-      height: 42px;
-      border: 4px solid tomato;
-}
-
-.bomb-selection-tile.puzzle-tile-5x5,
-.tile-bomb.puzzle-tile-5x5 {
-      width: 88px;
-      height: 88px;
-      border: 4px solid tomato;
-}
-
-.bomb-selection-tile.puzzle-tile-15x15,
-.tile-bomb.puzzle-tile-15x15 {
-      width: 32px;
-      height: 32px;
-      border: 2px solid tomato;
-}
-
-.bomb-selection-tile.puzzle-tile-20x20,
-.tile-bomb.puzzle-tile-20x20 {
-      width: 22;
-      height: 22px;
-      border: 1px solid tomato;
-}
 
 
-body .tile-flagged {
-      color: #5B6ED9;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 30px;
-      text-align: center;
-}
+@import "./tile_overlay.css";

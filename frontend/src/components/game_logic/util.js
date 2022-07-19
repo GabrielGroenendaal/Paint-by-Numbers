@@ -53,7 +53,7 @@ const Util = {
             for (let i = 0; i < board.width(); i++) {
                   for (let k = 0; k < board.height(); k++) {
                         let tile = board.tiles[i][k]
-                        newStr += "_" + tile.bombed + "|" + tile.flagged;
+                        newStr += "_" + tile.explored + "|" + tile.flagged;
                   }                  
             }
             return newStr;
