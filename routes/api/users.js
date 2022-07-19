@@ -94,7 +94,7 @@ router.post("/login", (request, response) => {
   User.findOne({ username }).then((user) => {
     if (!user) {
       // if user email not found return json error response
-      return response.status(404).json({ username: "This user does not exist" });
+      return response.status(404).json({ username: "This User does not exist" });
     }
 
     // user email must then exists using bcrypt to verifiy password
