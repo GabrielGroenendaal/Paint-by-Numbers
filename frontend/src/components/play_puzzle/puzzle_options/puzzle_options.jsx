@@ -37,6 +37,22 @@ class PuzzleOptions extends React.Component {
                                     <input type="radio" name="puzzle-size-options" onClick={this.changeSize.bind(this)} className="puzzle-size-options-item" value="20x20" />
                                     
                               </form>
+                            <div>
+                              <button className="question-button">?</button>
+                        </div>  
+                        </div>
+                        
+                        <div className="theme-drop-menu">
+                              <div className="theme">
+                                    <button className="theme-label">THEME</button>
+                                    <i className="gg-chevron-down"></i>    
+                                    <ul className="drop">
+                                          <li><a href="#">ANIMALS</a></li>
+                                          <li><a href="#">ARTWORKS</a></li>
+                                          <li><a href="#">LANDSCAPES</a></li>
+                                          <li><a href="#">MEMES</a></li>
+                                    </ul>
+                              </div>
                         </div>
                         {/* <div className="puzzle-difficulty-options">
                         <label className="puzzle-difficulty-options-header">DIFFICULTY</label>

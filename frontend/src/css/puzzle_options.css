@@ -133,7 +133,7 @@ input[type="radio"]:hover {
 
 
 .puzzle-selector-options-container {
-      width: 150px;
+      /* width: 150px; */
       height: 219px;
       border-radius: 15px;
       background-color: #F2F2F2;
@@ -311,3 +311,99 @@ input[type="radio"]:hover {
       justify-content: center;
       flex-direction: row;
     }
+
+    .question-button {
+      border: solid #5B6ED9;
+      border-radius: 20%;
+      border-style: solid;
+      border-width: 2px;
+      /* color: white; */
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-weight: 500;
+      font-size: 16px;
+      background: rgb(219, 219, 219);
+      /* background-color: #5B6ED9; */
+
+    }
+
+    .theme-drop-menu {
+      /* display: flex;
+      padding: 15px 20px; */
+      cursor: pointer;
+      z-index: 5;
+     
+      }
+
+      .theme {
+            padding: 0;
+      }
+
+      .theme a {
+            color: black; 
+            font-size: 13px;
+            text-decoration: none;
+      }
+
+ 
+.theme ul {
+      margin-top: 10px;
+      /* position: absolute; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 200px;
+      background: rgb(219, 219, 219);
+      left: 0px;
+      list-style: none;
+      border-radius: 5px;
+      /* opacity: 0; */
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+      padding: 5px;
+}
+    
+.theme li {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.theme li:hover {
+      background-color: rgb(190, 61, 104);
+      color: inherit;
+      z-index: 5000;
+}
+.theme button:focus+ul {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0px);
+}
+
+.theme-drop-menu button {
+      
+      border: none;
+      font-size: 16px;
+      /* margin: 0px; */
+      cursor: pointer;
+      padding-bottom: 0px;
+      padding-top: 4px;
+      color: inherit;
+      
+}
+     
+.theme-label {
+      margin: 0;
+      padding-left: 19px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+}
+                  
+.theme .gg-chevron-down {
+      position: relative;
+      display: inline-block;
+}
