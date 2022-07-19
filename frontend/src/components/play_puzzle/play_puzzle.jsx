@@ -1,13 +1,13 @@
 import React from 'react';
 import Board from '../game_logic/board'
-import Tile from '../game_logic/tile'
+// import Tile from '../game_logic/tile'
 import Util from '../game_logic/util'
 import BoardComponent from './board'
 import PuzzleOptions from './puzzle_options/puzzle_options';
 import PuzzleSubmit from './puzzle_options/puzzle_submit';
 import PuzzleLibraryContainer from './puzzle_options/puzzle_library_container';
-import SeedOption from './puzzle_options/seed_option';
-import { fetchPuzzle } from '../../actions/puzzle_actions';
+// import SeedOption from './puzzle_options/seed_option';
+// import { fetchPuzzle } from '../../actions/puzzle_actions';
 import ProgressBoard from './puzzle_options/progress_board';
 
 
@@ -26,10 +26,17 @@ class PlayPuzzle extends React.Component {
             this.revealAllTiles = this.revealAllTiles.bind(this)
       }
 
+      localStr(){
+            const saveProgress = Util.convertProgressToString(this.state.board);
+         localStorage.setItem()
+      }
+
+
+
       updateGame(tile, isFlagging) {
             (isFlagging) ? tile.toggleFlag() : tile.explore();
             if (this.state.board.checkComplete()) {
-                  this.state.status = "You finished!"
+                  this.setState({status : "You finished!"});
             }
             this.setState({ board: this.state.board })
       }
@@ -57,7 +64,7 @@ class PlayPuzzle extends React.Component {
       }
 
       changePuzzleOptions(options) {
-            if (options.dimensions && options.dimensions != this.state.dimensions) {
+            if (options.dimensions && options.dimensions !== this.state.dimensions) {
                   this.setState(prevState => ({ dimensions: options.dimensions }))
             }
             // if (options.difficulty && options.difficulty != this.state.difficulty) {
