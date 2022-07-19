@@ -55,3 +55,7 @@
       background-color: #5B6ED9;
       color: white;
 }
+
+label.login-error {
+      color: #f38688;
+  }
