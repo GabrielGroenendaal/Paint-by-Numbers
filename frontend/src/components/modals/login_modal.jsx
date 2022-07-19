@@ -65,7 +65,14 @@ class LoginModal extends React.Component {
 
     }
 
+    demoUserButton() {
+        if (this.props.formType === 'Login') {
+            return (
+                <button type="submit" className="second-button" id="demo-user-button" onClick={() => this.demoUserLogin()}>Demo Login</button>
+            )
+        }
 
+    }
 
     passwordErrors() {
 
@@ -136,7 +143,7 @@ class LoginModal extends React.Component {
 
         passwordErrorTag = Object.values(this.props.errors).length > 0 ? "login-error" : "";
 
-
+        let component = (this.props.formType === 'Login') ? this.demoUserButton() : {}
 
 
 
@@ -173,8 +180,7 @@ class LoginModal extends React.Component {
                             </label>
                             <button className='login-button2' type="submit" value="">{submitText}</button>
 
-
-                            <button type="submit" className="second-button" id="demo-user-button" onClick={() => this.demoUserLogin()}>Demo Login</button>
+                            {this.demoUserButton()}
 
                      
                         </form>
