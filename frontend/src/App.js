@@ -13,8 +13,10 @@ function App () {
     <div className="App">
    
 
-       
-    <Route path={`/`}><Main/></Route>
+      <Switch>
+        <Route exact path={`/`}><Main/></Route>
+        <Route path={`/:seed`}><Main/></Route>
+      </Switch>
 
      
 

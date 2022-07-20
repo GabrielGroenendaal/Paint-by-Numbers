@@ -1,37 +1,30 @@
 
 import React from 'react'
+import { useEffect } from 'react';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
-class SeedOption extends React.Component {
-      constructor(props) {
-            super(props)
-
-            this.state = {
-                  seed: ''
+const SeedOption = (props) => {
+      let seed = ''
+      let history = useHistory()
+      let params = useParams();
+      
+      useEffect( () => {
+         
+            if (params) {
+                  seed = params.seed
             }
-      }
+            if (seed) {
+                  props.updatePuzzle(seed)
+                  history.push('/');
+            }
+            
+      })
 
-      update(field) {
-            return e => this.setState({
-                  [field]: e.currentTarget.value
-            })
-      }
-
-      handleSubmit(event) {
-            event.preventDefault()
-            this.props.updatePuzzle(this.state.seed)
-      }
-      render() {
-            return (
-                  <div className="puzzle-gameplay-options-container">
-                        <form onSubmit={this.handleSubmit.bind(this)}>
-                        <label className="puzzle-image-options-header">ENTER SEED</label>
-
-                              <input type="text" onChange={this.update('seed')} value={this.state.seed} />
-                              <button type="submit" className="image-submit-button">SUBMIT</button>
-                        </form>
-                  </div>
-            )
-      }
+      return (
+            <div></div>
+      )
 }
+
 
 export default SeedOption;
