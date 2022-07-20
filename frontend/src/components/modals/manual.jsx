@@ -6,7 +6,7 @@ class Manual extends React.Component {
     }
     render() {
         return (
-            <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
+            <div className="modal-instruction-background">
                 <div className="modal-instruction-child">
                     <div className="instruction-form">
                         <form className="manual"onClick={e => e.stopPropagation()} >
@@ -30,11 +30,11 @@ class Manual extends React.Component {
                                 <li> Double numbers represents how many blocks are filled in, according to the first number, at least one space blank, then fill in consecutive squares according to the second number amount</li>
                                 <li>Play different levels of the game.</li> 
                             </div>
-                            <div className="manual-title">------- More Tips! -------</div>
+                            {/* <div className="manual-title">------- More Tips! -------</div>
                             <div className="manual-text">
                                 <li> Use option-click to flag tiles.</li>
                                 <li> Complete the larger numbers first.</li>
-                                <li> Complete the puzzle using the finished columns and rows.</li></div>
+                                <li> Complete the puzzle using the finished columns and rows.</li></div> */}
                         </form>
                     </div>
                 </div>
