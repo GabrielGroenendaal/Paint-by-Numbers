@@ -32,6 +32,10 @@ router.get("/user/:user_id", (request, response) => {
     );
 });
 
+
+
+
+
 //get a specific user puzzles
 // router.get("/user/:user_id/:puzzle_id", (request, response) => {
 //   Puzzle.findById(request.params.puzzle_id)
@@ -87,5 +91,14 @@ router.post(
     newPuzzle.save().then((puzzle) => response.json(puzzle));
   }
 );
+
+  router.get("/themes/:genre", (request, response) => {
+    console.log(request.params.genre)
+    Puzzle.find({ genre: request.params.genre })
+      .then((puzzles) => response.json(puzzles))
+      .catch((err) =>
+        response.status(404).json({ noPuzzlesFound: "No Puzzles found for that Theme" })
+      );
+  });
 
 module.exports = router;

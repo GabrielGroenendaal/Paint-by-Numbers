@@ -58,7 +58,8 @@ export const fetchUserPuzzles = id => (dispatch) =>
  export const fetchUserPuzzle = (userId,puzzle) => (dispatch) =>
     PuzzleAPIUtil.getUsersPuzzle(userId,puzzle).then(puzzle => dispatch(receiveUserPuzzle(puzzle))).catch(err => console.log(err));
 
-
+export const fetchPuzzlesByTheme = theme => (dispatch) => 
+    PuzzleAPIUtil.getThemedPuzzles(theme).then(puzzles => dispatch(receivePuzzles(puzzles))).catch(err => console.log(err))
 
 export const updatePuzzle =(user,puzzle) => dispatch => 
 PuzzleAPIUtil.updateUsersPuzzle(user,puzzle).then( puzzle => dispatch(receivePuzzle(puzzle))).catch(err => console.log(err));

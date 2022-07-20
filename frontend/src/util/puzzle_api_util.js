@@ -16,6 +16,9 @@ export const getUsersPuzzles = id => {
     return axios.get(`/api/puzzles/user/${id}`);
 }
 
+export const getThemedPuzzles = theme => {
+    return axios.get(`/api/puzzles/themes/${theme}`)
+}
 //get a speciifc user puzzle
 export const getUsersPuzzle = (userId,puzzle) => {
     return axios.get(`/api/puzzles/user/${userId}/${puzzle.id}`);

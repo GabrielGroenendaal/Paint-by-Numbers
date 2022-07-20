@@ -101,19 +101,19 @@ class PlayPuzzle extends React.Component {
       }
 
       selectPuzzleByTheme(theme) {
-            console.log(theme)
-            // this.props.fetchPuzzlesByTheme(theme)
-            //       .then((response) => {
-            //             let themed_puzzles = response.puzzles.data;
-            //             let chosen_puzzle = themed_puzzles(Math.floor(Math.random() * themed_puzzles.length))
-            //             let new_board = new Board({
-            //                   dimensions: chosen_puzzle.size,
-            //                   tiles: Util.parseTileDataFromString(chosen_puzzle.tile_data),
-            //                   originalImageUrl: chosen_puzzle.original_img_url,
-            //                   id: chosen_puzzle._id
-            //             })
-            //             this.setState({ board: new_board })
-            //       }).catch(err => err.responseJSON)
+            this.props.fetchThemedPuzzles('default')
+                  .then((response) => {
+                        let themed_puzzles = response.puzzles.data;
+                        let themed_puzzle = themed_puzzles[Math.floor(Math.random() * themed_puzzles.length)]
+                        console.log(themed_puzzle)
+                        let new_board = new Board({
+                              dimensions: themed_puzzle.size, 
+                              tiles: Util.parseTileDataFromString(themed_puzzle.tile_data),
+                              originalImageUrl: themed_puzzle.original_img_url,
+                              id: themed_puzzle._id
+                        })
+                        this.setState({ board: new_board })
+                  }).catch(err => err.responseJSON)
       }
 
       render() {
