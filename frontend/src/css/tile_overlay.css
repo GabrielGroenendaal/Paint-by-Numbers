@@ -55,8 +55,8 @@
       background: repeating-linear-gradient(45deg,
       tomato,
       tomato 2px,
-      white 2px,
-      white 5px);
+      transparent 2px,
+      transparent 5px);
 
       
       box-shadow: 0px 0px 0px 4px tomato inset;}
@@ -70,8 +70,8 @@
       background: repeating-linear-gradient(45deg,
       tomato,
       tomato 2px,
-      white 2px,
-      white 5px);
+      transparent 2px,
+      transparent 5px);
       /* rgb(255,141,110, .6),
       rgb(255,141,110, .6) 10px,
       rgb(255,141,110, .1) 10px,
@@ -84,8 +84,8 @@
       background: repeating-linear-gradient(45deg,
       tomato,
       tomato 2px,
-      white 2px,
-      white 5px);
+      transparent 2px,
+      transparent 5px);
       box-shadow: 0px 0px 0px 3px tomato inset;
 }
 
@@ -96,8 +96,8 @@
       background: repeating-linear-gradient(45deg,
       tomato,
       tomato 2px,
-      white 2px,
-      white 5px);
+      transparent 2px,
+      transparent 5px);
       box-shadow: 0px 0px 0px 2px tomato inset;
 }
 
