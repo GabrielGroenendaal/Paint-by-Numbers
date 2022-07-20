@@ -13,7 +13,8 @@ class PlayPuzzle extends React.Component {
             super(props)
             this.state = {
                   board: new Board({ dimensions: "10x10" }),
-                  board_size: "10x10"
+                  board_size: "10x10",
+                  progress: null
             }
 
             this.updateGame = this.updateGame.bind(this)
@@ -116,6 +117,49 @@ class PlayPuzzle extends React.Component {
                   }).catch(err => err.responseJSON)
       }
 
+      saveProgress() {
+            if (this.state.board.complete) {
+                  return null
+            }
+            let new_progress = {
+                  progress_data: Util.convertProgressToString(this.state.board),
+                  puzzle_id: this.state.board.id,
+                  user_id: this.props.currentUser.id
+            }
+
+            if (this.state.board.id === 'empty') {
+                  let creator = this.props.currentUser.id 
+                  console.log(new_progress)
+                  let puzzle_datum = {
+                        title: 'Title',
+                        difficulty: this.state.board.difficulty || "easy",
+                        size: Util.convertDimensionsToString(this.state.board.dimensions),
+                        tile_data: Util.convertBoardToString(this.state.board),
+                        original_img_url: (this.state.board.originalImageURL || 'https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c='),
+                        genre: 'default',
+                        creator_id: creator
+                  }
+                  this.props.processPuzzle(puzzle_datum).then((response) => {
+                        new_progress.puzzle_id = response.puzzle.data._id
+                        this.props.createNewProgress(new_progress).then((response) => {
+                              let new_progress = response.progress.data;
+                              this.setState({ progress: new_progress})
+                        })
+                  })
+            } else {
+                  if (this.state.progress) {    
+                        this.props.updateProgress(this.state.progress.id, new_progress).then((response) => {
+                              this.state.progress.progress_data = new_progress.progress_data;
+                        })
+                  } else {
+                        this.props.createNewProgress(new_progress).then((response) => {
+                              let new_progress = response.progress.data;
+                              this.setState({ progress: new_progress})
+                        })
+                  }
+            }      
+      }
+
       render() {
             if (!this.state.board) {
                   return null
@@ -153,7 +197,9 @@ class PlayPuzzle extends React.Component {
                                     openModal={this.props.openModal}
                                     revealAll={this.revealAllTiles}
                                     generate={this.generatePuzzle.bind(this)}
+                                    saveProgress={this.saveProgress.bind(this)}
                                     updatePuzzle={this.updatePuzzle} />
+                              
                         </div>
 
                   </div>

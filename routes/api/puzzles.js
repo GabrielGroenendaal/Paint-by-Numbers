@@ -92,13 +92,13 @@ router.post(
   }
 );
 
-  router.get("/themes/:genre", (request, response) => {
-    console.log(request.params.genre)
-    Puzzle.find({ genre: request.params.genre })
-      .then((puzzles) => response.json(puzzles))
-      .catch((err) =>
-        response.status(404).json({ noPuzzlesFound: "No Puzzles found for that Theme" })
-      );
-  });
+router.get("/themes/:genre", (request, response) => {
+  console.log(request.params.genre)
+  Puzzle.find({ genre: request.params.genre })
+    .then((puzzles) => response.json(puzzles))
+    .catch((err) =>
+      response.status(404).json({ noPuzzlesFound: "No Puzzles found for that Theme" })
+    );
+});
 
 module.exports = router;

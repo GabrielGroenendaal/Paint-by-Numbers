@@ -10,6 +10,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const puzzles = require("./routes/api/puzzles.js");
 const Puzzle = require("./models/Puzzle.js");
+const ProgressOnPuzzle = require('./models/Progress_on_Puzzle')
+const progresses = require("./routes/api/progresses.js")
 const path = require('path');
 
 if (process.env.NODE_ENV === 'production') {
@@ -44,7 +46,7 @@ app.use("/api/users", users);
 
 //for users to creaate a puzzle of their own
 app.use("/api/puzzles", puzzles);
-
+app.use("/api/progresses", progresses);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

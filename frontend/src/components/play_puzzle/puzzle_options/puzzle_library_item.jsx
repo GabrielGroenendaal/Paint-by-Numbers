@@ -48,6 +48,8 @@ class PuzzleLibraryItem extends React.Component {
                         {component}
                         {/* <div className="share-puzzle-button">SHARE</div> */}
                         <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
+                        <div className="user-library-button" onClick={() => this.props.saveProgress()}>SAVE</div>
+
                         {component2}
                   </div>
             )
