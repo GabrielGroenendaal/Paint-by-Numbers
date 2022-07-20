@@ -13,15 +13,16 @@ class PuzzleOptions extends React.Component {
 
       }
 
-      // changeDifficulty(event) {
-      //       this.props.changePuzzle({difficulty: event.currentTarget.value})
-      // }
+      handleClick(event) {
+            console.log(event)
+            event.preventDefault();
+            this.props.selectTheme(event.currentTarget.outerText)
+      }
 
       render() {
             return (
                   
                   <div className="puzzle-selector-options-container">
-                        {/* <p className="puzzle-selector-options-header"></p> */}
                         <div>
                               
                         </div>
@@ -47,10 +48,10 @@ class PuzzleOptions extends React.Component {
                               <div className="theme">
                                     <button className="theme-label">THEME</button>
                                     <ul>
-                                          <li><a href="#">ANIMALS</a></li>
-                                          <li><a href="#">ARTWORKS</a></li>
-                                          <li><a href="#">LANDSCAPES</a></li>
-                                          <li><a href="#">MEMES</a></li>
+                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>ANIMALS</a></li>
+                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>ARTWORKS</a></li>
+                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>LANDSCAPES</a></li>
+                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>MEMES</a></li>
                                     </ul>
                               </div>
                         </div>
