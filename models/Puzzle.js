@@ -12,7 +12,7 @@ const PuzzleSchema = new Schema(
       ref: "users",
       required: false
     },
-
+    
     original_img_url: {
       type: String,
       required: true,

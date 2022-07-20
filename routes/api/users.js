@@ -61,6 +61,36 @@ router.patch("/user/:id", (request, response) => {
 
 
 });
+
+
+
+router.patch("/user/:id", (request, response) => {
+
+
+  const updates = request.body
+  const puzzleUpdate = request.body.puzzles;
+
+  if(ObjectId.isValid(request.params.id)){
+    db.collection('users')
+        .updateOne({_id: ObjectId(request.params.id)}, {$set: updates})
+        .then(result => {
+          response.status(200).json(result)
+        })
+        .catch(err=>{
+          response.status(500).json({error: 'Could not update the user'})
+        })
+  }
+  else{
+    response.status(500).json({error: "invalid user id"});
+  }
+
+
+});
+
+
+
+
+
 //test route to see if login is successful
 
 router.get(

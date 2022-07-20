@@ -44,9 +44,12 @@ router.get("/user/:user_id", (request, response) => {
 //     );
 // });
 
-
+//seed route
+// router.get("/puzzleseed")
+// /api/puzzles/#
 
 //get a puzzle by its own id
+//h
 
 router.get("/:id", (request, response) => {
   Puzzle.findById(request.params.id)
