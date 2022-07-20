@@ -19,12 +19,21 @@ class LibraryItem extends React.Component {
                   board: newBoard
             }
       }
-
+      
+      onClick(event) {
+            event.preventDefault();
+            if (this.props.type === 'made') {
+                  let text = `www.paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
+                  navigator.clipboard.writeText(text)
+                  alert("Copied the url: " + text);
+            }
+      }
       
       render() {
+            let text = (this.props.type === 'made') ? 'SHARE' : 'OPEN';
             return (
                   <div className="cover-puzzle">
-                        <table className="library-board-container">
+                        <table className="library-board-container" onClick={this.onClick.bind(this)}>
                               <tbody>
                                     {this.state.board.tiles.map((ele, idx) => {
                                           return (

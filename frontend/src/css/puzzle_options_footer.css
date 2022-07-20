@@ -1,0 +1,133 @@
+
+
+#hiddenPixels {
+      display: none
+}
+
+
+
+.puzzle-options-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-content: center;
+      bottom: 0;
+      width: 100%;
+}
+
+.middle-option-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+}
+
+.puzzle-selector-options-container {
+      height: 200px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+}
+
+.puzzle-library-options {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+}
+.theme-drop-menu {
+      display: flex;
+      /* padding: 15px 20px; */
+      cursor: pointer;
+     
+     
+      }
+
+      .theme {
+            padding: 0;
+            position:relative
+      }
+
+      .theme a {
+            color: black; 
+            font-size: 13px;
+            text-decoration: none;
+      }
+
+ 
+.theme ul {
+      margin-top: 10px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 200px;
+      background: rgb(219, 219, 219);
+      left: 0px;
+      list-style: none;
+      border-radius: 5px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+      padding: 5px;
+                  /* max-height: 110px; */
+            overflow-y: hidden;
+}
+    
+.theme li {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.theme li:hover {
+      background-color: #5B6ED9;
+      font-size: 30px;
+      position: relative;
+      z-index: 1000;
+      border-radius: 3px;
+}
+.theme button:focus + ul {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0px);
+}
+
+.theme-drop-menu button {
+      
+      border: none;
+      font-size: 16px;
+      /* margin: 0px; */
+      cursor: pointer;
+      padding-bottom: 0px;
+      padding-top: 4px;
+      text-decoration: underline;
+      color: inherit;
+
+      
+}
+     
+.theme-label {
+      margin: 0;
+      padding-left: 19px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      transform: translateY(110px);
+}
+
+.theme button:focus {
+      transform: translateY(0px);
+      transition: all 0.4s ease;
+}
+                  
+.theme .gg-chevron-down {
+      position: relative;
+      display: inline-block;
+      z-index: 0;
+}
+

@@ -63,7 +63,7 @@ router.get("/:id", (request, response) => {
 
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (request, response) => {
     const { errors, isValid } = validatePuzzleInput(request.body);
 
@@ -79,7 +79,7 @@ router.post(
       size: request.body.size,
       difficulty: request.body.difficulty,
       //additons @ 7/19/2022
-      creator_id: request.user.id,
+      creator_id: request.body.creator_id,
       genre: request.body.genre
 
     });

@@ -11,7 +11,9 @@ class Reveal extends React.Component {
             <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
                 <div className="modal-instruction-child" >
                     <form className="manual" id="modal-cover-child-reveal" onClick={e => e.stopPropagation()}>
-                    <div className="cover-image" >
+       
+                        <div className="cover-image" >
+           
                         <div className="message reveal-message">Congratulations!</div>
                             <img src={url} className="reveal-img" alt="" />
                             </div>

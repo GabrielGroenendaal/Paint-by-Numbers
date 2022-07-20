@@ -21,6 +21,7 @@ class PuzzleLibraryItem extends React.Component {
       // }
       render() {
             let modal = (this.props.currentUser) ? 'library' : 'login'
+            let text = (this.props.currentUser) ? 'LIBRARY' : 'LOGIN'
             let component;
             let component2;
             if (this.props.active) {
@@ -46,7 +47,7 @@ class PuzzleLibraryItem extends React.Component {
                         {/* <div className="save-to-library-button">SAVE</div> */}
                         {component}
                         {/* <div className="share-puzzle-button">SHARE</div> */}
-                        <div className="user-library-button" onClick={() => this.props.openModal('library')}>LIBRARY</div>
+                        <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
                         {component2}
                   </div>
             )

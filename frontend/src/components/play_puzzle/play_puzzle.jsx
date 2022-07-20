@@ -123,11 +123,26 @@ class PlayPuzzle extends React.Component {
                               </div>
 
                         </div>
+
                         <div className="puzzle-options-container">
+                              <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} openModal={this.props.openModal} />
+                                    <div className="middle-option-container">
+                                          <ProgressBoard board={this.state.board} reset={this.reset.bind(this)} />
+                                          {/* <SeedOption updatePuzzle={this.updatePuzzle} />  */}
+                                          <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
+                                    </div>
+                                    <PuzzleLibraryContainer
+                                          active={true}
+                                          currentUser={this.props.currentUser}
+                                          openModal={this.props.openModal}
+                                          revealAll={this.revealAllTiles}
+                                          generate={this.generatePuzzle.bind(this)} 
+                                          updatePuzzle={this.updatePuzzle} />
+                        </div>
+                        {/* <div className="puzzle-options-container">
                               <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} openModal={this.props.openModal} />
                               <div className="middle-option-container">
                                     <ProgressBoard board={this.state.board} reset={this.reset.bind(this)} />
-                                    {/* <SeedOption updatePuzzle={this.updatePuzzle} />  */}
                                     <PuzzleSubmit generate={this.generatePuzzle.bind(this)} swap={this.props.swap} />
                               </div>
                               <PuzzleLibraryContainer
@@ -136,8 +151,9 @@ class PlayPuzzle extends React.Component {
                                     openModal={this.props.openModal}
                                     revealAll={this.revealAllTiles}
                                     generate={this.generatePuzzle.bind(this)} 
-                                    updatePuzzle={this.updatePuzzle} />
-                        </div>
+                                    updatePuzzle={this.updatePuzzle}
+                              />
+                        </div> */}
 
                   </div>
             )

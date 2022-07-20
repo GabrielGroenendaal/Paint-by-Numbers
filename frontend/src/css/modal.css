@@ -1,8 +1,3 @@
-@import "./modals/library.css";
-@import "./modals/manual.css";
-@import "./modals/login.css";
-@import "./modals/reveal.css";
-@import "./modals/signup.css";
 
 
 @keyframes appear {
@@ -33,6 +28,9 @@
 
 }
 
+.actual-close-button:hover {
+      transform: scale(1.3);
+}
 
 
 
@@ -125,3 +123,9 @@ li {
       opacity: 0.01;
       transition: opacity 300ms ease-in;
 }
+
+@import "./modals/library.css";
+@import "./modals/manual.css";
+@import "./modals/login.css";
+@import "./modals/reveal.css";
+@import "./modals/signup.css";

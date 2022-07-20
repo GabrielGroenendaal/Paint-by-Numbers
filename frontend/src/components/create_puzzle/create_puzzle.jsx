@@ -56,7 +56,7 @@ class CreatePuzzle extends React.Component {
             this.setState({
                   storedPicture: image
             })
-      }git
+      }
       submitImage(tiles, picURL) {
             if (!tiles) { return null }
             let dims = Util.convertDimensionsToString(this.state.board.dimensions)
@@ -88,7 +88,7 @@ class CreatePuzzle extends React.Component {
       }
 
       submitPuzzle() {
-            let creator = (this.props.currentUser) ? this.props.currentUser._id : 'default id'
+            let creator = (this.props.currentUser) ? this.props.currentUser.id : '62d820f04df718fe322babb3'
             let puzzleDatum = {
                   title: 'Title',
                   difficulty: this.state.board.difficulty || "easy",

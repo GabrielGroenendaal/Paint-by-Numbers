@@ -11,7 +11,11 @@ class Manual extends React.Component {
                     <div className="instruction-form">
                         <form className="manual"onClick={e => e.stopPropagation()} >
                             <br />
-                            <div className="close-button-manual" onClick={() => this.props.closeModal()}>X</div>
+                            <div className="close-button-manual" onClick={() => this.props.closeModal()}>
+                            <div className="actual-close-button" onClick={() => this.props.closeModal()}>
+                                    X
+                                </div>
+                            </div>
                             <div className='manual-login-message'> PAINT BY NUMBERS</div>
                            
                             <div className="manual-text">

@@ -11,7 +11,7 @@
 
 .made-puzzles {
       width: 500px;
-      height: 170px;
+      
       /* background-color: grey; */
       display: flex;
       justify-content: space-between;
@@ -25,9 +25,10 @@
       flex-wrap: wrap;
       width: 140px;
       height: 140px;
-      background-color: white;
+      background-color: rgb(156, 156, 209);
       margin: 5px;
       border-radius: 10px;
+      margin-bottom: 10px;
 }
 
 .cover-puzzle:hover {
@@ -41,6 +42,7 @@
       justify-content: center;
       
       border-radius: 15px;
+      
 }
 
 .library-board-container > tbody {
@@ -97,3 +99,48 @@
 .library-tile-flagged {
 
 }
+
+.made-puzzles {
+      flex-wrap: wrap;
+      
+}
+
+#library-modal-child {
+      height: 100%;
+      
+}
+
+#library-modal {
+      height: 100%;
+}
+
+#library {
+      height: 100%;
+      justify-content:start;
+      overflow-y: auto;
+      padding-bottom: 20px;
+}
+
+.close-button.library-close-button {
+      margin-left: 0px;
+      margin-right: 20px;
+      position: inherit;
+      width: 95%;
+      
+}
+
+#library-item {
+      margin-top: 40px;
+}
+
+
+
+.cover-puzzle:active {
+      
+      background: rgb(129, 129, 199);
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+

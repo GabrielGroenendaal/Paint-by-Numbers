@@ -1,9 +1,4 @@
-.puzzle-options-container {
-      display: flex;
-      /* align-items: center; */
-      justify-content: center;
-      /* flex-direction: row; */
-}
+
 
 #hiddenPixels {
       display: none
@@ -23,16 +18,11 @@
 
 
 .puzzle-options-container {
-
       display: flex;
       justify-content: center;
-      /* flex-direction: row; */
       align-content: center;
-      /* align-items: center;
-      background-color: red; */
       bottom: 0;
       width: 100%;
-
 }
 
 .middle-option-container {
@@ -43,8 +33,6 @@
 }
 
 .image-submit-button {
-      /* display: inline-flex; 
-          padding: 5px;*/
       width: 100px;
       height: 35px;
       color: white;
@@ -83,17 +71,6 @@ input[type="text" i] {
       font-size: 13px;
 }
 
-/* input[type="radio"] {
-      appearance: none;
-      background-color: #fff;
-      margin: 0;
-      font: inherit;
-      color: currentColor;
-      width: 1.15em;
-      height: 1.15em;
-      border: 0.15em solid #5B6ED9;;
-      border-radius: 20%;
-    } */
 
 input[type="radio"] {
       appearance: none;
