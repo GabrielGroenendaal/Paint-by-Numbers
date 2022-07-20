@@ -158,3 +158,13 @@
       align-items: center;
     }
     
+    .welcome {
+      padding: 10px;
+      color:grey;
+    }
+
+    .right-nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

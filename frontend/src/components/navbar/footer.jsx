@@ -8,10 +8,12 @@ class footer extends React.Component {
         return (
             <div className="footer">
                 <div className="footer-links">
-                    <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
+                    {/* <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
                     <i className="fa fa-github"></i>  
-                    </a>
-               
+                    </a> */}
+                    <label> Gabriel G.</label>
+                    <label> Michael R.</label>
+                    <label> Karen P.</label>
                 </div>
             </div>
         );

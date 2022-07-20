@@ -29,7 +29,10 @@ class NavBar extends React.Component {
     logout() {
         if (this.props.currentUser) {
             return (
-                <button className="login-button" type="submit" onClick={() => this.props.logout()}>Log Out</button>
+                <div className='right-nav-bar'>
+                <div className='welcome'>Welcome, {this.props.user.username}</div>
+                    <button className="login-button" type="submit" onClick={() => this.props.logout()}>Log Out</button>
+                </div>
             )
         }
     }
