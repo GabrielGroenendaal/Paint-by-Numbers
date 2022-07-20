@@ -45,8 +45,7 @@ class PuzzleOptions extends React.Component {
                         <div className="theme-drop-menu">
                               <div className="theme">
                                     <button className="theme-label">THEME</button>
-                                    <i className="gg-chevron-down"></i>    
-                                    <ul className="drop">
+                                    <ul>
                                           <li><a href="#">ANIMALS</a></li>
                                           <li><a href="#">ARTWORKS</a></li>
                                           <li><a href="#">LANDSCAPES</a></li>
