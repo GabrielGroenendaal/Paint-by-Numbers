@@ -119,7 +119,7 @@ class CreatePuzzle extends React.Component {
                                           <i className="fa fa-chevron-up" id="fa-chevron-up"></i>
                                     </button> */}
                                     <div className="puzzle-options-container">
-                                                <CreatePuzzleOptions active={true} updateBoard={this.updateBoardSetting} />
+                                                <CreatePuzzleOptions active={true} updateBoard={this.updateBoardSetting} openModal={this.props.openModal} />
                                                 <div className="middle-option-container">
                                                       <ImageOptions
                                                             submitImageForCheck={this.submitImageForCheck.bind(this)}

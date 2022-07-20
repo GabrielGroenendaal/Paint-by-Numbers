@@ -25,7 +25,9 @@ class LoggedNavBar extends React.Component {
                     <button className="log-out" type="submit">
                         <i className="fa fa-sign-out"></i>
                     </button>
-                    <i className="material-icons">info_outline</i>
+                    <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
+                        <i className="fa fa-github"></i>
+                    </a>
                 </div>
             </div>
         );

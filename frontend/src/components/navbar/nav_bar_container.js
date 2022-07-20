@@ -6,7 +6,9 @@ import NavBar from './nav_bar';
 import { logout } from '../../actions/session_actions';
 const mSTP = state => {
     return {
-            currentUser: state.session.isAuthenticated
+            currentUser: state.session.isAuthenticated,
+            user: state.session.user
+
     }
 };
 

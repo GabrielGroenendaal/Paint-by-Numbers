@@ -29,7 +29,10 @@ class NavBar extends React.Component {
     logout() {
         if (this.props.currentUser) {
             return (
-                <button className="login-button" type="submit" onClick={() => this.props.logout()}>Log Out</button>
+                <div className='right-nav-bar'>
+                <div className='welcome'>Welcome, {this.props.user.username}</div>
+                    <button className="login-button" type="submit" onClick={() => this.props.logout()}>Log Out</button>
+                </div>
             )
         }
     }
@@ -53,7 +56,10 @@ class NavBar extends React.Component {
                     {this.signup()}
                     {this.login()}
                     {this.logout()}
-                <i className="material-icons" onClick={() => this.props.openModal('manual')}>info_outline</i>
+                <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
+                        <i className="fa fa-github"></i>
+                </a>
+                {/* <i className="material-icons" onClick={() => this.props.openModal('manual')}>info_outline</i> */}
 
                 </div>
             </div>

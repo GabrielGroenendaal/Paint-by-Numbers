@@ -17,7 +17,7 @@ class CreatePuzzleOptions extends React.Component {
       render() {
             if (this.props.active) {
                   return (
-                        <div className="puzzle-selector-options-container">
+                        <div className="puzzle-selector-options-container-create">
                               <div className="puzzle-size-options">
                                     <label className="puzzle-size-options-header">SIZE</label>
                                     <form className="puzzle-size-options-items">
@@ -31,6 +31,10 @@ class CreatePuzzleOptions extends React.Component {
                                           <input type="radio" name="puzzle-size-options" onClick={this.changeSize.bind(this)} className="puzzle-size-options-item" value="20x20" />
                                          
                                     </form>
+                              </div>
+                                    <button className="question-button" onClick={() => this.props.openModal('manual')}>?</button>
+                              <div>
+
                               </div>
                               {/* <div className="puzzle-difficulty-options">
                               <label className="puzzle-difficulty-options-header">DIFFICULTY</label>
@@ -49,7 +53,7 @@ class CreatePuzzleOptions extends React.Component {
             } else {
                   return (
                         <div className="puzzle-selector-options-container puzzle-bomb-reset" onClick={() => this.props.reset()}>
-                              <div className="reset-create-puzzle">Reset</div>
+                              <div className="reset-create-puzzle">RESET</div>
                         </div>
                   )
             }

@@ -1,4 +1,5 @@
 import React from "react";
+import { openModal } from "../../../actions/modal_actions";
 
 class PuzzleOptions extends React.Component {
       constructor(props) {
@@ -37,6 +38,21 @@ class PuzzleOptions extends React.Component {
                                     <input type="radio" name="puzzle-size-options" onClick={this.changeSize.bind(this)} className="puzzle-size-options-item" value="20x20" />
                                     
                               </form>
+                            <div>
+                                    <button className="question-button" onClick={() => this.props.openModal('manual')}>?</button>
+                        </div>  
+                        </div>
+                        
+                        <div className="theme-drop-menu">
+                              <div className="theme">
+                                    <button className="theme-label">THEME</button>
+                                    <ul>
+                                          <li><a href="#">ANIMALS</a></li>
+                                          <li><a href="#">ARTWORKS</a></li>
+                                          <li><a href="#">LANDSCAPES</a></li>
+                                          <li><a href="#">MEMES</a></li>
+                                    </ul>
+                              </div>
                         </div>
                         {/* <div className="puzzle-difficulty-options">
                         <label className="puzzle-difficulty-options-header">DIFFICULTY</label>
