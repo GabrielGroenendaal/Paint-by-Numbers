@@ -1,4 +1,5 @@
 import React from "react";
+import { openModal } from "../../../actions/modal_actions";
 
 class PuzzleOptions extends React.Component {
       constructor(props) {
@@ -38,7 +39,7 @@ class PuzzleOptions extends React.Component {
                                     
                               </form>
                             <div>
-                              <button className="question-button">?</button>
+                                    <button className="question-button" onClick={() => this.props.openModal('manual')}>?</button>
                         </div>  
                         </div>
                         

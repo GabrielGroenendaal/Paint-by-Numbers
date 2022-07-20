@@ -124,7 +124,7 @@ class PlayPuzzle extends React.Component {
 
                         </div>
                         <div className="puzzle-options-container">
-                              <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} />
+                              <PuzzleOptions changePuzzle={this.changePuzzleOptions.bind(this)} openModal={this.props.openModal} />
                               <div className="middle-option-container">
                                     <ProgressBoard board={this.state.board} reset={this.reset.bind(this)} />
                                     {/* <SeedOption updatePuzzle={this.updatePuzzle} />  */}

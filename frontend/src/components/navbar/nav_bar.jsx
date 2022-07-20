@@ -53,7 +53,10 @@ class NavBar extends React.Component {
                     {this.signup()}
                     {this.login()}
                     {this.logout()}
-                <i className="material-icons" onClick={() => this.props.openModal('manual')}>info_outline</i>
+                <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
+                        <i className="fa fa-github"></i>
+                </a>
+                {/* <i className="material-icons" onClick={() => this.props.openModal('manual')}>info_outline</i> */}
 
                 </div>
             </div>

@@ -317,6 +317,7 @@ input[type="radio"]:hover {
       border-radius: 20%;
       border-style: solid;
       border-width: 2px;
+      z-index: 2;
       /* color: white; */
       padding-top: 5px;
       padding-bottom: 5px;
@@ -418,4 +419,16 @@ input[type="radio"]:hover {
       position: relative;
       display: inline-block;
       z-index: 0;
+}
+
+
+a {
+      color: inherit ;
+       text-decoration: none;
+}
+
+
+a:link .fa-github { 
+      opacity: .3;
+      
 }
