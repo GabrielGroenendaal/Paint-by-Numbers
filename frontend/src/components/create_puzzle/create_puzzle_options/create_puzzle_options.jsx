@@ -49,7 +49,7 @@ class CreatePuzzleOptions extends React.Component {
             } else {
                   return (
                         <div className="puzzle-selector-options-container puzzle-bomb-reset" onClick={() => this.props.reset()}>
-                              <div className="reset-create-puzzle">Reset</div>
+                              <div className="reset-create-puzzle">RESET</div>
                         </div>
                   )
             }
