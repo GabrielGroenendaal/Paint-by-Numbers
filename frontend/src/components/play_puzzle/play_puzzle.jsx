@@ -35,8 +35,9 @@ class PlayPuzzle extends React.Component {
 
       updateGame(tile, isFlagging) {
             (isFlagging) ? tile.toggleFlag() : tile.explore();
-            if (this.state.board.checkComplete()) {
-                  this.setState({status : "You finished!"});
+            if (this.state.board.complete) {
+                  this.setState({ status: "You finished!" });
+                  this.props.openModal('reveal')
             }
             this.setState({ board: this.state.board })
       }
@@ -91,9 +92,6 @@ class PlayPuzzle extends React.Component {
 
       reveal() {
             this.props.openModal('reveal')
-            // this.setState({
-            //       board: new Board({ dimensions: "10x10" })
-            // })
       }
 
       revealAllTiles() {
@@ -101,6 +99,8 @@ class PlayPuzzle extends React.Component {
             console.log(Util.convertBoardToString(this.state.board));
             console.log(Util.convertProgressToString(this.state.board))
             this.state.board.revealAll();
+            this.props.openModal('reveal')
+
             this.setState({
                   board: this.state.board
             })
@@ -110,9 +110,9 @@ class PlayPuzzle extends React.Component {
             if (!this.state.board) {
                   return null
             } 
-            if (this.state.board.complete) {
-                  this.reveal()
-            }
+            // if (this.state.board.complete) {
+            //       this.reveal()
+            // }
             return (
                   <div className="main">
                         <div className="puzzle-container">

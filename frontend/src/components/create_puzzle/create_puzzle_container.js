@@ -7,7 +7,7 @@ import { updateUserInfo } from '../../actions/session_actions.js';
 const mSTP = state => {
       return {
             // currentUser: state.session.user,
-            currentUser: state.entities.users[state.session.user.id],
+            currentUser: state.session.user,
             puzzles: Object.values(state.puzzle),
       }
 }
