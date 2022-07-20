@@ -144,6 +144,24 @@ input[type="radio"]:hover {
       text-align: center;
 }
 
+.puzzle-selector-options-container-create {
+      /* width: 150px; */
+      height: 219px;
+      border-radius: 15px;
+      background-color: #F2F2F2;
+      display: inline;
+      padding: 10px;
+      margin-left: auto;
+      justify-content: center;
+      transition: 0.4s;
+      text-align: center;
+}
+
+.puzzle-selector-options-container-create:hover {
+      background-color: #5B6ED9;
+      color: white;
+}
+
 .puzzle-selector-options-container:hover {
       background-color: #5B6ED9;
       color: white;
@@ -300,7 +318,7 @@ input[type="radio"]:hover {
       justify-content: space-between;
     }
     
-    .puzzle-selector-options-container {
+    .puzzle-selector-options-container, .puzzle-selector-options-container-create  {
       height: 255px;
       min-width: 160px;
     }
@@ -326,6 +344,10 @@ input[type="radio"]:hover {
       background: rgb(219, 219, 219);
       /* background-color: #5B6ED9; */
 
+    }
+
+    .puzzle-selector-options-container-create button {
+      display: inline;
     }
 
     .theme-drop-menu {
