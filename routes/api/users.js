@@ -7,10 +7,12 @@ const User = require("../../models/User.js");
 const keys = require("../../config/keys.js");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // import validation functions
 const validateRegisterInput = require("../../validation/register.js");
 const validateLoginInput = require("../../validation/login.js");
+const { db } = require("../../models/User.js");
 
 //test route to see if routes are working
 
@@ -18,10 +20,51 @@ router.get("/test", (request, response) => {
   response.json({ msg: "This is the users routes being called" });
 });
 
+
+//route to view a specific user
+
+router.get("/user/:id", (request, response) => {
+  User.findById(request.params.id)
+    .then((user) => response.json(user))
+    .catch((err) =>
+      response
+        .status(404)
+        .json({ userNotFound: "No User exists with that id" }));
+});
+
+
+//user info updating routes
+router.patch("/user/:id", (request, response) => {
+  // User.findById(request.params.id)
+  // .then((user) => response.json(user))
+  // .catch((err) =>
+  // response
+  // .status(404)
+  // .json({userNotFound: "No User exists with that id"}));
+
+  const updates = request.body
+  // const puzzleUpdate = request.body.puzzles;
+
+  if(ObjectId.isValid(request.params.id)){
+    db.collection('users')
+        .updateOne({_id: ObjectId(request.params.id)}, {$set: updates})
+        .then(result => {
+          response.status(200).json(result)
+        })
+        .catch(err=>{
+          response.status(500).json({error: 'Could not update the user'})
+        })
+  }
+  else{
+    response.status(500).json({error: "invalid user id"});
+  }
+
+
+});
 //test route to see if login is successful
 
 router.get(
-  "/current",
+  "/currentUser",
   passport.authenticate("jwt", { session: false }),
   (request, response) => {
     response.json({ msg: "user login successful!" });
@@ -36,15 +79,18 @@ router.post("/register", (request, response) => {
     return response.status(400).json(errors);
   }
 
-//   conditon to validate unique emails only flag error if email is already registered;
-//   User.findOne({ email: request.body.email }).then((user) => {
-//   if (user) {
-//   throw a status : 400 error if the email address already exists
-//   return response.status(400).json({
-//   email: "A User has already registered with this email address",
-//   });
-//   }
-//   we are not using emails for this app
+  //   conditon to validate unique emails only flag error if email is already registered;
+  //   User.findOne({ email: request.body.email }).then((user) => {
+  //   if (user) {
+  //   throw a status : 400 error if the email address already exists
+  //   return response.status(400).json({
+  //   email: "A User has already registered with this email address",
+  //   });
+  //   }
+  //   we are not using emails for this app
+
+
+
 
   User.findOne({
     username: request.body.username,
@@ -59,6 +105,7 @@ router.post("/register", (request, response) => {
       const newUser = new User({
         username: request.body.username,
         password: request.body.password,
+        puzzles : request.body.puzzles
       });
 
       //bcryptjs comes in here where we encrypt the password with blo:wfish algo
@@ -88,6 +135,7 @@ router.post("/login", (request, response) => {
 
   const username = request.body.username;
   const password = request.body.password;
+  const puzzles = request.body.puzzles;
 
   // use bycrpt and password to look up said user for the inputted credentials
   // this one will check for the email findOne is self explanatory
@@ -106,6 +154,7 @@ router.post("/login", (request, response) => {
         const payload = {
           id: user.id,
           username: user.username,
+          puzzles: user.puzzles
         };
         jwt.sign(
           payload,

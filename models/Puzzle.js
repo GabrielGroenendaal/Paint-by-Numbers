@@ -7,10 +7,11 @@ const PuzzleSchema = new Schema(
       type: String,
       required: true,
     },
-    // creator_id: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "users",
-    // },
+    creator_id: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+      required: false
+    },
 
     original_img_url: {
       type: String,
@@ -31,6 +32,12 @@ const PuzzleSchema = new Schema(
       type: String,
       required: true,
     },
+
+    genre:{
+      type: String,
+      required: true
+    },
+
   },
   {
     timestamps: true,

@@ -79,5 +79,10 @@ export const logout = () => (dispatch) => {
 };
 
 
+export const updateUserInfo = (user,puzzle) => (dispatch) =>
+SessionAPIUtil.updateUserInfo(user,puzzle).then((user) => dispatch(receiveCurrentUser(user)), err => dispatch(receiveSessionErrors(err.response.data)));
+
+
+
 // export const signUpUser = user => (dispatch) =>
 // SessionAPIUtil.signUp(user).then( user => (dispatch(receiveCurrentUser(user))), err => (dispatch(receiveSessionErrors(err.responseJSON))));

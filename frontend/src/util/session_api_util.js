@@ -23,3 +23,7 @@ export const login = (userData) => {
 
 }
 
+export const updateUserInfo = (userData,puzzle) => {
+    return axios.patch(`/api/users/user/${userData.id}`,puzzle);
+}
+

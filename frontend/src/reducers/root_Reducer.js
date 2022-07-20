@@ -7,9 +7,9 @@ import modalReducer from "./modal_reducer";
 
 
 const rootReducer = combineReducers({
-    // entities : entitiesReducer,
+    entities : entitiesReducer,
     modal: modalReducer,
-    puzzle: puzzleReducer,
+    // puzzle: puzzleReducer,
     session : sessionReducer,
     errors : errorsReducer
 });

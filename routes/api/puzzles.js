@@ -21,16 +21,16 @@ const validatePuzzleInput = require("../../validation/puzzles.js");
 
 //get users puzzles
 
-// router.get("/user/:user_id", (request, response) => {
-//   Puzzle.find({ creator_id: request.params.user_id })
-//     // .sort({ creator_id: request.params.user_id })
-//     .then((puzzles) => response.json(puzzles))
-//     .catch((err) =>
-//       response
-//         .status(404)
-//         .json({ noPuzzlesFound: "No Puzzles found for that User" })
-//     );
-// });
+router.get("/user/:user_id", (request, response) => {
+  Puzzle.find({ creator_id: request.params.user_id })
+    // .sort({ creator_id: request.params.user_id })
+    .then((puzzles) => response.json(puzzles))
+    .catch((err) =>
+      response
+        .status(404)
+        .json({ noPuzzlesFound: "No Puzzles found for that User" })
+    );
+});
 
 //get a specific user puzzles
 // router.get("/user/:user_id/:puzzle_id", (request, response) => {
@@ -60,7 +60,7 @@ router.get("/:id", (request, response) => {
 
 router.post(
   "/",
-  //passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (request, response) => {
     const { errors, isValid } = validatePuzzleInput(request.body);
 
@@ -75,6 +75,10 @@ router.post(
       tile_data: request.body.tile_data,
       size: request.body.size,
       difficulty: request.body.difficulty,
+      //additons @ 7/19/2022
+      creator_id: request.user.id,
+      genre: request.body.genre
+
     });
 
     newPuzzle.save().then((puzzle) => response.json(puzzle));

@@ -21,6 +21,16 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+
+    puzzles : [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'puzzles'
+      
+      }
+    ],
+
+
   },
 
   {
