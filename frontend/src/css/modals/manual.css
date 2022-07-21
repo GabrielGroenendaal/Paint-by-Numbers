@@ -1,9 +1,9 @@
 .close-button-manual {
-      width: 40px;
+      /* width: 40px; */
       display: flex;
       align-items: right;
       text-align: right;
-      margin-left: 420px;
+      margin-left: 267px;
       justify-content: right;
       margin-bottom: 10px;
       cursor: pointer;
@@ -18,8 +18,8 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       font-style: normal;
-      min-height: 200px;
-      background: white;
+      /* min-height: 200px; */
+      background:#F2F2F2;
       display: flex;
       opacity: 1;
       border-radius: 30px;
@@ -30,7 +30,7 @@
       border-radius: 25px;
       text-align: center;
       min-height: 580px;
-      min-width: 530px;
+      max-width: 300px;
       /*below might not be needed if not enough content */
       max-height: calc(100vh - 210px);
       /* overflow-y: auto; */
@@ -57,11 +57,11 @@
 
 
 .modal-instruction-child {
-      position: absolute;
+      /* position: absolute; */
       top: 50%;
       left: 50%;
       padding: 32px;
-      transform: translate(-50%, -50%);
+      /* transform: translate(-50%, -50%); */
       border-radius: 8px;
       animation: manual-animation 800ms ease-in;
 }
@@ -74,8 +74,8 @@
 }
 
 .manual-text {
-      width: 500px;
-      /* background-color: grey; */
+     /*  width: 500px;
+      background-color: grey; */
       text-align: left;
       font-size: 15px;
       padding-left: 15px;
