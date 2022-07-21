@@ -142,3 +142,9 @@
    outline: none;
 }
 
+
+#seed-title {
+      width: 80%;
+      font-size: 14px;
+      overflow-x: auto;
+}

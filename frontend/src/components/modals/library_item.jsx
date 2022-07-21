@@ -26,7 +26,7 @@ class LibraryItem extends React.Component {
             event.preventDefault();
             console.log(this.props.puzzle)
             if (this.props.type === 'made') {
-                  let text = `www.paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
+                  let text = `paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
                   navigator.clipboard.writeText(text)
                   alert("Copied the url: " + text);
             } else {
