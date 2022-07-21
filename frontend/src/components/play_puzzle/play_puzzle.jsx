@@ -125,8 +125,24 @@ class PlayPuzzle extends React.Component {
       }
 
       selectPuzzleByTheme(theme) {
-            theme = 'default'
-            this.props.fetchThemedPuzzles(theme)
+            let checkTheme = ''
+            switch (theme) {
+                  case 'ANIMALS':
+                        checkTheme = 'Animals'
+                        break
+                  case 'ARTWORKS':
+                        checkTheme = 'Artwork'
+                        break
+                  case 'LANDSCAPES':
+                        checkTheme = 'Landscape'
+                        break;
+                  case 'POP CULTURE':
+                        checkTheme = 'Pop Culture';
+                        break;
+                  default:
+                        checkTheme = 'default'
+            }
+            this.props.fetchThemedPuzzles(checkTheme)
                   .then((response) => {
                         let themed_puzzles = response.puzzles.data;
                         let themed_puzzle = themed_puzzles[Math.floor(Math.random() * themed_puzzles.length)]
