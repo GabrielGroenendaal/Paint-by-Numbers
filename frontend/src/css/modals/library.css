@@ -15,6 +15,7 @@
       /* background-color: grey; */
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
 }
 
 .cover-puzzle {
@@ -100,10 +101,7 @@
 
 }
 
-.made-puzzles {
-      flex-wrap: wrap;
-      
-}
+
 
 #library-modal-child {
       height: 100%;

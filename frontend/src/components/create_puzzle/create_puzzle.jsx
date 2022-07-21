@@ -131,7 +131,10 @@ class CreatePuzzle extends React.Component {
 
                                                 </div>
                                              
-                                                <PuzzleLibraryContainer />
+                                                <PuzzleLibraryContainer
+                                                      active={true}
+                                                      currentUser={this.props.currentUser}
+                                                />
                                     {/* SubmitPuzzleButtons */}
                                     {/* LibraryOptions */}
                                           </div>
@@ -160,7 +163,10 @@ class CreatePuzzle extends React.Component {
                                                       <ImageOptions submitImage={this.submitImage.bind(this)} board={this.state.board} />
                                                       <BombPuzzleSubmission submitPuzzle={this.submitPuzzle.bind(this)} swap={this.props.swap}/>
                                                 </div>
-                                                <PuzzleLibraryContainer />
+                                                <PuzzleLibraryContainer
+                                                   active={true}
+                                                   currentUser={this.props.currentUser}
+                                                />
                                     {/* SubmitPuzzleButtons */}
                                     {/* LibraryOptions */}
                                           </div>

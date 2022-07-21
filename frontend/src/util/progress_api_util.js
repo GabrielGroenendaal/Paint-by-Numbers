@@ -16,3 +16,7 @@ export const updateProgressOnPuzzle = (id, progress) => {
 export const deleteProgressOnPuzzle = (id) => {
       return axios.delete(`api/progresses/${id}`)
 }
+
+export const getProgressOnPuzzleAndUser = (userId, puzzleId) => {
+      return axios.get(`api/progresses/user/${userId}/${puzzleId}`)
+}

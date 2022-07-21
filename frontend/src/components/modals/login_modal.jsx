@@ -11,18 +11,18 @@ class LoginModal extends React.Component {
         this.state = {
             username: '',
             password: '',
-            
+
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.demoUserLogin = this.demoUserLogin.bind(this);
         this.passwordErrors = this.passwordErrors.bind(this);
         this.usernameErrors = this.usernameErrors.bind(this);
-      
+
 
     }
 
-   
+
     componentWillUnmount() {
         this.props.removeSessionErrors();
     }
@@ -42,14 +42,26 @@ class LoginModal extends React.Component {
         }
         const user = Object.assign({}, values);
         this.props.processForm(user)
-        .then( () => {
-            if(Object.values(this.props.errors).length > 0){
-                    console.log("");
-            }
-            else{
-                    this.props.closeModal();
-            }
-        })
+            .then(() => {
+                if (this.props.formType === 'Sign Up') {
+                    this.props.processFormAgain(user).then(() => {
+                        if (Object.values(this.props.errors).length > 0) {
+                            console.log("");
+                        }
+                        else {
+                            this.props.closeModal();
+                        }
+                    })
+                } else {
+                    if (Object.values(this.props.errors).length > 0) {
+                        console.log("");
+                    }
+                    else {
+                        this.props.closeModal();
+                    }
+                }
+
+            })
     }
 
 
@@ -92,7 +104,7 @@ class LoginModal extends React.Component {
         for (let i = 0; i < passwordErrorList.length; i++) {
             if (Object.values(this.props.errors).includes(passwordErrorList[i])) {
                 return passwordErrorMessage[i];
-               
+
             }
         }
         return "";
@@ -106,7 +118,7 @@ class LoginModal extends React.Component {
             'Username must be between 2 and 30 characters'];
 
 
-       
+
 
         let usernameErrorMessage = {
             0: "Username is Required",
@@ -118,7 +130,7 @@ class LoginModal extends React.Component {
         for (let i = 0; i < usernameLoginErrors.length; i++) {
             if (Object.values(this.props.errors).includes(usernameLoginErrors[i])) {
                 return usernameErrorMessage[i];
-                
+
             }
         }
 
@@ -159,8 +171,8 @@ class LoginModal extends React.Component {
                                 <div className="actual-close-button" onClick={() => this.props.closeModal()}>
                                     X
                                 </div>
-                            
-                                
+
+
                             </div>
                             <div className='login-message'> PAINT BY NUMBERS</div>
                             <br />
@@ -188,7 +200,7 @@ class LoginModal extends React.Component {
 
                             {this.demoUserButton()}
 
-                     
+
                         </form>
 
                     </div>

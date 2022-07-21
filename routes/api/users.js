@@ -35,12 +35,6 @@ router.get("/user/:id", (request, response) => {
 
 //user info updating routes
 router.patch("/user/:id", (request, response) => {
-  // User.findById(request.params.id)
-  // .then((user) => response.json(user))
-  // .catch((err) =>
-  // response
-  // .status(404)
-  // .json({userNotFound: "No User exists with that id"}));
 
   const updates = request.body
   // const puzzleUpdate = request.body.puzzles;
@@ -58,15 +52,11 @@ router.patch("/user/:id", (request, response) => {
   else{
     response.status(500).json({error: "invalid user id"});
   }
-
-
 });
 
 
 
 router.patch("/user/:id", (request, response) => {
-
-
   const updates = request.body
   const puzzleUpdate = request.body.puzzles;
 
@@ -92,7 +82,6 @@ router.patch("/user/:id", (request, response) => {
 
 
 //test route to see if login is successful
-
 router.get(
   "/currentUser",
   passport.authenticate("jwt", { session: false }),
@@ -108,19 +97,6 @@ router.post("/register", (request, response) => {
   if (!isValid) {
     return response.status(400).json(errors);
   }
-
-  //   conditon to validate unique emails only flag error if email is already registered;
-  //   User.findOne({ email: request.body.email }).then((user) => {
-  //   if (user) {
-  //   throw a status : 400 error if the email address already exists
-  //   return response.status(400).json({
-  //   email: "A User has already registered with this email address",
-  //   });
-  //   }
-  //   we are not using emails for this app
-
-
-
 
   User.findOne({
     username: request.body.username,
@@ -148,7 +124,7 @@ router.post("/register", (request, response) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) => response.json(user))
+            .then((finalUser) => response.json(finalUser))
             .catch((err) => console.log(err));
         });
       });

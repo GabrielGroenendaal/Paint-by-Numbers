@@ -47,6 +47,7 @@ app.use("/api/users", users);
 //for users to creaate a puzzle of their own
 app.use("/api/puzzles", puzzles);
 app.use("/api/progresses", progresses);
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

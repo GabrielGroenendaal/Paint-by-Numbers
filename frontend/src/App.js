@@ -11,37 +11,13 @@ import Main from './components/main';
 function App () {
   return (
     <div className="App">
-   
-
       <Switch>
         <Route exact path={`/`}><Main/></Route>
-        <Route path={`/:seed`}><Main/></Route>
+        <Route path={`/:seed`}><Main /></Route>     
       </Switch>
-
-     
-
-
-
     </div>
   );
 }
-
-
-// const App = () => (
-//       <div className="App">
-      
-
-//        <Switch>
-//         <Route exact path="/" component={SplashContainer} />
-//         <AuthRoute path="/register" component={SignUpContainer} />
-//         <AuthRoute path="/login" component={LoginContainer} />
-
-//       </Switch>
-
-//     </div>
-// )
-
-
 
 
 export default App;

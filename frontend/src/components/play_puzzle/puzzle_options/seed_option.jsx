@@ -10,11 +10,11 @@ const SeedOption = (props) => {
       let params = useParams();
       
       useEffect( () => {
-         
             if (params) {
                   seed = params.seed
             }
             if (seed) {
+                  console.log(seed)
                   props.updatePuzzle(seed)
                   history.push('/');
             }
@@ -28,3 +28,4 @@ const SeedOption = (props) => {
 
 
 export default SeedOption;
+

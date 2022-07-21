@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const ProgressOnPuzzle = require('../../models/Progress_on_Puzzle')
-const Puzzle = require('../../models/Puzzle')
-const User = require('../../models/User')
+
 
 
 router.get('/user/:user_id', (request, response) => {
@@ -18,6 +17,16 @@ router.get('/user/:user_id', (request, response) => {
             );
 });
 
+
+router.get("/user/:user_id/:puzzle_id", (request, response) => {
+      ProgressOnPuzzle.find({ user_id: request.params.user_id, puzzle_id: request.params.puzzle_id })
+            .then(progress => response.json(progress))
+            .catch((err) =>
+            response
+                  .status(404)
+                  .json({ noProgressFound: "No Progress on Puzzles Found for that User" })
+      );
+})
 
 router.post('/',
       passport.authenticate("jwt", { session: false }),
@@ -50,3 +59,5 @@ router.delete('/:id', (request, response) => {
             .then(() => { response.status(200).json({ message: 'Deleted!' }) })
             .catch((error) => {response.status(400).json({error: error})})
 })
+
+module.exports = router; 

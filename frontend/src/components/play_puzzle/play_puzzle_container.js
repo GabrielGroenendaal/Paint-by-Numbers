@@ -5,7 +5,7 @@ import PlayPuzzle from "./play_puzzle";
 import { fetchPuzzle } from '../../actions/puzzle_actions';
 import { openModal } from '../../actions/modal_actions';
 import { fetchPuzzlesByTheme } from '../../actions/puzzle_actions';
-import { createNewProgress, updateProgress, fetchUserProgresses, deleteProgress } from '../../actions/progress_actions';
+import { createNewProgress, updateProgress, fetchUserProgresses, deleteProgress, fetchProgressForPuzzle } from '../../actions/progress_actions';
 import { createNewPuzzle } from '../../actions/puzzle_actions';
 
 const mSTP = state => {
@@ -23,7 +23,8 @@ const mDTP = dispatch => {
             createNewProgress: progress => dispatch(createNewProgress(progress)),
             updateProgress: (id, progress) => dispatch(updateProgress(id, progress)),
             deleteProgress: id => dispatch(deleteProgress(id)),
-            processPuzzle: puzzle => dispatch(createNewPuzzle(puzzle))
+            processPuzzle: puzzle => dispatch(createNewPuzzle(puzzle)),
+            fetchProgressForPuzzle: (userId, puzzleId) => dispatch(fetchProgressForPuzzle(userId, puzzleId))
 
       }
 }

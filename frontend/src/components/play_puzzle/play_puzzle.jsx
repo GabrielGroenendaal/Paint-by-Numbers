@@ -67,24 +67,34 @@ class PlayPuzzle extends React.Component {
             this.props.fetchPuzzle(seed)
                   .then(response => {
                         let new_puzzle = response.puzzle.data;
-
                         new_board = new Board({
                               dimensions: new_puzzle.size,
                               tiles: Util.parseTileDataFromString(new_puzzle.tile_data),
                               originalImageUrl: new_puzzle.original_img_url,
                               id: new_puzzle._id
                         })
-                        // if (this.props.currentUser) {
-                        //       this.props.fetchProgressForPuzzleAndUser(this.props.currentUser.id, new_puzzle._id)
-                        //             .then((response) => {
-                        //                   let progress = response.progress.data;
-                        //                   new_board.updateBoard(progress.progressData);
-                        //             })
-                        //             .catch(err => err.responseJSON)
-                        // }
+                        console.log(new_board)
+                        if (this.props.currentUser.id) {
+                              this.props.fetchProgressForPuzzle(this.props.currentUser.id, new_puzzle._id)
+                                    .then((response) => {
+                                          let puzzleProgress = response.progress.data[0]
+                                          new_board.updateBoard(Util.parseProgressFromString(puzzleProgress.progress_data))
+                                          this.setState({ board: new_board })
 
-                        this.setState({ board: new_board })
+                                    })
+                              // this.props.fetchUserProgresses(this.props.currentUser.id)
+                              //       .then((response) => {
+                              //             let progress = response.progresses.data;
+                              //             console.log(progress)
+                              //             progress = progress.filter(el => el.puzzle_id = new_puzzle.id)
+                              //             console.log(progress)
+                              //             //new_board.updateBoard(progress.progressData);
+                              //       })
+                              //       .catch(err => err.responseJSON)
+                        } else {
+                              this.setState({ board: new_board })
 
+                        }
             }).catch(err => err.responseJSON)
       }
 
@@ -102,7 +112,8 @@ class PlayPuzzle extends React.Component {
       }
 
       selectPuzzleByTheme(theme) {
-            this.props.fetchThemedPuzzles('default')
+            theme = 'default'
+            this.props.fetchThemedPuzzles(theme)
                   .then((response) => {
                         let themed_puzzles = response.puzzles.data;
                         let themed_puzzle = themed_puzzles[Math.floor(Math.random() * themed_puzzles.length)]
@@ -129,7 +140,6 @@ class PlayPuzzle extends React.Component {
 
             if (this.state.board.id === 'empty') {
                   let creator = this.props.currentUser.id 
-                  console.log(new_progress)
                   let puzzle_datum = {
                         title: 'Title',
                         difficulty: this.state.board.difficulty || "easy",
@@ -137,22 +147,29 @@ class PlayPuzzle extends React.Component {
                         tile_data: Util.convertBoardToString(this.state.board),
                         original_img_url: (this.state.board.originalImageURL || 'https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c='),
                         genre: 'default',
-                        creator_id: creator
+                        creator_id: '62d820f04df718fe322babb3'
                   }
                   this.props.processPuzzle(puzzle_datum).then((response) => {
                         new_progress.puzzle_id = response.puzzle.data._id
+
                         this.props.createNewProgress(new_progress).then((response) => {
+                              console.log(response)
                               let new_progress = response.progress.data;
+                              let new_board = this.state.board;
+                              new_board.id = new_progress.puzzle_id;
                               this.setState({ progress: new_progress})
                         })
                   })
             } else {
                   if (this.state.progress) {    
-                        this.props.updateProgress(this.state.progress.id, new_progress).then((response) => {
-                              this.state.progress.progress_data = new_progress.progress_data;
+                        this.props.updateProgress(this.state.progress._id, new_progress).then((response) => {
+                              let new_progress_data = this.state.progress;
+                              new_progress_data.progress_data = new_progress.progress_data;
+                              this.setState({progress: new_progress_data})
                         })
                   } else {
                         this.props.createNewProgress(new_progress).then((response) => {
+                              console.log(response)
                               let new_progress = response.progress.data;
                               this.setState({ progress: new_progress})
                         })

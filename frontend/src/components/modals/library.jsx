@@ -30,28 +30,65 @@ class Library extends React.Component {
 
     componentDidMount() {
         if (this.props.currentUser) {
+
             this.props.fetchUserPuzzles(this.props.currentUser.id).then((response) => {
-                console.log(response)
-                let puzzles = response.puzzles.data;
-                let new_puzzles = []
-                puzzles.forEach(puzzle => {
-                    let puzzle_datum = {
-                        id: puzzle._id,
-                        size: puzzle.size,
-                        tileData: puzzle.tile_data
+                if (response) {
+                    let puzzles = response.puzzles.data;
+                    let new_puzzles = []
+
+                    puzzles.forEach(puzzle => {
+                        let puzzle_datum = {
+                            id: puzzle._id,
+                            size: puzzle.size,
+                            tileData: puzzle.tile_data
+                        }
+                        new_puzzles.push(puzzle_datum)
+                        this.setState({
+                            made_puzzles: new_puzzles
+                        })
+                    })
+                 
+                }
+
+            }).catch(err => console.log(err))
+
+            this.props.fetchUserProgresses(this.props.currentUser.id)
+                .then((response) => {
+                    if (response) {
+                        let progresses = response.progresses.data;
+                        let new_progress = []
+                        progresses.forEach(progress => {
+
+                            this.props.fetchPuzzle(progress.puzzle_id).then((response) => {
+                                let progress_datum = {
+                                    id: progress._id,
+                                    puzzle_id: progress.puzzle_id,
+                                    size: response.puzzle.data.size,
+                                    user_id: progress.user_id,
+                                    tileData: response.puzzle.data.tile_data,
+                                    progressData: progress.progress_data
+                                };
+                                new_progress.push(progress_datum)
+                                this.setState({
+                                    saved_puzzles: new_progress
+                                })
+                            })
+
+
+                        })
+                 
                     }
-                    new_puzzles.push(puzzle_datum)
-                })
-                this.setState({
-                    made_puzzles: new_puzzles
-                })
-            })
+
+
+                }).catch(err => console.log(err))
+
+
+
         }
     }
 
     render() {
-        console.log(this.state)
-
+        
         return (
             <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
                 <div className="modal-instruction-child" id="library-modal-child">
@@ -65,9 +102,14 @@ class Library extends React.Component {
                             <div className='login-message'> Puzzles You've Saved</div>
                             <div className="manual-title">------- Click to Open -------</div>
                             <div className="saved-puzzles">
-                                <LibraryItemContainer type={"saved"} puzzle={SamplePuzzle1} />
-                                <LibraryItemContainer type={"saved"} puzzle={SamplePuzzle2} />
-                                <LibraryItemContainer type={"saved"} puzzle={SamplePuzzle3} />
+                                {this.state.saved_puzzles.map((ele, idx) => {
+                                    return <LibraryItemContainer
+                                        type={"saved"}
+                                        puzzle={ele}
+                                        key={idx.toString()}
+                                    />
+                                })}
+
                             </div>
                             <div className='login-message' id="library-item"> Puzzles You've Made</div>
                             <div className="manual-title">------- Click to Copy URL -------</div>
@@ -80,7 +122,7 @@ class Library extends React.Component {
                                             key={idx.toString()} />
                                     )
                                 })}
-                
+
                             </div>
 
                         </form>

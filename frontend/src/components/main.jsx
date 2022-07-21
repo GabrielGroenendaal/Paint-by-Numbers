@@ -30,8 +30,7 @@ class Main extends React.Component {
                         <Modal swap={this.props.swap}/>
                         <NavBarContainer />
                         {component}
-                        {/* <Game /> */}
-                        {/* <CreatePuzzleContainer /> */}
+                  
                         <Footer />
                   </div>
             

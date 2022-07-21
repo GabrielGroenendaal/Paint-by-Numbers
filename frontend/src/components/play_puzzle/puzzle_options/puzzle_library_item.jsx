@@ -9,29 +9,23 @@ class PuzzleLibraryItem extends React.Component {
             }
       }
 
-      // update(field) {
-      //       return e => this.setState({
-      //             [field]: e.currentTarget.value
-      //       })
-      // }
+      saveButton() {
+            if (this.props.currentUser.id) {
+                  return (
+                        <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.saveProgress()}>SAVE</button>
 
-      // handleSubmit(event) {
-      //       event.preventDefault()
-      //       this.props.updatePuzzle(this.state.seed)
-      // }
+                  )
+            }
+      }
+
       render() {
-            let modal = (this.props.currentUser) ? 'library' : 'login'
-            let text = (this.props.currentUser) ? 'LIBRARY' : 'LOGIN'
+            
+            let modal = (this.props.currentUser.id) ? 'library' : 'login'
+            let text = (this.props.currentUser.id) ? 'LIBRARY' : 'LOGIN'
             let component;
             let component2;
             if (this.props.active) {
                   component = <SeedOption updatePuzzle={this.props.updatePuzzle} />
-                  //       <form id="seed" onSubmit={this.handleSubmit.bind(this)}>
-                  //             <label className="puzzle-image-options-header" id="seed-input-header">ENTER SEED</label>
-
-                  //             <input type="text" id="seed-input" onChange={this.update('seed')} value={this.state.seed} />
-                  //             <button type="submit" className="image-submit-button">SUBMIT</button>
-                  //       </form>;
                   component2 =
                         <form id="reveal">
                               <button
@@ -48,8 +42,7 @@ class PuzzleLibraryItem extends React.Component {
                         {component}
                         {/* <div className="share-puzzle-button">SHARE</div> */}
                         <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
-                        <div className="user-library-button" onClick={() => this.props.saveProgress()}>SAVE</div>
-
+                        {this.saveButton()}
                         {component2}
                   </div>
             )

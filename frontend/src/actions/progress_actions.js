@@ -68,3 +68,10 @@ export const deleteProgress = (id) => dispatch =>
       ProgressAPIUtil.deleteProgressOnPuzzle(id)
             .then(() => dispatch(clearProgress()))
             .catch(err => console.log(err))
+
+
+
+export const fetchProgressForPuzzle = (userId, puzzleId) => dispatch => 
+      ProgressAPIUtil.getProgressOnPuzzleAndUser(userId, puzzleId)
+            .then((progress) => dispatch(receiveNewProgress(progress)))
+            .catch(err => console.log(err))
