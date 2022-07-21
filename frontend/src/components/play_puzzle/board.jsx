@@ -21,7 +21,9 @@ class Board extends React.Component {
 
       componentDidMount() {
             document.addEventListener('keydown', (event) => {
-                  this.clearSelection()
+                  if (!event.altKey) {
+                        this.clearSelection()
+                  }
             });
       }
       

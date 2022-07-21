@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route, Routes, Switch, withRouter } from 'react-router-dom';
-import { AuthRoute, ProtectedRoute } from './util/route_util.js';
 // import SplashContainer from "./components/splash/splash_container.js"
 // import LoginContainer from "./components/sessions/login_container.js";
 // import SignUpContainer from "./components/sessions/signup_container.js";

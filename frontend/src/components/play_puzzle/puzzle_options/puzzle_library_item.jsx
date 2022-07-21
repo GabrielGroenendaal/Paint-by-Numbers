@@ -19,7 +19,9 @@ class PuzzleLibraryItem extends React.Component {
       }
 
       render() {
-            
+            if (!this.props.currentUser) {
+                  return null
+            }
             let modal = (this.props.currentUser.id) ? 'library' : 'login'
             let text = (this.props.currentUser.id) ? 'LIBRARY' : 'LOGIN'
             let component;
