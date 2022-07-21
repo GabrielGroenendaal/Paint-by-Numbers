@@ -6,10 +6,10 @@ class Manual extends React.Component {
     }
     render() {
         return (
-            <div className="modal-instruction-background">
-                <div className="modal-instruction-child">
+            <div className="modal-instruction-background-left">
+                <div className="modal-instruction-child-left">
                     <div className="instruction-form">
-                        <form className="manual"onClick={e => e.stopPropagation()} >
+                        <form className="manual-instruction"onClick={e => e.stopPropagation()} >
                             <br />
                             <div className="close-button-manual" onClick={() => this.props.closeModal()}>
                             <div className="actual-close-button" onClick={() => this.props.closeModal()}>
@@ -26,8 +26,8 @@ class Manual extends React.Component {
                             <div className="manual-title">------- How to Play -------</div>
                             <div className="manual-text">
                                 Look at the numbers on the top and side, these numbers represent how many squares need to be filled in.
-                                <li> Single numbers represent how many consecutive blocks need to be filled in. The easiest columns and rows to finish are the ones with zeros and the amount of columns/rows there are.</li>
-                                <li> Double numbers represents how many blocks are filled in, according to the first number, at least one space blank, then fill in consecutive squares according to the second number amount</li>
+                                <li> Single numbers represent how many consecutive blocks need to be filled in. </li>
+                                <li> Double numbers represents how many blocks are filled in, according to the first number, at least one space blank, then fill in consecutive squares according to the second number amount.</li>
                                 {/* <li>Play different levels of the game.</li>  */}
                             </div>
                             {/* <div className="manual-title">------- More Tips! -------</div>
