@@ -26,34 +26,34 @@ class ManualCreate extends React.Component {
     render() {
 
         const modal_content_one = this.state.slide === "modal_content_one" ? (
-            <div className="mpo-modal-slide content-1">
-                <div className="mpo-modal-content">
+            <div className="mpo-modal-slide-create content-1">
+                <div className="mpo-modal-content-create">
                     <div className="modal-slider-text-one">
                         <div className="manual-title">------- How to Create -------</div>
-                        <img src={require('./assets/create-manual-01.png')} alt="step 1" />
+                        <img src={require('./assets/create-manual-2-01.png')} alt="step 1" />
                     </div>
                 </div>
             </div>
         ) : ("");
 
         const modal_content_two = this.state.slide === "modal_content_two" ? (
-            <div className="mpo-modal-slide content-2">
-                <div className="mpo-modal-content">
-                    <img src={require('./assets/create-manual-04.png')} alt="step 2" />
+            <div className="mpo-modal-slide-create content-2">
+                <div className="mpo-modal-content-create">
+                    <img src={require('./assets/create-manual-2-04.png')} alt="step 2" />
                 </div>
             </div>) : ("");
 
         const modal_content_three = this.state.slide === "modal_content_three" ? (
-            <div className="mpo-modal-slide content-3">
-                <div className="mpo-modal-content">
-                    <img src={require('./assets/create-manual-05.png')} alt="step 3" />
+            <div className="mpo-modal-slide-create content-3">
+                <div className="mpo-modal-content-create">
+                    <img src={require('./assets/create-manual-2-05.png')} alt="step 3" />
                 </div>
             </div>) : ("");
 
         const modal_content_four = this.state.slide === "modal_content_four" ? (
-            <div className="mpo-modal-slide content-4">
-                <div className="mpo-modal-content">
-                    <img src={require('./assets/create-manual-06.png')} alt="step 4" />
+            <div className="mpo-modal-slide-create content-4">
+                <div className="mpo-modal-content-create">
+                    <img src={require('./assets/create-manual-2-06.png')} alt="step 4" />
                 </div>
             </div>) : ("");
 
@@ -80,7 +80,7 @@ class ManualCreate extends React.Component {
 
                             <div className="mpo-modal">
                                 <input type="checkbox" id="mpo-modal-controller" className="mpo-modal-open" hidden />
-                                <div className="mpo-modal-wrap">
+                                <div className="mpo-modal-wrap-create">
                                     <label htmlFor="mpo-modal-controller" className="mpo-modal-overlay"></label>
                                     <div className="mpo-modal-body" >
 

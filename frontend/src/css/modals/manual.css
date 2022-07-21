@@ -267,3 +267,32 @@
        margin-top: 0px;
 }
 
+/*modal create*/
+.mpo-modal-slide-create {
+      position: absolute;
+      animation: manual-animation 500ms ease-in;
+      width: 100%;
+      min-height: 400px;
+      justify-content: center;
+}
+
+.mpo-modal-content-create {
+      position: relative;
+      display: flex;
+      margin: 7px 15px 50px;
+      justify-content: center;
+      align-items: center;
+      padding-top: 30px;
+}
+
+.mpo-modal-content-create img {
+      height: 110%;
+      width: 104%;
+      justify-content: center;
+      align-items: center;
+}
+
+.mpo-modal-wrap-create {
+      display: flex;
+      justify-content: center;
+}
