@@ -109,7 +109,7 @@ class PlayPuzzle extends React.Component {
       }
 
       revealAllTiles() {
-            let new_board = Object.assign({}, this.state.board);
+            let new_board = this.state.board;
             new_board.revealAll();
             this.props.openModal('reveal')
 
