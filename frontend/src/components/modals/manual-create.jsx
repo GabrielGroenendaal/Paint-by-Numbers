@@ -1,6 +1,6 @@
 import React from "react";
 
-class Manual extends React.Component {
+class ManualCreate extends React.Component {
     constructor(props) {
         super(props)
 
@@ -27,12 +27,8 @@ class Manual extends React.Component {
             <div className="mpo-modal-slide content-1">
                 <div className="mpo-modal-content">
                     <div className="modal-slider-text-one">
-                        <div className="manual-title">------- How to Play -------</div>
-                        <div className="manual-text">
-                            Look at the numbers on the top and side, these numbers represent how many squares need to be filled in.
-                            <li> Single numbers represent how many consecutive blocks need to be filled in. </li>
-                            <li> Double numbers represents how many blocks are filled in, according to the first number, at least one space blank, then fill in consecutive squares according to the second number amount.</li>
-                        </div>
+                        <div className="manual-title">------- How to Create -------</div>
+                        <img src={require('./assets/create-manual-01.png')} alt="step 1" />
                     </div>
                 </div>
             </div>
@@ -41,29 +37,21 @@ class Manual extends React.Component {
         const modal_content_two = this.state.slide === "modal_content_two" ? (
             <div className="mpo-modal-slide content-2">
                 <div className="mpo-modal-content">
-                    <div className="manual-title">------- Tile Key -------</div>
-                    <img src={require('./key-tiles-03-03.png')} alt="tile keys" />
+                    <img src={require('./assets/create-manual-04.png')} alt="step 2" />
                 </div>
             </div>) : ("");
 
         const modal_content_three = this.state.slide === "modal_content_three" ? (
             <div className="mpo-modal-slide content-3">
                 <div className="mpo-modal-content">
-                    <div className="manual-title">------- Tips -------</div>
-                    <div className="tips-list-text">
-                        <div className="tips-number-container">
-                            <label className="tips-number">1</label>
-                            <ul> Use option-click to flag tiles.</ul>
-                        </div>
-                        <div className="tips-number-container">
-                            <label className="tips-number">2</label>
-                            <ul> Complete the larger numbers  <br />  first.</ul>
-                        </div>
-                        <div className="tips-number-container">
-                            <label className="tips-number">3</label>
-                            <ul> Complete the puzzle using the finished columns and rows.</ul>
-                        </div>
-                    </div>
+                    <img src={require('./assets/create-manual-05.png')} alt="step 3" />
+                </div>
+            </div>) : ("");
+
+        const modal_content_four = this.state.slide === "modal_content_four" ? (
+            <div className="mpo-modal-slide content-4">
+                <div className="mpo-modal-content">
+                    <img src={require('./assets/create-manual-06.png')} alt="step 4" />
                 </div>
             </div>) : ("");
 
@@ -93,7 +81,7 @@ class Manual extends React.Component {
                                 <div className="mpo-modal-wrap">
                                     <label htmlFor="mpo-modal-controller" className="mpo-modal-overlay"></label>
                                     <div className="mpo-modal-body" >
-                                       
+
                                         <input type="radio" name="content-nav" value={"modal_content_one"}
                                             className="modal-radio" onChange={this.onChangeValue("modal_content_one")}
                                             checked={this.state.slide === "modal_content_one"} />
@@ -108,10 +96,15 @@ class Manual extends React.Component {
                                             className="modal-radio" onChange={this.onChangeValue("modal_content_three")}
                                             checked={this.state.slide === "modal_content_three"} />
 
+                                        <input type="radio" name="content-nav" value={"modal_content_four"}
+                                            className="modal-radio" onChange={this.onChangeValue("modal_content_four")}
+                                            checked={this.state.slide === "modal_content_four"} />
+
 
                                         {modal_content_one}
                                         {modal_content_two}
                                         {modal_content_three}
+                                        {modal_content_four}
 
 
 
@@ -127,4 +120,4 @@ class Manual extends React.Component {
         )
     }
 }
-export default Manual;
+export default ManualCreate;

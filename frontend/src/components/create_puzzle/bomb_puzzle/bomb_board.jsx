@@ -25,7 +25,11 @@ class BombBoard extends React.Component {
       }
 
       addToSelection(tile) {
-            this.setState(prevState => ({ selection: [...prevState.selection, tile]}))
+            let new_selection = this.state.selection
+            if (!new_selection.includes(tile)) {
+                  this.setState(prevState => ({ selection: [...prevState.selection, tile] }))
+
+            }
       }
 
       onMouseDown(event) {

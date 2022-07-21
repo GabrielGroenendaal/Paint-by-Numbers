@@ -1,6 +1,7 @@
 import React from "react";
 import LibraryItemContainer from "./library_item_container";
-import Util from "../game_logic/util";
+import LibrarySavedItemContainer from "./library_saved_item_container";
+import Util from "../../game_logic/util";
 
 
 class Library extends React.Component {
@@ -17,9 +18,9 @@ class Library extends React.Component {
     componentDidMount() {
         if (this.props.currentUser) {
 
-            this.props.fetchUserPuzzles(this.props.currentUser.id).then((response) => {
-                if (response) {
-                    let puzzles = response.puzzles.data;
+            this.props.fetchUserPuzzles(this.props.currentUser.id).then((res1) => {
+                if (res1) {
+                    let puzzles = res1.puzzles.data;
                     let new_puzzles = []
 
                     puzzles.forEach(puzzle => {
@@ -27,7 +28,8 @@ class Library extends React.Component {
                         let puzzle_datum = {
                             id: puzzle._id,
                             size: puzzle.size,
-                            tileData: puzzle.tile_data
+                            tileData: puzzle.tile_data,
+                            creator_id: puzzle.creator_id
                         }
                         new_puzzles.push(puzzle_datum)
                         this.setState({
@@ -37,23 +39,23 @@ class Library extends React.Component {
 
                 }
 
-            }).catch(err => console.log(err)).then(() => {
+            }).catch(err => console.log(err))
                 this.props.fetchUserProgresses(this.props.currentUser.id)
-                .then((response) => {
-                    if (response) {
-                        let progresses = response.progresses.data;
+                .then((res2) => {
+                    if (res2) {
+                        let progresses = res2.progresses.data;
                         let new_progress = []
                         progresses.forEach(progress => {
-                            console.log(progress)
-                            this.props.fetchPuzzle(progress.puzzle_id).then((res) => {
-                                if (res.puzzle.data) {
+                            // console.log(progress)
+                            this.props.fetchPuzzle(progress.puzzle_id).then((res3) => {
+                                if (res3.puzzle.data) {
                                     let progress_datum = {
                                         id: progress._id,
                                         puzzle_id: progress.puzzle_id,
                                         user_id: progress.user_id,
-                                        tileData: res.puzzle.data.tile_data,
-                                        progressData: progress.progress_data,
-                                        size: res.puzzle.data.size,
+                                        tileData: res3.puzzle.data.tile_data,
+                                        progress: progress.progress_data,
+                                        size: res3.puzzle.data.size,
     
                                     };
                                     new_progress.push(progress_datum)
@@ -72,7 +74,7 @@ class Library extends React.Component {
 
                 }).catch(err => console.log(err))
 
-            })
+            
 
 
 
@@ -93,11 +95,11 @@ class Library extends React.Component {
                 <div className="library-manual-title">------- Click to Open -------</div>
                 <div className="saved-puzzles">
                     <div className="library-items">
-                        {this.state.saved_puzzles.map((ele, idx) => {
+                        {this.state.saved_puzzles.map((ele2, idx) => {
                             
-                                return <LibraryItemContainer
+                                return <LibrarySavedItemContainer
                                 type={"saved"}
-                                puzzle={ele}
+                                savedPuzzle={ele2}
                                 key={idx.toString()}
                             />
                             
@@ -111,9 +113,9 @@ class Library extends React.Component {
 
         )
     }
-// 62d997ae86b2f7e0794ec4fc (beautiful water)
-    // 62d9977f86b2f7e0794ec4fa (beautiful mountains)
+
     madePuzzles() {
+
         return (
             <div className="made-puzzles-container">
                 <div className='login-message' id="library-item"> Puzzles You've Made</div>
@@ -123,10 +125,7 @@ class Library extends React.Component {
                         {
                             this.state.made_puzzles.map(
                                 (ele, idx) => {
-                                    if (idx === 0) {
-                                        return null
-                                    }
-                                  
+                                   
                                         return (
                                             <LibraryItemContainer
                                                 type="made"
