@@ -90,17 +90,17 @@ class Library extends React.Component {
     render() {
         
         return (
-            <div className="modal-instruction-background" onClick={() => this.props.closeModal()}>
-                <div className="modal-instruction-child" id="library-modal-child">
-                    <div className="instruction-form" id="library-modal">
-                        <form className="manual" id="library" onClick={e => e.stopPropagation()}>
+            <div className="library-instruction-background" onClick={() => this.props.closeModal()}>
+                <div className="library-instruction-child" id="library-modal-child">
+                    <div className="library-form" id="library-modal">
+                        <form className="library-manual" id="library" onClick={e => e.stopPropagation()}>
                             <div className="close-button library-close-button">
                                 <div className="actual-close-button" onClick={() => this.props.closeModal()}>
                                     X
                                 </div>
                             </div>
                             <div className='login-message'> Puzzles You've Saved</div>
-                            <div className="manual-title">------- Click to Open -------</div>
+                            <div className="library-manual-title">------- Click to Open -------</div>
                             <div className="saved-puzzles">
                                 {this.state.saved_puzzles.map((ele, idx) => {
                                     return <LibraryItemContainer
