@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { closeModal } from '../../actions/modal_actions.js';
 
 class ManualCreate extends React.Component {
     constructor(props) {
@@ -119,5 +121,11 @@ class ManualCreate extends React.Component {
             </div>
         )
     }
+
+
+    
 }
 export default ManualCreate;
+
+
+

@@ -10,6 +10,7 @@ import Reveal from './reveal_puzzle'
 import LibraryContainer from './library/library_container';
 import SeedContainer from '../create_puzzle/create_puzzle_options/seed_container';
 import RevealContainer from './reveal_container';
+import ManualCreateContainer from './manual_create_container';
 
 import "../../App.css";
 var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
@@ -32,6 +33,9 @@ class Modal extends React.Component {
                         break
                   case 'manual':
                         component = <ManualContainer />
+                        break
+                  case 'createmanual':
+                        component = <ManualCreateContainer />
                         break
                   case 'library':
                         component = <LibraryContainer />
