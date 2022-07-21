@@ -146,7 +146,7 @@ class PlayPuzzle extends React.Component {
             }
 
             if (this.state.board.id === 'empty') {
-                  let creator = this.props.currentUser.id 
+                  // let creator = this.props.currentUser.id 
                   let puzzle_datum = {
                         title: 'Title',
                         difficulty: this.state.board.difficulty || "easy",
@@ -158,7 +158,7 @@ class PlayPuzzle extends React.Component {
                   }
                   this.props.processPuzzle(puzzle_datum).then((response) => {
                         new_progress.puzzle_id = response.puzzle.data._id
-
+                        console.log(response)
                         this.props.createNewProgress(new_progress).then((response) => {
                               let new_progress = response.progress.data;
                               let new_board = this.state.board;

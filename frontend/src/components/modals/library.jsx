@@ -85,6 +85,8 @@ class Library extends React.Component {
 
 
     savedPuzzles() {
+        console.log(this.state.saved_puzzles)
+
         return (
             <div className="saved-puzzles-container">
                 <div className='login-message'> Puzzles You've Saved</div>
@@ -109,9 +111,9 @@ class Library extends React.Component {
 
         )
     }
-
+// 62d997ae86b2f7e0794ec4fc (beautiful water)
+    // 62d9977f86b2f7e0794ec4fa (beautiful mountains)
     madePuzzles() {
-        console.log(this.state.made_puzzles)
         return (
             <div className="made-puzzles-container">
                 <div className='login-message' id="library-item"> Puzzles You've Made</div>
