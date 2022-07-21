@@ -8,7 +8,10 @@ const LibraryItemTile = (props) => {
       let classText = "library-tile"
       let text = ""
       if (renderTile.explored && renderTile.bombed) {
-            classText += ' library-tile-bomb library-tile-explored'
+            classText += ' library-tile-explored'
+            if (props.type === 'saved') {
+                  classText += ' library-tile-bomb'
+            }
       } else if (renderTile.explored) {
             classText += " library-tile-explored"
       } else if (renderTile.flagged) {
@@ -19,7 +22,9 @@ const LibraryItemTile = (props) => {
       }
 
       let renderTileStyle = (renderTile.colored && renderTile.explored) ? { background: renderTile.color } : {}
-      
+      if (props.type === 'made') {
+            renderTileStyle = { background: renderTile.color}
+      }
       let dims = Util.convertDimensionsToString(props.board.dimensions)
       switch (dims) {
             case "5x5":
@@ -41,7 +46,7 @@ const LibraryItemTile = (props) => {
                   className={classText}
                   style={renderTileStyle}
             >
-
+            
             </td>
       )
 }

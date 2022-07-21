@@ -88,7 +88,6 @@ const ColorUtil = {
       },
 
       mapTiles(tiles, avg) {
-            console.log(avg)
             tiles.forEach((tile, idx) => {
                   let hex = this.hexToRGB(tile[0])
                   let hexTotal = hex.r + hex.g + hex.b;

@@ -93,7 +93,6 @@ router.post(
 );
 
 router.get("/themes/:genre", (request, response) => {
-  console.log(request.params.genre)
   Puzzle.find({ genre: request.params.genre })
     .then((puzzles) => response.json(puzzles))
     .catch((err) =>

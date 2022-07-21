@@ -45,7 +45,7 @@ class Board {
                   for (let k = 0; k < this.height(); k++) {
                         let thisTileData = tileData.shift();
                         let bombedStatus = Util.parseBoolean(thisTileData[1]);
-                        if (bombedStatus == false) { this.total += 1; }
+                        if (bombedStatus === false) { this.total += 1; }
                         let tileOptions = {
                               color: thisTileData[0],
                               bombed: bombedStatus,
@@ -70,7 +70,7 @@ class Board {
                   for (let k = 0; k < this.height(); k++) {
                         let tileOptions = {
                               bombed: false,
-                              color: 'gray',
+                              color: 'white',
                               board: this,
                               explored: false, 
                               flagged: false,

@@ -14,7 +14,6 @@ class PuzzleOptions extends React.Component {
       }
 
       handleClick(event) {
-            console.log(event)
             event.preventDefault();
             this.props.selectTheme(event.currentTarget.outerText)
       }

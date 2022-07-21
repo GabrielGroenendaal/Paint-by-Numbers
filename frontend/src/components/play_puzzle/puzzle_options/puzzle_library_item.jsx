@@ -10,7 +10,7 @@ class PuzzleLibraryItem extends React.Component {
       }
 
       saveButton() {
-            if (this.props.currentUser.id) {
+            if (this.props.currentUser) {
                   return (
                         <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.saveProgress()}>SAVE</button>
 
@@ -19,23 +19,27 @@ class PuzzleLibraryItem extends React.Component {
       }
 
       render() {
-            if (!this.props.currentUser) {
-                  return null
-            }
-            let modal = (this.props.currentUser.id) ? 'library' : 'login'
-            let text = (this.props.currentUser.id) ? 'LIBRARY' : 'LOGIN'
+            
+            let modal = 'login'
+            let text = 'LOGIN'
+            if (this.props.currentUser) {
+                  if (this.props.currentUser.id) {
+                        modal = 'library'
+                        text = 'LIBRARY'
+                  }
+            }  
             let component;
-            let component2;
+            // let component2;
             if (this.props.active) {
                   component = <SeedOption updatePuzzle={this.props.updatePuzzle} />
-                  component2 =
-                        <form id="reveal">
-                              <button
-                                    type="submit"
-                                    className="image-submit-button reveal-button"
-                                    onClick={() => this.props.revealAll()}
-                              >REVEAL</button>
-                        </form>
+                  // component2 =
+                  //       <form id="reveal">
+                  //             <button
+                  //                   type="submit"
+                  //                   className="image-submit-button reveal-button"
+                  //                   onClick={() => this.props.revealAll()}
+                  //             >REVEAL</button>
+                  //       </form>
             }
            
             return (
@@ -45,7 +49,7 @@ class PuzzleLibraryItem extends React.Component {
                         {/* <div className="share-puzzle-button">SHARE</div> */}
                         <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
                         {this.saveButton()}
-                        {component2}
+                        {/* {component2} */}
                   </div>
             )
       }

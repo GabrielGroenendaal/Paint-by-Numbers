@@ -3,28 +3,30 @@ import Board from '../game_logic/board'
 import LibraryItemTile from './library_item_tile'
 import Util from "../game_logic/util";
 import { withRouter } from "react-router";
+
 class LibraryItem extends React.Component {
       constructor(props) {
             super(props)
 
             let progress = (this.props.type === "saved") ? Util.parseProgressFromString(this.props.puzzle.progressData) : null
-            let newBoard = new Board({
+
+            let options = {
                   tiles: Util.parseTileDataFromString(this.props.puzzle.tileData),
                   dimensions: this.props.puzzle.size,
-            }, { tiles: progress });
-
-            if (this.props.type === "made") {
+            }
+            let newBoard = new Board(options);
+            if (this.props.type === "saved") {
+                  newBoard.updateBoard(progress)
+            } else {
                   newBoard.revealAll()
             }
-
             this.state = {
                   board: newBoard
             }
       }
-      
+    
       onClick(event) {
             event.preventDefault();
-            console.log(this.props.puzzle)
             if (this.props.type === 'made') {
                   if (event.altKey) {
                         this.props.deletePuzzle(this.props.puzzle.id)
@@ -32,7 +34,7 @@ class LibraryItem extends React.Component {
                   } else {
                         let text = `paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
                         navigator.clipboard.writeText(text)
-                        alert("Copied the url: " + text); 
+                        alert("Copied the url: " + text);
                   }
             } else {
                   if (event.altKey) {
@@ -64,6 +66,7 @@ class LibraryItem extends React.Component {
                                                                         tile={innerEle}
                                                                         key={idx.toString() + innerIdx.toString()}
                                                                         board={this.state.board}
+                                                                        type={this.props.type}
                                                                   />
                                                             )
                                                       })}

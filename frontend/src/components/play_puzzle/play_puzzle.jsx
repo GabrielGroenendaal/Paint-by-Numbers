@@ -73,7 +73,6 @@ class PlayPuzzle extends React.Component {
                               originalImageUrl: new_puzzle.original_img_url,
                               id: new_puzzle._id
                         })
-                        console.log(new_board)
                         if (this.props.currentUser.id) {
                               this.props.fetchProgressForPuzzle(this.props.currentUser.id, new_puzzle._id)
                                     .then((response) => {
@@ -125,7 +124,7 @@ class PlayPuzzle extends React.Component {
                   .then((response) => {
                         let themed_puzzles = response.puzzles.data;
                         let themed_puzzle = themed_puzzles[Math.floor(Math.random() * themed_puzzles.length)]
-                        console.log(themed_puzzle)
+                        // console.log(themed_puzzle)
                         let new_board = new Board({
                               dimensions: themed_puzzle.size, 
                               tiles: Util.parseTileDataFromString(themed_puzzle.tile_data),
@@ -161,7 +160,6 @@ class PlayPuzzle extends React.Component {
                         new_progress.puzzle_id = response.puzzle.data._id
 
                         this.props.createNewProgress(new_progress).then((response) => {
-                              console.log(response)
                               let new_progress = response.progress.data;
                               let new_board = this.state.board;
                               new_board.id = new_progress.puzzle_id;
@@ -177,7 +175,6 @@ class PlayPuzzle extends React.Component {
                         })
                   } else {
                         this.props.createNewProgress(new_progress).then((response) => {
-                              console.log(response)
                               let new_progress = response.progress.data;
                               this.setState({ progress: new_progress})
                         })
@@ -211,7 +208,9 @@ class PlayPuzzle extends React.Component {
                               <div className="middle-option-container">
                                     <ProgressBoard
                                           board={this.state.board}
-                                          reset={this.reset.bind(this)} />
+                                          reset={this.reset.bind(this)}
+                                          revealAll={this.revealAllTiles}
+                                    />
                                     <PuzzleSubmit
                                           generate={this.generatePuzzle.bind(this)}
                                           swap={this.props.swap} />
