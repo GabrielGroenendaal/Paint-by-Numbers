@@ -13,6 +13,7 @@ const Puzzle = require("./models/Puzzle.js");
 const ProgressOnPuzzle = require('./models/Progress_on_Puzzle')
 const progresses = require("./routes/api/progresses.js")
 const path = require('path');
+const cors = require("cors");
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
@@ -28,6 +29,10 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
+
+
+// defeat CORS
+app.use(cors());
 
 app.use(
   bodyParser.urlencoded({
