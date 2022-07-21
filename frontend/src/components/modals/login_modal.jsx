@@ -168,9 +168,9 @@ class LoginModal extends React.Component {
                         <form className="sform" onClick={e => e.stopPropagation()} onSubmit={this.handleSubmit} >
                             <br />
                             <div className="close-button" onClick={() => this.props.closeModal()} >
-                                <div className="actual-close-button" onClick={() => this.props.closeModal()}>
+                                {/* <div className="actual-close-button" onClick={() => this.props.closeModal()}>
                                     X
-                                </div>
+                                </div> */}
 
 
                             </div>
