@@ -34,7 +34,7 @@ class LibrarySavedItem extends React.Component {
                         board: null
                   })
             } else {
-                  this.props.history.push(`/${this.props.savedPuzzle.id}`)
+                  this.props.history.push(`/${this.props.savedPuzzle.puzzle_id}`)
                   this.props.closeModal()
             }
       }
