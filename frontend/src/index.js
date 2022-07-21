@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (decodedUser.exp < currentTime) {
       store.dispatch(logoutCurrentUser());
-      window.location.href = "/login";
+      //window.location.href = "/login";
     }
   } else {
     store = configureStore({});
