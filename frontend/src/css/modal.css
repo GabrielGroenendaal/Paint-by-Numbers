@@ -11,7 +11,7 @@
       z-index: 1111;
       height: 40px;
       width: 40px;
-      /* right: 30px;*/
+      right: 46px;
       top: 130px;
       display: inline-flex;
       align-items: right;
@@ -24,7 +24,8 @@
       color: #3854A6;
       font-weight: 600;
       opacity: .8;
-      animation: none;
+      animation: appear 350ms ease-in 1
+      ;
 
 }
 

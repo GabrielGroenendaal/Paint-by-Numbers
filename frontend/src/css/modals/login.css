@@ -18,7 +18,7 @@
       opacity: 1;
       border-radius: 30px;
       flex-direction: column;
-      /* justify-content: center;*/
+      justify-content: center;
       align-items: center;
       padding: 20px;
       border-radius: 25px;
