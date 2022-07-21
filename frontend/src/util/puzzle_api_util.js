@@ -33,3 +33,7 @@ export const updateUsersPuzzle = (user,puzzle) => {
 export const createPuzzle = puzzleData => {
     return axios.post('api/puzzles/', puzzleData);
 }
+
+export const deletePuzzle = puzzleId => {
+    return axios.delete(`api/puzzles/${puzzleId}`)
+}

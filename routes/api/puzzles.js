@@ -101,4 +101,11 @@ router.get("/themes/:genre", (request, response) => {
     );
 });
 
+router.delete('/:id', (request, response) => {
+  Puzzle.deleteOne({ _id: request.params.id })
+        .then(() => { response.status(200).json({ message: 'Deleted!' }) })
+        .catch((error) => {response.status(400).json({error: error})})
+})
+
+
 module.exports = router;

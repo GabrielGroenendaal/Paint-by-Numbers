@@ -68,7 +68,8 @@ PuzzleAPIUtil.updateUsersPuzzle(user,puzzle).then( puzzle => dispatch(receivePuz
 export const createNewPuzzle = puzzleData => (dispatch) =>
     PuzzleAPIUtil.createPuzzle(puzzleData).then(puzzle => dispatch(receiveNewPuzzle(puzzle))).catch(err => console.log(err));
 
-
+export const deletePuzzle = puzzleId => (dispatch) =>
+    PuzzleAPIUtil.deletePuzzle(puzzleId).catch(err => console.log(err))
 
 
 

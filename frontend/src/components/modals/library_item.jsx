@@ -26,9 +26,14 @@ class LibraryItem extends React.Component {
             event.preventDefault();
             console.log(this.props.puzzle)
             if (this.props.type === 'made') {
-                  let text = `paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
-                  navigator.clipboard.writeText(text)
-                  alert("Copied the url: " + text);
+                  if (event.altKey) {
+                        this.props.deletePuzzle(this.props.puzzle.id)
+                        this.setState({board: null})
+                  } else {
+                        let text = `paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
+                        navigator.clipboard.writeText(text)
+                        alert("Copied the url: " + text); 
+                  }
             } else {
                   if (event.altKey) {
                         this.props.deleteProgress(this.props.puzzle.id)

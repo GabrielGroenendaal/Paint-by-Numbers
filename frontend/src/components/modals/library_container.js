@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions.js';
 import Library from './library.jsx';
 
-import { fetchUserPuzzles, fetchPuzzle } from '../../actions/puzzle_actions.js';
+import { fetchUserPuzzles, fetchPuzzle, deletePuzzle } from '../../actions/puzzle_actions.js';
 import { deleteProgress, fetchUserProgresses } from '../../actions/progress_actions.js';
 const mSTP = (state) => {
     return {
@@ -16,7 +16,8 @@ const mDTP = dispatch => {
         fetchUserPuzzles: (id) => dispatch(fetchUserPuzzles(id)),
         fetchUserProgresses: (id) => dispatch(fetchUserProgresses(id)),
         deleteProgress: (id) => dispatch(deleteProgress(id)),
-        fetchPuzzle: (id) => dispatch(fetchPuzzle(id))
+        fetchPuzzle: (id) => dispatch(fetchPuzzle(id)),
+        deletePuzzle: (id) => dispatch(deletePuzzle(id))
     }
 }
 
