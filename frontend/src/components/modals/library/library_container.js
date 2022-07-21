@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { closeModal } from '../../actions/modal_actions.js';
+import { closeModal } from '../../../actions/modal_actions.js';
 import Library from './library.jsx';
 
-import { fetchUserPuzzles, fetchPuzzle, deletePuzzle } from '../../actions/puzzle_actions.js';
-import { deleteProgress, fetchUserProgresses } from '../../actions/progress_actions.js';
+import { fetchUserPuzzles, fetchPuzzle, deletePuzzle } from '../../../actions/puzzle_actions.js';
+import { deleteProgress, fetchUserProgresses } from '../../../actions/progress_actions.js';
 const mSTP = (state) => {
     return {
         currentUser: state.session.user

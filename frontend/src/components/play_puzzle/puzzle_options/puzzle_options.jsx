@@ -50,7 +50,7 @@ class PuzzleOptions extends React.Component {
                                           <li><a href="#" onMouseDown={this.handleClick.bind(this)}>ANIMALS</a></li>
                                           <li><a href="#" onMouseDown={this.handleClick.bind(this)}>ARTWORKS</a></li>
                                           <li><a href="#" onMouseDown={this.handleClick.bind(this)}>LANDSCAPES</a></li>
-                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>MEMES</a></li>
+                                          <li><a href="#" onMouseDown={this.handleClick.bind(this)}>POP CULTURE</a></li>
                                     </ul>
                               </div>
                         </div>

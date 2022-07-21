@@ -1,5 +1,5 @@
 import React from "react";
-import Util from "../game_logic/util";
+import Util from "../../game_logic/util";
 
 
 const LibraryItemTile = (props) => {

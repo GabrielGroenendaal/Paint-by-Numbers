@@ -7,7 +7,7 @@ import LoginContainer from '../sessions/login_container';
 import SignUpContainer from '../sessions/signup_container';
 import ManualContainer from './manual_container';
 import Reveal from './reveal_puzzle'
-import LibraryContainer from './library_container';
+import LibraryContainer from './library/library_container';
 import SeedContainer from '../create_puzzle/create_puzzle_options/seed_container';
 import RevealContainer from './reveal_container';
 

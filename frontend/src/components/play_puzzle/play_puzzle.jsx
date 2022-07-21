@@ -79,9 +79,15 @@ class PlayPuzzle extends React.Component {
                                           if (response.progress.data[0]) {
                                                 let puzzleProgress = response.progress.data[0]
                                                 new_board.updateBoard(Util.parseProgressFromString(puzzleProgress.progress_data))
-                                                this.setState({ board: new_board })
+                                                this.setState({
+                                                      board: new_board,
+                                                      progress: response.progress.data
+                                                })
                                           } else {
-                                                this.setState({ board: new_board })
+                                                this.setState({
+                                                      board: new_board,
+                                                      progress: null
+                                                })
 
                                           }
                   
@@ -158,7 +164,7 @@ class PlayPuzzle extends React.Component {
                   }
                   this.props.processPuzzle(puzzle_datum).then((response) => {
                         new_progress.puzzle_id = response.puzzle.data._id
-                        console.log(response)
+                        // console.log(response)
                         this.props.createNewProgress(new_progress).then((response) => {
                               let new_progress = response.progress.data;
                               let new_board = this.state.board;

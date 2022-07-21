@@ -18,15 +18,30 @@ class Board {
             this.total = 0;
 
             // Parse the Tile Data 
-            this.tiles = (options.tiles) ? this.makeTileMap(options.tiles) : this.generateBoard();
-            if (!options.tiles) { this.plantBombs() } 
+            this.tiles = []
+            if (options.tiles) {
+                  this.tiles = this.makeTileMap(options.tiles)
+            } else if (options.freshTiles) {
+                  let fresh = Util.parseTileDataFromString(options.freshTiles)
+                  this.tiles = this.makeTileMap(fresh)
+            } else {
+                  this.tiles = this.generateBoard()
+                  this.plantBombs()
+            }
+            
+            
 
             // Parse the progress data
             this.mistakes = progress.mistakes || 0;
             this.guesses = progress.guesses || 0;
             this.complete = false;
             this.perfect = false;
-            this.updateBoard(progress.tiles);
+            if (progress.tiles) {
+                  this.updateBoard(progress.tiles);
+            } else if (progress.freshTiles) {
+                  let fresh = Util.parseProgressFromString(progress.freshTiles)
+                  this.updateBoard(fresh)
+            }
 
             
             // Generates Hints
@@ -36,8 +51,40 @@ class Board {
             this.updateHintsY();
       }
 
+      makeFreshMap(tileData) {
+            if (!tileData) {
+                  return null
+            }
+            let data = Util.parseTileDataFromString(tileData)
+            let board = []
+
+            for (let i = 0; i < this.width(); i++) {
+                  let row = []
+                  for (let k = 0; k < this.height(); k++) {
+                        let thisTileData = tileData.shift();
+                        let bombedStatus = Util.parseBoolean(thisTileData[1]);
+                        if (bombedStatus === false) { this.total += 1; }
+                        let tileOptions = {
+                              color: thisTileData[0],
+                              bombed: bombedStatus,
+                              board: this,
+                              explored: false, 
+                              flagged: false,
+                              pos: [i,k]
+                        }
+                        let tile = new Tile(tileOptions)
+                        row.push(tile)
+                  }
+                  board.push(row)
+            }
+            return board
+      }
+
 
       makeTileMap(tileData) {
+            if (!tileData) {
+                  return null
+            }
             let board = []
 
             for (let i = 0; i < this.width(); i++) {
@@ -169,7 +216,7 @@ class Board {
       }
 
       updateBoard(progress) {
-            if (progress == null) { return null }
+            if (!progress) { return null }
 
             for (let i = 0; i < this.width(); i++) {
                   for (let k = 0; k < this.height(); k++) {
