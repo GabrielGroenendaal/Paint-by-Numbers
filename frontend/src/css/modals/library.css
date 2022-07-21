@@ -70,11 +70,10 @@
   .message {
       align-items: center;
       text-align: center;
-  } */
+  } 
 .saved-puzzles {
       width: 500px;
       height: 170px;
-      /* background-color: grey; */
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -83,14 +82,12 @@
 .made-puzzles {
       width: 500px;
       
-      /* background-color: grey; */
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
 }
 
 .cover-puzzle {
-      /* flex-direction: row; */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -216,7 +213,6 @@
       display: flex;
       width: 500px;
       height: 170px;
-      /* background-color: grey; */
       display: flex;
       align-items: center;
       justify-content: space-between;
