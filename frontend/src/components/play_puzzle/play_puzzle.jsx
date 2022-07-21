@@ -77,9 +77,15 @@ class PlayPuzzle extends React.Component {
                         if (this.props.currentUser.id) {
                               this.props.fetchProgressForPuzzle(this.props.currentUser.id, new_puzzle._id)
                                     .then((response) => {
-                                          let puzzleProgress = response.progress.data[0]
-                                          new_board.updateBoard(Util.parseProgressFromString(puzzleProgress.progress_data))
-                                          this.setState({ board: new_board })
+                                          if (response.progress.data[0]) {
+                                                let puzzleProgress = response.progress.data[0]
+                                                new_board.updateBoard(Util.parseProgressFromString(puzzleProgress.progress_data))
+                                                this.setState({ board: new_board })
+                                          } else {
+                                                this.setState({ board: new_board })
+
+                                          }
+                  
 
                                     })
                               // this.props.fetchUserProgresses(this.props.currentUser.id)
