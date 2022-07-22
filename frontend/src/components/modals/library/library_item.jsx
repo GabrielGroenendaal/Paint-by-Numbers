@@ -22,11 +22,15 @@ class LibraryItem extends React.Component {
             event.preventDefault()
             if (event.altKey) {
                   this.props.deletePuzzle(this.props.puzzle.id)
-                  this.setState({ board: null})
+                  this.setState({ board: null })
             } else {
                   let text = `paint-by-number.herokuapp.com/#/${this.props.puzzle.id}`
-                  navigator.clipboard.writeText(text)
-                  alert("URL copied to dashboard!")
+                  navigator.clipboard.writeText(text).then(() => {
+                        alert(`URL copied to dashboard!: ${text}`)
+
+                  }, () => {
+                        alert(`Unsuccessful copy`)
+                  })
             }
       }
       render() {
