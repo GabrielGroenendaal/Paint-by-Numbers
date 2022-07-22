@@ -31,7 +31,6 @@ class PuzzleLibraryItem extends React.Component {
             let component;
             // let component2;
             if (this.props.active) {
-                  component = <SeedOption updatePuzzle={this.props.updatePuzzle} />
                   // component2 =
                   //       <form id="reveal">
                   //             <button
@@ -45,7 +44,7 @@ class PuzzleLibraryItem extends React.Component {
             return (
                   <div className="puzzle-library-options">
                         {/* <div className="save-to-library-button">SAVE</div> */}
-                        {component}
+                        {/* {component} */}
                         {/* <div className="share-puzzle-button">SHARE</div> */}
                         <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
                         {this.saveButton()}

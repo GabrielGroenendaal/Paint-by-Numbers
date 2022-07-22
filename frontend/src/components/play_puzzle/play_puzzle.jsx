@@ -6,8 +6,7 @@ import PuzzleOptions from './puzzle_options/puzzle_options';
 import PuzzleSubmit from './puzzle_options/puzzle_submit';
 import PuzzleLibraryContainer from './puzzle_options/puzzle_library_container';
 import ProgressBoard from './puzzle_options/progress_board';
-
-
+import SeedOption from './puzzle_options/seed_option';
 class PlayPuzzle extends React.Component {
       constructor(props) {
             super(props)
@@ -247,7 +246,7 @@ class PlayPuzzle extends React.Component {
                                     generate={this.generatePuzzle.bind(this)}
                                     saveProgress={this.saveProgress.bind(this)}
                                     updatePuzzle={this.updatePuzzle} />
-                              
+                              <SeedOption updatePuzzle={this.updatePuzzle.bind(this)} />
                         </div>
 
                   </div>

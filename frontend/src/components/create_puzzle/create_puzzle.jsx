@@ -10,7 +10,8 @@ import ColorUtil from '../game_logic/color_util'
 import BombPuzzleSubmission from "./bomb_puzzle/bomb_puzzle_submission";
 import BombBoard from "./bomb_puzzle/bomb_board";
 import PuzzleLibraryContainer from "../play_puzzle/puzzle_options/puzzle_library_container";
-
+import SeedComponent from "./create_puzzle_options/seed_component";
+import Seed from "./create_puzzle_options/seed";
 class CreatePuzzle extends React.Component {
       constructor(props) {
             super(props)
@@ -140,7 +141,8 @@ class CreatePuzzle extends React.Component {
                                           </div>
                                           </div>
                               </div>
-                      
+                              <SeedComponent swap={this.props.swap} />
+
                             
       
                         </div>
@@ -173,7 +175,7 @@ class CreatePuzzle extends React.Component {
                                           </div>
                               </div>
                       
-                            
+                            <SeedComponent swap={this.props.swap} />
       
                         </div>
                   )
