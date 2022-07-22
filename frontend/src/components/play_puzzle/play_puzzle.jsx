@@ -190,9 +190,11 @@ class PlayPuzzle extends React.Component {
                   })
             } else {
                   if (this.state.progress) {    
-                        this.props.updateProgress(this.state.progress._id, new_progress).then((response) => {
+                        console.log(this.state.progress)
+                        console.log(this.state.progress._id)
+                        this.props.updateProgress(this.state.progress[0]._id, new_progress).then((response) => {
                               let new_progress_data = this.state.progress;
-                              new_progress_data.progress_data = new_progress.progress_data;
+                              console.log(new_progress_data)
                               this.setState({progress: new_progress_data})
                         })
                   } else {
