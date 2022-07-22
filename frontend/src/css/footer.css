@@ -1,9 +1,10 @@
 .footer {
-      /* position: absolute; */
+      position: fixed;
       right: 0;
-      /* bottom: 0; */
+      bottom: 0;
       width: 100%;
-      background-color: rgb(213, 213, 213);
+      background-color: #F2F2F2;
+      mix-blend-mode: multiply;
       z-index: 1;
       opacity: .8;
 }
