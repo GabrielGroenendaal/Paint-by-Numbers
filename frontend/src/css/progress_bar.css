@@ -11,6 +11,11 @@
 
 }
 
+.progress-barr:hover {
+      background-color: #5B6ED9;
+      color: white;
+}
+
 .progress-count {
       padding-top: 20px;
 }

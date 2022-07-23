@@ -51,6 +51,8 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      margin-top: 40%;
+      margin-right: 100px;
       border-radius: 25px;
       text-align: center;
       min-height: 620px;
@@ -103,9 +105,9 @@
 }
 
 .modal-instruction-child-left {
-      /* position: absolute; 
+      position: absolute; 
       top: 50%;
-      left: 50%;*/
+      left: 50%;
       padding: 32px;
       /* transform: translate(-50%, -50%); */
       border-radius: 8px;

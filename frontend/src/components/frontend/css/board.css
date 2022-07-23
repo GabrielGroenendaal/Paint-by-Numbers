@@ -3,12 +3,7 @@
     /* height: 550px; */
     border-radius: 10px;
     padding: 12px;
-    /* margin: 30px; */
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    /* background-color: rgb(214, 214, 214); */
+
 }
 
 
@@ -74,6 +69,7 @@ tr:nth-child(5n + 1) td {
     display: flex;
 }
 
+
 .progress-bar h3 {
     font-size: 12px;
     text-align: center;
@@ -108,3 +104,5 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+
