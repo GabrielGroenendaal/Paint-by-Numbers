@@ -51,8 +51,12 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+
+      /* Gabe's Temporary Fix for the Manual Positioning */
       margin-top: 40%;
       margin-right: 100px;
+
+      
       border-radius: 25px;
       text-align: center;
       min-height: 620px;
