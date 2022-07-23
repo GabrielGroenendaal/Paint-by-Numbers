@@ -214,14 +214,19 @@ input[type="radio"]:hover {
 }
 
 .generate-link {
-
+      color: #5B6ED9;
       border-radius: 12px;
       height: 30px;
       font-size: 15px;
+      transition: .4s;
+      text-decoration: underline;
+
 }
 
 .generate-link:hover {
-      color: blue
+      color: blue;
+      transform: scale(1.1)
+
 }
 
 .submit-button {
