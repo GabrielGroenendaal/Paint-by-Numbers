@@ -1,5 +1,7 @@
 import React from "react";
 import SeedOption from "./seed_option";
+
+
 class PuzzleLibraryItem extends React.Component {
 
       constructor(props) {
@@ -20,35 +22,22 @@ class PuzzleLibraryItem extends React.Component {
 
       render() {
             
-            let modal = 'login'
+            let modalType = 'login'
             let text = 'LOGIN'
             if (this.props.currentUser) {
                   if (this.props.currentUser.id) {
-                        modal = 'library'
+                        modalType = 'library'
                         text = 'LIBRARY'
                   }
             }  
-            let component;
-            // let component2;
-            if (this.props.active) {
-                  // component2 =
-                  //       <form id="reveal">
-                  //             <button
-                  //                   type="submit"
-                  //                   className="image-submit-button reveal-button"
-                  //                   onClick={() => this.props.revealAll()}
-                  //             >REVEAL</button>
-                  //       </form>
-            }
+
            
             return (
                   <div className="puzzle-library-options">
-                        {/* <div className="save-to-library-button">SAVE</div> */}
-                        {/* {component} */}
-                        {/* <div className="share-puzzle-button">SHARE</div> */}
-                        <div className="user-library-button" onClick={() => this.props.openModal(modal)}>{text}</div>
+                      
+                        <div className="user-library-button" onClick={() => this.props.openModal({modal: modalType})}>{text}</div>
                         {this.saveButton()}
-                        {/* {component2} */}
+                     
                   </div>
             )
       }

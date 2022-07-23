@@ -39,7 +39,7 @@ class PuzzleOptions extends React.Component {
                                     
                               </form>
                             <div>
-                                    <button className="question-button" onClick={() => this.props.openModal('manual')}>?</button>
+                                    <button className="question-button" onClick={() => this.props.openModal({modal: 'manual'})}>?</button>
                         </div>  
                         </div>
                         

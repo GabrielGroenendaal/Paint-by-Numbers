@@ -13,7 +13,8 @@ class PlayPuzzle extends React.Component {
             this.state = {
                   board: new Board({ dimensions: "10x10" }),
                   board_size: "10x10",
-                  progress: null
+                  progress: null,
+                  url:  "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c="
             }
 
             this.updateGame = this.updateGame.bind(this)
@@ -30,7 +31,10 @@ class PlayPuzzle extends React.Component {
       updateGame(tile, isFlagging) {
             (isFlagging) ? tile.toggleFlag() : tile.explore();
             if (this.state.board.complete) {
-                  this.props.openModal('reveal')
+                  this.props.openModal({
+                        modal: 'reveal',
+                        url: this.state.url
+                  })
             }
             this.setState({ board: this.state.board })
       }
@@ -44,7 +48,7 @@ class PlayPuzzle extends React.Component {
                         tiles: tile_data,
                         originalImageUrl: new_puzzle.original_img_url,
                         id: new_puzzle._id
-                  })
+                  }), 
             })
       }
 
@@ -52,7 +56,11 @@ class PlayPuzzle extends React.Component {
             let options = {
                   dimensions: this.state.dimensions,
             }
-            this.setState(prevState => ({ board: new Board(options) }))
+            this.setState(prevState => ({
+                  board: new Board(options),
+                  progress: null,
+                  url:  "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c="
+            }))
       }
 
       changePuzzleOptions(options) {
@@ -80,46 +88,50 @@ class PlayPuzzle extends React.Component {
                                                 new_board.updateBoard(Util.parseProgressFromString(puzzleProgress.progress_data))
                                                 this.setState({
                                                       board: new_board,
-                                                      progress: response.progress.data
+                                                      progress: response.progress.data,
+                                                      url: new_puzzle.original_img_url
                                                 })
                                           } else {
                                                 this.setState({
                                                       board: new_board,
-                                                      progress: null
+                                                      progress: null,
+                                                      url: new_puzzle.original_img_url
                                                 })
 
                                           }
                   
 
                                     })
-                              // this.props.fetchUserProgresses(this.props.currentUser.id)
-                              //       .then((response) => {
-                              //             let progress = response.progresses.data;
-                              //             console.log(progress)
-                              //             progress = progress.filter(el => el.puzzle_id = new_puzzle.id)
-                              //             console.log(progress)
-                              //             //new_board.updateBoard(progress.progressData);
-                              //       })
-                              //       .catch(err => err.responseJSON)
                         } else {
-                              this.setState({ board: new_board })
+                              this.setState({
+                                    board: new_board,
+                                    progress: null,
+                                    url: new_puzzle.original_img_url
+                              })
 
                         }
             }).catch(err => err.responseJSON)
       }
 
       reveal() {
-            this.props.openModal('reveal')
-      }
+            let imgurl = (this.state.board.originalImageUrl) ? this.state.board.originalImageURL : "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c="
+
+            this.props.openModal({
+                  modal: 'reveal',
+                  url: this.state.url
+            })      }
 
       revealAllTiles() {
             let new_board = this.state.board;
             new_board.revealAll();
-            this.props.openModal('reveal')
+            let imgurl = (this.state.board.originalImageUrl) ? this.state.board.originalImageURL : "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c="
 
+            this.props.openModal({
+                  modal: 'reveal',
+                  url: this.state.url
+            })
             this.setState({
                   board: new_board,
-                  progress: null
             })
       }
 
@@ -152,7 +164,11 @@ class PlayPuzzle extends React.Component {
                               originalImageUrl: themed_puzzle.original_img_url,
                               id: themed_puzzle._id
                         })
-                        this.setState({ board: new_board })
+                        this.setState({
+                              board: new_board,
+                              url: themed_puzzle.original_img_url,
+                              progress: null
+                        })
                   }).catch(err => err.responseJSON)
       }
 

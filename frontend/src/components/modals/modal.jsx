@@ -26,7 +26,6 @@ class Modal extends React.Component {
 
       render(){
             let component;
-
             switch (this.props.modal)  {
                   case 'login':
                         component = <LoginContainer />
@@ -47,7 +46,7 @@ class Modal extends React.Component {
                         component = <SignUpContainer />
                         break;
                   case 'seed':
-                        component = <SeedContainer swap={this.props.swap} />
+                        component = <SeedContainer swap={this.props.swap}/>
                         break;
                   default:
                         return null
@@ -68,7 +67,7 @@ class Modal extends React.Component {
 
 const mapStateToProps = state => {
       return {
-            modal: state.modal
+            modal: state.modal.modal
       }
 }
 

@@ -5,7 +5,8 @@ import Reveal from './reveal_puzzle.jsx';
 const mSTP = state => {
       let currentPuzzle = (state.puzzle.new) ? state.puzzle.new : ''
       return {
-            currentPuzzle: currentPuzzle
+            currentPuzzle: currentPuzzle,
+            url: state.modal.url
       }
 }
 

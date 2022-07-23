@@ -99,7 +99,7 @@ class CreatePuzzle extends React.Component {
                   creator_id: creator,
                   genre: 'default'
             }
-            this.props.processPuzzle(puzzleDatum).then(() => this.props.openModal('seed'))
+            this.props.processPuzzle(puzzleDatum).then(() => this.props.openModal({ modal: 'seed'}))
 
             //let puzzleData = Util.convertBoardToString(this.state.board)
       }

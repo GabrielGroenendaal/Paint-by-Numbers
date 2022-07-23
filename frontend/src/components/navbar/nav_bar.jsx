@@ -8,21 +8,18 @@ class NavBar extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-        // this.props.fetchUser(this.props.match.params.userId);
-    }
-
+    
     signup() {
         if (!this.props.currentUser) {
             return (
-                <button className="signup-button" type="submit" onClick={() => this.props.openModal('signup')}>Sign Up</button>
+                <button className="signup-button" type="submit" onClick={() => this.props.openModal({modal: 'signup'})}>Sign Up</button>
             )
         }
     }
 
     login() {
         if(!this.props.currentUser) {
-            return(<button className="login-button" type="submit" onClick={() => this.props.openModal("login")}>Log In</button>)
+            return(<button className="login-button" type="submit" onClick={() => this.props.openModal({modal: "login"})}>Log In</button>)
         }
     }
 
@@ -46,11 +43,9 @@ class NavBar extends React.Component {
                     <div className="nav-bar-logo"></div>
                     <div className="title">PAINT BY NUMBERS</div>
 
-                    {/* <i className="material-icons">info_outline</i> */}
                 </div>
 
 
-                {/* <div className="title">PAINT BY NUMBERS</div> */}
 
                 <div className="signup-button-container">
                     {this.signup()}
@@ -59,7 +54,6 @@ class NavBar extends React.Component {
                 <a href="https://github.com/GabrielGroenendaal/Paint-by-Numbers">
                         <i className="fa fa-github"></i>
                 </a>
-                {/* <i className="material-icons" onClick={() => this.props.openModal('manual')}>info_outline</i> */}
 
                 </div>
             </div>
