@@ -233,11 +233,21 @@
       padding-bottom: 20px;
 }
 .library-tab-item {
-      padding: 0px 10px;
+      padding: 5px 10px;
+      transition: .4s;
+      border-radius: 10px;
 }
 
 .library-tab-item:hover {
-      color:#3854A6;
+      background-color: #3854A6;
+      color:white;
+      font-weight: 600;
+      transform: scale(1.1)
+}
+
+.library-tab-selected {
+      background-color: #3854A6;
+      color:white;
       font-weight: 600;
       transform: scale(1.1)
 }

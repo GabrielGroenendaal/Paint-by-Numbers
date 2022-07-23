@@ -74,21 +74,12 @@ class Library extends React.Component {
 
                 }).catch(err => console.log(err))
 
-            
-
-
-
-            
-
-
         }
         
     }
 
 
     savedPuzzles() {
-        console.log(this.state.saved_puzzles)
-
         return (
             <div className="saved-puzzles-container">
                 <div className='login-message'> Puzzles You've Saved</div>
@@ -139,23 +130,10 @@ class Library extends React.Component {
                                 }
                             )
                         }
-                        {/* {this.state.made_puzzles.map((ele, idx) => {
-                            
-                            return (
-                                <LibraryItemContainer
-                                    type="made"
-                                    puzzle={ele}
-                                    key={idx.toString()} />
-                            )
-                        })} */}
                         <div className="library-separator"></div>
                     </div>
-
-
                 </div>
             </div>
-
-
         )
     }
 
@@ -173,10 +151,13 @@ class Library extends React.Component {
                 tab: 1
             })
         }
-        // console.log(text)
     }
     render() {
         let component = (this.state.tab === 1) ? this.savedPuzzles() : this.madePuzzles();
+
+        let tab1Class = (this.state.tab === 1) ? 'library-tab-item library-tab-selected' : 'library-tab-item'
+        let tab2Class = (this.state.tab === 2) ? 'library-tab-item library-tab-selected' : 'library-tab-item'
+
         return (
             <div className="library-instruction-background" onClick={() => this.props.closeModal()}>
                 <div className="library-instruction-child" id="library-modal-child">
@@ -188,10 +169,10 @@ class Library extends React.Component {
                                 </div>
                             </div>
                             <div className="library-tab">
-                                <div className="library-tab-item" onClick={this.handleClick.bind(this)}>
+                                <div className={tab1Class} onClick={this.handleClick.bind(this)}>
                                     SAVED
                                 </div>
-                                <div className="library-tab-item" onClick={this.handleClick.bind(this)}>
+                                <div className={tab2Class} onClick={this.handleClick.bind(this)}>
                                     CREATED
                                 </div>
                             </div>
