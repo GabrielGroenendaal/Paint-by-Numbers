@@ -13,7 +13,7 @@ class ManualCreate extends React.Component {
     }
 
     onChangeValue(e) {
-        console.log(e)
+        // console.log(e)
         return e => {
             this.setState({
                 slide: e.currentTarget.value
@@ -71,9 +71,11 @@ class ManualCreate extends React.Component {
                             <div className='manual-login-message'> PAINT BY NUMBERS</div>
 
                             <div className="manual-text">
-                                Paint by Numbers (Picross) is a game in which you solve puzzles using numbers,
-                                the numbers at the top and on the left of a puzzle are called hint numbers.
-                                Fill in squares correctly to complete an illustration, and you may reveal an image!
+                                On this site, you will be able to make puzzles by drawing them yourself, or by using 
+                                an image from the internet.  
+                                <br></br>
+                                <br></br>
+                                Note: If an image isn't working, try uploading it to <a class="imgur-link" href="https://imgur.com/" rel="noreferrer noopener" target="_blank">Imgur</a> first.
                             </div>
 
 

@@ -56,7 +56,7 @@
       margin-top: 40%;
       margin-right: 100px;
 
-      
+
       border-radius: 25px;
       text-align: center;
       min-height: 620px;
@@ -303,4 +303,14 @@
 .mpo-modal-wrap-create {
       display: flex;
       justify-content: center;
+}
+
+.imgur-link {
+      color: #38a64a;
+      font-weight: bold;
+      transition: .4s;
+}
+
+.imgur-link:hover {
+      color: rgb(47, 255, 54);
 }

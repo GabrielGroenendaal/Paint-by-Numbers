@@ -11,7 +11,7 @@ class Manual extends React.Component {
     }
 
     onChangeValue(e) {
-        console.log(e)
+        // console.log(e)
         return e => {
             this.setState({
                 slide: e.currentTarget.value

@@ -22,6 +22,9 @@ class PlayPuzzle extends React.Component {
             this.revealAllTiles = this.revealAllTiles.bind(this)
       }
 
+      componentDidMount() {
+            this.props.openModal({ modal: 'manual'})
+      }
       localStr() {
             const saveProgress = Util.convertProgressToString(this.state.board);
             localStorage.setItem()
@@ -205,11 +208,11 @@ class PlayPuzzle extends React.Component {
                   })
             } else {
                   if (this.state.progress) {    
-                        console.log(this.state.progress)
-                        console.log(this.state.progress._id)
+                        // console.log(this.state.progress)
+                        // console.log(this.state.progress._id)
                         this.props.updateProgress(this.state.progress[0]._id, new_progress).then((response) => {
                               let new_progress_data = this.state.progress;
-                              console.log(new_progress_data)
+                              // console.log(new_progress_data)
                               this.setState({progress: new_progress_data})
                         })
                   } else {

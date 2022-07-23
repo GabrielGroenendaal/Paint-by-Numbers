@@ -25,6 +25,9 @@ class CreatePuzzle extends React.Component {
             this.reset = this.reset.bind(this)
       }
 
+      componentDidMount() {
+            this.props.openModal({modal: 'createmanual'})
+      }
       updateBoardSetting(options) {
             if (options.dimensions && options.dimensions !== Util.convertDimensionsToString(this.state.board.dimensions)) {
                   this.setState(prevState => ({board: new BoardCreate({dimensions: options.dimensions})}))

@@ -32,7 +32,7 @@ class CreatePuzzleOptions extends React.Component {
                                          
                                     </form>
                               </div>
-                                    <button className="question-button" onClick={() => this.props.openModal('createmanual')}>?</button>
+                                    <button className="question-button" onClick={() => this.props.openModal({modal: 'createmanual'})}>?</button>
                               <div>
 
                               </div>
