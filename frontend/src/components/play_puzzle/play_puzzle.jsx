@@ -19,16 +19,14 @@ class PlayPuzzle extends React.Component {
 
             this.updateGame = this.updateGame.bind(this)
             this.updatePuzzle = this.updatePuzzle.bind(this)
-            this.revealAllTiles = this.revealAllTiles.bind(this)
+            // this.revealAllTiles = this.revealAllTiles.bind(this)
       }
 
       componentDidMount() {
             this.props.openModal({ modal: 'manual'})
       }
-      localStr() {
-            const saveProgress = Util.convertProgressToString(this.state.board);
-            localStorage.setItem()
-      }
+
+   
 
 
       updateGame(tile, isFlagging) {
@@ -127,7 +125,6 @@ class PlayPuzzle extends React.Component {
       revealAllTiles() {
             let new_board = this.state.board;
             new_board.revealAll();
-            let imgurl = (this.state.board.originalImageUrl) ? this.state.board.originalImageURL : "https://media.istockphoto.com/vectors/party-popper-with-confetti-vector-id1125716911?k=20&m=1125716911&s=612x612&w=0&h=1jfthodW7JsOR8vz3A_e2HJbrAAjPJhogviXeOwaz5c="
 
             this.props.openModal({
                   modal: 'reveal',
@@ -251,7 +248,7 @@ class PlayPuzzle extends React.Component {
                                     <ProgressBoard
                                           board={this.state.board}
                                           reset={this.reset.bind(this)}
-                                          revealAll={this.revealAllTiles}
+                                          revealAll={this.revealAllTiles.bind(this)}
                                     />
                                     <PuzzleSubmit
                                           generate={this.generatePuzzle.bind(this)}

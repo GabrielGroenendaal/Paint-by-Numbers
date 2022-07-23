@@ -75,7 +75,7 @@ class ManualCreate extends React.Component {
                                 an image from the internet.  
                                 <br></br>
                                 <br></br>
-                                Note: If an image isn't working, try uploading it to <a class="imgur-link" href="https://imgur.com/" rel="noreferrer noopener" target="_blank">Imgur</a> first.
+                                Note: If an image isn't working, try uploading it to <a className="imgur-link" href="https://imgur.com/" rel="noreferrer noopener" target="_blank">Imgur</a> first.
                             </div>
 
 
