@@ -173,9 +173,9 @@ class PlayPuzzle extends React.Component {
       }
 
       saveProgress() {
-            if (this.state.board.complete) {
-                  return null
-            }
+            // if (this.state.board.complete) {
+            //       return null
+            // }
             let new_progress = {
                   progress_data: Util.convertProgressToString(this.state.board),
                   puzzle_id: this.state.board.id,
@@ -200,7 +200,8 @@ class PlayPuzzle extends React.Component {
                               let new_progress = response.progress.data;
                               let new_board = this.state.board;
                               new_board.id = new_progress.puzzle_id;
-                              this.setState({ progress: new_progress})
+                              this.setState({ progress: new_progress })
+                              alert('Saved Progress')
                         })
                   })
             } else {
@@ -215,7 +216,10 @@ class PlayPuzzle extends React.Component {
                   } else {
                         this.props.createNewProgress(new_progress).then((response) => {
                               let new_progress = response.progress.data;
-                              this.setState({ progress: new_progress})
+                              this.setState({ progress: new_progress })
+                              alert('Saved Progress')
+
+                              
                         })
                   }
             }      
