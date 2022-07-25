@@ -13,7 +13,7 @@ class PuzzleLibraryItem extends React.Component {
 
       saveButton() {
             if (this.props.currentUser) {
-                  if (this.props.currentUser.id) {
+            if (this.props.currentUser.id) {
                         return (
                               <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.saveProgress()}>SAVE</button>
       
