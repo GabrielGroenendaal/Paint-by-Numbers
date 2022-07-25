@@ -17,11 +17,11 @@ Paint-by-Numbers is a website where users are  able to generate, create, share, 
 ***
 
 ### Major Features and Code Highlights
-#### Feature A
+### Feature A
 ```
   // Some code goes here
 ```
-#### Feature B
+### Feature B
 ```
   // Some code goes here
 ```
