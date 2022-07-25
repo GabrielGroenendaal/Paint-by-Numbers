@@ -302,7 +302,7 @@ input[type="radio"]:hover {
     
     .puzzle-library-options {
       height: 255px;
-      justify-content: space-between;
+      justify-content: space-around;
     }
     
     .puzzle-selector-options-container, .puzzle-selector-options-container-create  {
@@ -442,4 +442,19 @@ a {
 a:link .fa-github { 
       opacity: .3;
       
+}
+
+.library-description-text {
+      font-size: 13px;
+      padding: 3px;
+}
+
+
+.inactive-button {
+      background-color: rgb(121, 131, 146);
+}
+
+.image-submit-button.inactive-button:hover {
+      background-color: #3854A6;
+      content: 'LOGIN'
 }

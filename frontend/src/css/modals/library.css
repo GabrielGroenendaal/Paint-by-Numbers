@@ -252,3 +252,13 @@
       transform: scale(1.1)
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.library-manual::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .library-manual {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
