@@ -12,32 +12,54 @@ class PuzzleLibraryItem extends React.Component {
       }
 
       saveButton() {
-            if (this.props.currentUser.id) {
-                  return (
-                        <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.saveProgress()}>SAVE</button>
-
-                  )
+            if (this.props.currentUser) {
+                  if (this.props.currentUser.id) {
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.saveProgress()}>SAVE</button>
+      
+                        )
+                  } else {
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>SAVE</button>
+      
+                        )
+                  }
             } else {
-                  return (
-                        <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>SAVE</button>
 
-                  )
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>SAVE</button>
+      
+                        )
+                  
+                
             }
       }
 
       libraryButton() {
           
 
-            if (this.props.currentUser.id) {
-                  return (
-                        <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.openModal({ modal: 'library' })}>LIBRARY</button>
+            if (this.props.currentUser) {
 
-                  )
+                  if (this.props.currentUser.id) {
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button" onClick={() => this.props.openModal({ modal: 'library' })}>LIBRARY</button>
+      
+                        )
+                  } else {
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>LIBRARY</button>
+      
+                        )
+                  }
+               
             } else {
-                  return (
-                        <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>LIBRARY</button>
 
-                  )
+                        return (
+                              <button type="submit" className="image-submit-button reveal-button inactive-button" onClick={() => this.props.openModal({modal: 'login'})}>LIBRARY</button>
+      
+                        )
+                  
+                 
             }
       }
 

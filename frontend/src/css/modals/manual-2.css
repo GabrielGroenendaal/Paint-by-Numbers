@@ -1,0 +1,83 @@
+.tile.manual-tile, .tile-overlay.manual-tile-overlay {
+      width: 4px;
+      height: 4px;
+}
+
+.manual-text-1-item-1 img {
+      max-width: 40%;
+      max-height: 40%;
+}
+
+.manual-text-1-item-2 img {
+      max-width: 20%;
+      max-height:90%;
+}
+
+
+.manual-text-1-item-3 img {
+      max-width: 40%;
+      max-height: 40%;
+}
+
+.manual-top-text-2 img {
+      max-width: 40%;
+}
+
+.manual-text-1-item-1, .manual-text-1-item-2, .manual-text-1-item-3 {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+
+   
+}
+
+.manual-text-1-item-3{
+      align-items: center;
+}
+
+.manual-text-1-item-1 span {
+      display: inline;
+}
+
+.manual-text-1 > div {
+      margin-top: 10px;
+}
+
+.manual-text.manual-text-1, .manual-text.manual-text-2, .manual-text.manual-text-3 {
+      padding: 0px 0px;
+}
+
+.manual-top-text-2 > div {
+      margin-bottom: 10px;
+}
+
+.manual-top-text-1 > div {
+      margin-bottom: 10px;
+}
+.manual-top-text-3 > div {
+      margin-bottom: 10px;
+}
+
+
+.manual-text-3> div {
+      margin-top: 10px;
+}
+.hint-example-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+.number-hint-top-item.number-hint-top-item-example {
+      font-size: 20px;
+      padding: 0px 10px;
+}
+
+.number-hint-top-row.number-hint-top-row-example {
+      justify-content: center;;
+}
+
+.board-container-hintboard-example {
+      margin-top: 10px;
+}

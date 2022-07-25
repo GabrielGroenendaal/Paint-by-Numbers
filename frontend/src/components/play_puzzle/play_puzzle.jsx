@@ -240,6 +240,17 @@ class PlayPuzzle extends React.Component {
                         </div>
 
                         <div className="puzzle-options-container">
+                        {/* <div className="theme-drop-menu">
+                              <div className="theme">
+                                    <button className="theme-label">THEME</button>
+                                    <ul>
+                                          <li><a href="#">ANIMALS</a></li>
+                                          <li><a href="#">ARTWORKS</a></li>
+                                          <li><a href="#">LANDSCAPES</a></li>
+                                          <li><a href="#">POP CULTURE</a></li>
+                                    </ul>
+                              </div>
+                        </div> */}
                               <PuzzleOptions
                                     changePuzzle={this.changePuzzleOptions.bind(this)}
                                     selectTheme={this.selectPuzzleByTheme.bind(this)}

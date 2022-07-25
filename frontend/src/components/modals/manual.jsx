@@ -5,7 +5,7 @@ class Manual extends React.Component {
         super(props)
 
         this.state = {
-            slide: "modal_content_one"
+            slide: "modal_content_four"
         }
         this.onChangeValue = this.onChangeValue.bind(this);
     }
@@ -19,7 +19,276 @@ class Manual extends React.Component {
         }
     }
 
+    // manualBoard() {
 
+
+    //     return (
+    //         <tbody>
+    //             <tr className='board-row manual-board-row'>
+    //                 <td className="tile manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="tile manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="tile manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="tile manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="tile manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+    //             <tr className='board-row manual-board-row'>
+    //             <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+    //             <tr className='board-row manual-board-row'>
+    //             <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+    //             <tr className='board-row manual-board-row'>
+    //             <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+    //             <tr className='board-row manual-board-row'>
+    //             <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+    //             <tr className='board-row manual-board-row'>
+    //             <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //                 <td className="manual-tile tile-unexplored">
+    //                     <div className="tile-overlay manual-tile-overlay">
+
+    //                     </div>
+    //                 </td>
+    //             </tr>
+
+    //         </tbody>
+    //     )
+    // }
+
+    topContent() {
+        let text;
+        switch (this.state.slide) {
+            case 'modal_content_one':
+                text = <div className="manual-text manual-top-text-1">
+                    <div>
+                        Paint by Numbers (Picross) is a game in which you solve puzzles using logic.
+
+                    </div>
+                    <div>
+                        Fill in squares correctly to complete an illustration, and you may reveal an image!
+
+                    </div>
+                </div>
+                break;
+            case 'modal_content_two':
+                text = <div className="manual-text manual-top-text-2">
+                    <div>Reveal tiles by clicking on them! Click and drag to select multiple tiles at once, and press any key to clear your selection.</div>
+                    <div>Hold ALT or OPTION when you click a tile to flag it instead, useful for marking tiles you think are empty!</div>
+                    {/* You can reveal tiles by clicking on them with your mouse. You can click and drag to select multiple tiles at once.
+                    Hold ALT or OPTION and click tiles to flag them, useful for marking tiles you think are empty! */}
+                </div>
+                break;
+            case 'modal_content_three':
+                text = <div className="manual-text manual-top-text-3">
+                    <div>The numbers above each column and left of each row are HINTS!</div>
+                    <div>
+                            <table className="board-container board-container-hintboard-example">
+                                <tbody>
+                                    <tr className="board-row board-row-hintboard-example">
+                                        <td class="number-hint-top-row hint-tile-15x15">
+                                            <div className="number-hint-top-item">1</div>
+                                            <div className="number-hint-top-item">3</div>
+
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    {/* <div className="hint-example-container">
+                        <table className="hint-example">
+                            <tbody>
+                                <tr className="number-hint-top-row number-hint-top-row-example">
+                                    <td className="number-hint-top-item number-hint-top-item-example">
+                                        1
+                                    </td>
+                                    <td className="number-hint-top-item number-hint-top-item-example" >
+                                        2
+                                    </td>
+                                    <td className="number-hint-top-item number-hint-top-item-example">
+                                        1
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> */}
+
+                    <div>Each hint corresponds to a sequence of consecutive tiles that are FILLED on that row or column.</div>
+                </div>
+                break;
+            case 'modal_content_four':
+                text = <div className="manual-text manual-top-text-2">
+                    <div>You can generate a random puzzle OR receive a themed puzzle based on an image.</div>
+
+                    <div className="manual-text-1-item-3">
+                                <img id="manual-text-2-img" src={require('./assets/generate_sample.png')} alt="generate-button" />
+                                <img id="manual-text-3-img" src={require('./assets/theme_sample.png')} alt="generate-button" />
+
+                            </div> 
+                    {/* <div>Reveal tiles by clicking on them! Click and drag to select multiple tiles at once, and press any key to clear your selection.</div> */}
+                </div>
+                break;
+            default:
+                text = <div></div>
+        }
+        return text;
+    }
 
     render() {
 
@@ -28,10 +297,29 @@ class Manual extends React.Component {
                 <div className="mpo-modal-content">
                     <div className="modal-slider-text-one">
                         <div className="manual-title">------- How to Play -------</div>
-                        <div className="manual-text">
-                            Look at the numbers on the top and side, these numbers represent how many squares need to be filled in.
-                            <li> Single numbers represent how many consecutive blocks need to be filled in. </li>
-                            <li> Double numbers represents how many blocks are filled in, according to the first number, at least one space blank, then fill in consecutive squares according to the second number amount.</li>
+
+                        <div className="manual-text manual-text-1">
+                            <div className="manual-text-1-item-1">
+                                Each puzzle is a grid where every tile is either FILLED or EMPTY!
+                                <img id="manual-text-1-img" src={require('./assets/sample-puzzlle.png')} alt="tile keys" />
+
+                            </div>
+                            <div>To solve the puzzle, you must reveal all the FILLED tiles while revealing as few EMPTY tiles as possible!</div>
+                            <div className="manual-text-1-item-2">
+                                Puzzles can either be randomly generated, or based on an image that is revealed upon completion!
+                            </div>
+                            <div>
+                                Click the navigations tabs below to learn more!
+                            </div>
+                            {/* <div className="manual-text-1-item-2">
+                                You can generate a random puzzle OR receive a themed puzzle based on an image
+
+                            </div>
+                            <div className="manual-text-1-item-3">
+                                <img id="manual-text-2-img" src={require('./assets/generate_sample.png')} alt="generate-button" />
+                                <img id="manual-text-3-img" src={require('./assets/theme_sample.png')} alt="generate-button" />
+
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -49,6 +337,118 @@ class Manual extends React.Component {
         const modal_content_three = this.state.slide === "modal_content_three" ? (
             <div className="mpo-modal-slide content-3">
                 <div className="mpo-modal-content">
+                    {/* <div className="manual-title">------- EXAMPLE -------</div> */}
+                    <div className="manual-text manual-text-3">
+                        <div>
+                            <table className="board-container board-container-hintboard-example">
+                                <tbody>
+                                    <tr className="board-row board-row-hintboard-example">
+                                        <td class="number-hint-top-row hint-tile-15x15">
+                                            <div className="number-hint-top-item">1</div>
+                                            <div className="number-hint-top-item">3</div>
+
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-bomb">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15 tile-bomb">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                1 corresponds to the first FILLED tile on that row.
+
+                                </li>
+                                <li>
+                                 3 corresponds to the last three tiles of the row.
+
+                                </li>
+                                <li>
+                                Because the "1" and "3" are separate sequences, we know there must be an EMPTY tile in between them.
+
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div>
+                            When a hint's corresponding tiles are revealed, they are crossed out.
+                        </div>
+                        <div>
+                            <table className="board-container board-container-hintboard-example">
+                                <tbody>
+                                    <tr className="board-row board-row-hintboard-example">
+                                        <td class="number-hint-top-row hint-tile-15x15">
+                                            <div className="number-hint-top-item hint-crossout">1</div>
+                                            <div className="number-hint-top-item hint-crossout">1</div>
+
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplred">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-unexplored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                        <td className="tile puzzle-tile-15x15 tile-explored">
+                                            <div className="tile-overlay puzzle-tile-overlay puzzle-tile-overlay-15x15">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    {/* <div className="tips-list-text">
+                        <div className="tips-number-container">
+                            <label className="tips-number">1</label>
+                            <ul> Use option-click to flag tiles.</ul>
+                        </div>
+                        <div className="tips-number-container">
+                            <label className="tips-number">2</label>
+                            <ul> Complete the larger numbers  <br />  first.</ul>
+                        </div>
+                        <div className="tips-number-container">
+                            <label className="tips-number">3</label>
+                            <ul> Complete the puzzle using the finished columns and rows.</ul>
+                        </div>
+                    </div> */}
+                </div>
+            </div>) : ("");
+
+        const modal_content_four = this.state.slide === "modal_content_four" ? (
+            <div className="mpo-modal-slide content-4">
+                <div className="mpo-modal-content">
                     <div className="manual-title">------- Tips -------</div>
                     <div className="tips-list-text">
                         <div className="tips-number-container">
@@ -61,7 +461,7 @@ class Manual extends React.Component {
                         </div>
                         <div className="tips-number-container">
                             <label className="tips-number">3</label>
-                            <ul> Complete the puzzle using the finished columns and rows.</ul>
+                            <ul> Work from the edges inward using</ul>
                         </div>
                     </div>
                 </div>
@@ -80,11 +480,11 @@ class Manual extends React.Component {
                             </div>
                             <div className='manual-login-message'> PAINT BY NUMBERS</div>
 
-                            <div className="manual-text">
-                                Paint by Numbers (Picross) is a game in which you solve puzzles using numbers,
-                                the numbers at the top and on the left of a puzzle are called hint numbers.
+                            {/* <div className="manual-text">
+                                Paint by Numbers (Picross) is a game in which you solve puzzles using logic.
                                 Fill in squares correctly to complete an illustration, and you may reveal an image!
-                            </div>
+                            </div> */}
+                            {this.topContent()}
 
 
 
@@ -93,7 +493,7 @@ class Manual extends React.Component {
                                 <div className="mpo-modal-wrap">
                                     <label htmlFor="mpo-modal-controller" className="mpo-modal-overlay"></label>
                                     <div className="mpo-modal-body" >
-                                       
+
                                         <input type="radio" name="content-nav" value={"modal_content_one"}
                                             className="modal-radio" onChange={this.onChangeValue("modal_content_one")}
                                             checked={this.state.slide === "modal_content_one"} />
@@ -108,10 +508,14 @@ class Manual extends React.Component {
                                             className="modal-radio" onChange={this.onChangeValue("modal_content_three")}
                                             checked={this.state.slide === "modal_content_three"} />
 
-
+                                        <input type="radio" name="content-nav" value={"modal_content_four"}
+                                            className="modal-radio" onChange={this.onChangeValue("modal_content_four")}
+                                            checked={this.state.slide === "modal_content_four"} />
                                         {modal_content_one}
                                         {modal_content_two}
                                         {modal_content_three}
+                                        {modal_content_four}
+
 
 
 
@@ -121,7 +525,9 @@ class Manual extends React.Component {
                             </div>
 
                         </form>
+
                     </div>
+
                 </div>
             </div>
         )

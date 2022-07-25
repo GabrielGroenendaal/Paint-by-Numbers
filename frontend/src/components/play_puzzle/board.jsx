@@ -68,6 +68,7 @@ class Board extends React.Component {
             let hintsX = this.props.board.hintsX;
             let hintsY = this.props.board.hintsY;
 
+            
 
             return (
                   <table
