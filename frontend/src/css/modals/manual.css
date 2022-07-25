@@ -76,6 +76,8 @@
 }
 
 .modal-instruction-background-left {
+      pointer-events: none;
+
       position: absolute;
       display: flex;
       z-index: 0; 
@@ -88,6 +90,7 @@
 }
 
 .modal-instruction-background {
+      pointer-events: none;
       position: fixed;
       bottom: 0;
        top: 0;
@@ -333,6 +336,10 @@
 
 .imgur-link:hover {
       color: rgb(47, 255, 54);
+}
+
+.manual-instruction {
+      pointer-events: all;
 }
 
 @import "./manual-2.css"
