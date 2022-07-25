@@ -1,5 +1,6 @@
 .footer {
       position: fixed;
+      pointer-events: none;
       right: 0;
       bottom: 0;
       width: 100%;
