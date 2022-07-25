@@ -5,7 +5,7 @@ class Manual extends React.Component {
         super(props)
 
         this.state = {
-            slide: "modal_content_four"
+            slide: "modal_content_one"
         }
         this.onChangeValue = this.onChangeValue.bind(this);
     }
