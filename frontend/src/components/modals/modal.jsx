@@ -13,11 +13,8 @@ import RevealContainer from './reveal_container';
 import ManualCreateContainer from './manual_create_container';
 
 import "../../App.css";
-var ReactCSSTransitionGroup = require('react-transition-group'); // ES5 with npm
+var ReactCSSTransitionGroup = require('react-transition-group'); 
 
-// import {CSSTransition} from 'react-transition-group';
-
-// var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup')
 class Modal extends React.Component {
       
       constructor(props){

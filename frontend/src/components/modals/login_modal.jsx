@@ -155,7 +155,6 @@ class LoginModal extends React.Component {
 
         passwordErrorTag = Object.values(this.props.errors).length > 0 ? "login-error" : "";
 
-        let component = (this.props.formType === 'Login') ? this.demoUserButton() : {}
 
 
 
@@ -168,9 +167,7 @@ class LoginModal extends React.Component {
                         <form className="sform" onClick={e => e.stopPropagation()} onSubmit={this.handleSubmit} >
                             <br />
                             <div className="close-button" onClick={() => this.props.closeModal()} >
-                                {/* <div className="actual-close-button" onClick={() => this.props.closeModal()}>
-                                    X
-                                </div> */}
+                 
 
 
                             </div>

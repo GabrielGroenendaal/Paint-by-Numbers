@@ -8,7 +8,6 @@ import { withRouter } from 'react-router';
 class LibrarySavedItem extends React.Component {
       constructor(props) {
             super(props)
-            // console.log(props.savedPuzzle)
             let progress = (this.props.savedPuzzle.progress) ? {
                   freshProgress: this.props.savedPuzzle.progress
             } : null
@@ -16,7 +15,6 @@ class LibrarySavedItem extends React.Component {
                   freshTiles: this.props.savedPuzzle.tileData,
                   dimensions: this.props.savedPuzzle.size
             }
-            // console.log(progress)
             let newBoard = new Board(options);
             newBoard.updateBoard(Util.parseProgressFromString(this.props.savedPuzzle.progress))
             
