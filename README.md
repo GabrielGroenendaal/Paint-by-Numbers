@@ -5,7 +5,7 @@ Paint-by-Numbers is a website where users are  able to generate, create, share, 
 
 ***
 
-### Technologies, Libraries, and APIs
+## Technologies, Libraries, and APIs
 - React
 - HTML5
 - CSS
@@ -16,7 +16,7 @@ Paint-by-Numbers is a website where users are  able to generate, create, share, 
 
 ***
 
-### Major Features and Code Highlights
+## Major Features and Code Highlights
 ### Feature A
 ```
   // Some code goes here
