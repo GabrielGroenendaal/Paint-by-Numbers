@@ -1,5 +1,5 @@
 # Paint-by-Numbers
-## [Live Link](https://paint-by-number.herokuapp.com/#/?/)
+### [Live Link](https://paint-by-number.herokuapp.com/#/?/)
 <img width="671" alt="Paint by Numbers" src="https://user-images.githubusercontent.com/36039557/180854871-53b0a8dc-7257-4a25-a6cd-ec9049bc0c17.png">
 Paint-by-Numbers is a website where users are  able to generate, create, share, and solve Nonogram puzzles. These puzzles can be based off of images they draw using a in-site interface or those that they upload themselves. Users can make optionally make accounts which will allow them to store libraries of puzzles they've created and of puzzles they're attempting to solve, storing their progress between sessions and between devices.  
 
