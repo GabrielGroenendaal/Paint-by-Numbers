@@ -24,7 +24,7 @@ class LibraryItem extends React.Component {
                   this.props.deletePuzzle(this.props.puzzle.id)
                   this.setState({ board: null })
             } else {
-                  let text = `paint-by-number.herokuapp.com/${this.props.puzzle.id}`
+                  let text = `paint-by-number.herokuapp.com/?#/${this.props.puzzle.id}`
                   navigator.clipboard.writeText(text).then(() => {
                         alert(`URL copied to dashboard!: ${text}`)
 
