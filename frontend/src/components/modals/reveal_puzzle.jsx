@@ -4,15 +4,15 @@ class Reveal extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            url: this.props.url
-        }
+        // this.state = {
+        //     url: this.props.url
+        // }
     }
 
     componentDidMount() {
-        this.setState({
-            url: this.props.url
-        })
+        // this.setState({
+        //     url: this.props.url
+        // })
     }
     render() {
         if (!this.props.url) {

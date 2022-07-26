@@ -33,9 +33,12 @@ class ProgressBoard extends React.Component {
                               </form>
                               <form id="reveal">
                               <button
-                                    type="submit"
-                                    className="image-submit-button reveal-button"
-                                    onClick={() => this.props.revealAll()}
+                                          type="submit"
+                                          className="image-submit-button reveal-button"
+                                          onClick={(event) => {
+                                                event.preventDefault()
+                                                this.props.revealAll()
+                                          }}
                               >REVEAL</button>
                         </form>
                         </div>

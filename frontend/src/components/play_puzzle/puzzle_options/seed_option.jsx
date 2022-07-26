@@ -9,7 +9,8 @@ const SeedOption = (props) => {
       let history = useHistory()
       let params = useParams();
       
-      useEffect( () => {
+      useEffect(() => {
+            
             if (params) {
                   seed = params.seed
             }
