@@ -28,7 +28,10 @@ class ProgressBoard extends React.Component {
                               <button
                                     type="submit"
                                     className="image-submit-button reveal-button"
-                                    onClick={() => this.props.reset()}
+                                          onClick={(event) => { 
+                                                event.preventDefault()
+                                                this.props.reset()
+                                          }}
                               >RESET</button>
                               </form>
                               <form id="reveal">
