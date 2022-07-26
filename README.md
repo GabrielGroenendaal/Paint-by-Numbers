@@ -1,6 +1,6 @@
 # Paint-by-Numbers
 ### <a href="https://paint-by-number.herokuapp.com/#/?/" target="_blank">Live Link</a>
-<img width="671" alt="Paint by Numbers" src="https://user-images.githubusercontent.com/36039557/180854871-53b0a8dc-7257-4a25-a6cd-ec9049bc0c17.png">
+![Paint by Numbers](https://user-images.githubusercontent.com/36039557/181078811-3ac70cde-a71b-4fc8-943c-2f5d8722cc0e.gif)
 
 <a href="https://paint-by-number.herokuapp.com/#/?/" target="_blank">**Paint-by-Numbers**</a> is an application that lets user create, play and share <a href="https://en.wikipedia.org/wiki/Nonogram" target="_blank">**Nonogram**</a> puzzles. Nonograms are picture-logic puzzles where the players goal is to reveal all the **filled** tiles on the board while revealing as few **empty** tiles as possible. Nonograms can be created with ***any arrangement*** of filled and empty tiles on a grid, and are often designed to produce a simple image like Pixel art upon completion. 
 
@@ -194,6 +194,8 @@ class LibrarySavedItem extends React.Component {
 ```
 ***
 ### Converting Images to Puzzles
+![Image Conversion](https://user-images.githubusercontent.com/36039557/181076482-8cb66f11-c526-40e4-b1ae-bdd1805c79c0.gif)
+
 One of the most difficult features to implement for this application was the conversion of images into functional Nonogram Puzzles. This process requires the pixelization of the image, which was accomplished using a modified version of ```react-pixelify```. The app then renders this picture on an invisible ```canvas```, which once mounted will be iterated through to map each pixel's RGB value to a ```tileData``` array.  
 ```
 // ImageOptions.jsx
@@ -245,7 +247,6 @@ convertImageToPixels(dimensions) {
             return tile_data;
 }
 ```
-
 The ```tileData``` is then analyzed to determine the ```averagePixel``` value of the entire board by averaging RGB values. The app then iterates through the ```tileData``` array, using the ```averagePixel``` to determine whether each tile is **filled** or **empty**. The updated array is then returned to the ```CreatePuzzle``` component where it is imported onto the ```Board``` so that users can edit and toggle the tiles.  
 ```
 const ColorUtil = {
