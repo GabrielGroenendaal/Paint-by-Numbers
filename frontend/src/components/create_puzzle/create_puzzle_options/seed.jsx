@@ -16,7 +16,7 @@ class Seed extends React.Component {
             if (!this.props.newPuzzle) {
                   return null
             }
-            let text = `paint-by-number.herokuapp.com/#/${this.props.newPuzzle._id}`
+            let text = `paint-by-number.herokuapp.com/${this.props.newPuzzle._id}`
             return (
                   <div className="modal-instruction-background" onClick={this.handleClick}>
                         <div className="modal-instruction-child">
