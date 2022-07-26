@@ -30,7 +30,7 @@ On our application, Paint-by-Numbers, users are able to draw their own puzzles u
 The core feature of our application is the ```Board```, the interface through which players interact with the puzzle and receive game information. The board houses the lion's share of gameplay functionality, a dynamic, responsive complex of React Components that are intertwined with the game logic, as constructed in Javascript. It was essential to our team to make it as seamless and enjoyable to use as possible. 
 
 The board is comprised of ```Tile``` and ```Hint``` components arranged into a table element. Each ```Tile``` features dynamic styling to indicate its status (hover, active, etc.), the state of its associated ```Tile.js``` object (filled, empty, flagged, unrevealed),  and color. Users are able to click and drag to select multiple tiles at once, particularly essential when drawing a puzzle using the in-game tools. This was implemented using the ```selection``` and ```selecting``` variables on the state, and a number of event handlers.
-```
+```.js
 // Board.jsx
 class Board extends React.Component {
       constructor(props) {
@@ -77,7 +77,7 @@ class Board extends React.Component {
      // ...
 }
 ```
-```
+```.js
 class Tile extends React.Component {
       //...Functions that are given to each Tile element 
       onMouseDown(event) {
@@ -100,7 +100,7 @@ class Tile extends React.Component {
 A ```User``` that is logged in is able to save their ```PuzzleProgress``` to resume later. This feature makes use of complex backend functionality that converts the board state into an object that can exported for storage and later imported into to other components. 
 
 One of the greatest challenges of this project was to make a functional ```Library``` component that displays all the ```Puzzles``` the current user has progress on. The component needed to fetch all the ```PuzzleProgress``` objects for that ```User```,  as well as ```tileData``` for those puzzles to render displays on the ```Library```.
-```
+```.js
 class Library extends React.Component {
     constructor(props) {
         super(props)
@@ -156,7 +156,7 @@ class Library extends React.Component {
 }
 ```
 In the ```LibrarySavedItem``` component, the ```tileData``` is then used to construct a little display of the puzzle state, including revealed tiles and mistakes. If clicked, the app redirects the user to the ```Puzzle``` and loads their ```PuzzleProgress```.
-```
+```.js
 class LibrarySavedItem extends React.Component {
         constructor(props) {
               super(props)
@@ -197,7 +197,7 @@ class LibrarySavedItem extends React.Component {
 ![Image Conversion](https://user-images.githubusercontent.com/36039557/181076482-8cb66f11-c526-40e4-b1ae-bdd1805c79c0.gif)
 
 One of the most difficult features to implement for this application was the conversion of images into functional Nonogram Puzzles. This process requires the pixelization of the image, which was accomplished using a modified version of ```react-pixelify```. The app then renders this picture on an invisible ```canvas```, which once mounted will be iterated through to map each pixel's RGB value to a ```tileData``` array.  
-```
+```.js
 // ImageOptions.jsx
 class ImageOptions extends React.Component {
        //....
@@ -217,7 +217,7 @@ class ImageOptions extends React.Component {
       // ...
 }
 ```
-```
+```.js
 // color_util.js
 convertImageToPixels(dimensions) {
             let img = document.getElementById('hiddenPixels')
@@ -248,7 +248,7 @@ convertImageToPixels(dimensions) {
 }
 ```
 The ```tileData``` is then analyzed to determine the ```averagePixel``` value of the entire board by averaging RGB values. The app then iterates through the ```tileData``` array, using the ```averagePixel``` to determine whether each tile is **filled** or **empty**. The updated array is then returned to the ```CreatePuzzle``` component where it is imported onto the ```Board``` so that users can edit and toggle the tiles.  
-```
+```.js
 const ColorUtil = {
       // The big Guns
       seedBombsByColor(board) {
