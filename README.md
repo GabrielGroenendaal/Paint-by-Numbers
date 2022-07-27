@@ -1,8 +1,8 @@
 # Paint-by-Numbers
-### <a href="https://paint-by-number.herokuapp.com/#/?/" target="_blank">Live Link</a>
+### <a href="https://paint-by-number.herokuapp.com" target="_blank" rel="noopener noreferrer">Live Link</a>
 ![Paint by Numbers](https://user-images.githubusercontent.com/36039557/181078811-3ac70cde-a71b-4fc8-943c-2f5d8722cc0e.gif)
 
-<a href="https://paint-by-number.herokuapp.com/#/?/" target="_blank">**Paint-by-Numbers**</a> is an application that lets user create, play and share <a href="https://en.wikipedia.org/wiki/Nonogram" target="_blank">**Nonogram**</a> puzzles. Nonograms are picture-logic puzzles where the players goal is to reveal all the **filled** tiles on the board while revealing as few **empty** tiles as possible. Nonograms can be created with ***any arrangement*** of filled and empty tiles on a grid, and are often designed to produce a simple image like Pixel art upon completion. 
+<a href="https://paint-by-number.herokuapp.com" target="_blank">**Paint-by-Numbers**</a> is an application that lets user create, play and share <a href="https://en.wikipedia.org/wiki/Nonogram" target="_blank">**Nonogram**</a> puzzles. Nonograms are picture-logic puzzles where the players goal is to reveal all the **filled** tiles on the board while revealing as few **empty** tiles as possible. Nonograms can be created with ***any arrangement*** of filled and empty tiles on a grid, and are often designed to produce a simple image like Pixel art upon completion. 
 
 On our application, Paint-by-Numbers, users are able to draw their own puzzles using an in-site interface or upload an image to be converted into a Puzzle. They are then able to share links to these puzzles with other users for them to try and solve. In addition, Users have the option to create accounts to store libraries of puzzles they've created or save their progress on puzzles they're trying to solve between sessions or devices.  
 
